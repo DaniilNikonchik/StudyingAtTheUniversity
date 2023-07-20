@@ -1,0 +1,10 @@
+Гонки,Asphalt 9,Gameloft,100
+Гонки,Forza Horizon 4,Microsoft,1000
+Гонки,Need for speed: Undegraund,EA games,50
+Гонки,Need for speed: Most Wanted,EA games,50
+Шутер,CS GO,Valve,12
+Шутер,CS 1.6,Valve,20
+Шутер,Warface,Crytek,70
+Песочница,Minecraft,Microsoft,30
+Песочница,Growtopia,Ubisoft,15
+Песочница,Factorio,Kovarex,66
