@@ -1,0 +1,14 @@
+Vanya,cat,murzik,54
+Misha,fish,,2
+Misha,fish,,2
+Misha,fish,,2
+Pasha,dog,tuzik,27
+Vanya,cat,tuzik,2
+Vanya,eagle,green,5
+Vanya,dog,boba buba,8
+Pasha,cat,tuzik,3
+Vanya,cat,tuzik,2
+Vanya,rat,,3
+Vanya,dog,Vasya,8
+Sasha,dog,bobik,3
+Masha,fish,tuzik,1

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\makhn\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\makhn\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_XMLPARSING.1705365269.00" t="ExcludeRecursive" />
+    <e p="C:\Лабы программирование\1 курс 2 семестр\XMLPARSING" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="XMLPARSING" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="CarsRepairs.dtd" t="Include" />
+        <e p="CarsRepairs.json" t="Include" />
+        <e p="CarsRepairs.xml" t="Include" />
+        <e p="CarsRepairsSchema.json" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="XMLPARSING.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="XMLPARSING.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>

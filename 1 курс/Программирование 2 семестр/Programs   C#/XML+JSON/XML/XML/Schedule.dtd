@@ -1,0 +1,9 @@
+<!ELEMENT schedule (weekday+)>
+<!ELEMENT weekday (classСontainer)>
+        <!ELEMENT classСontainer (class+)>
+        <!ELEMENT class EMPTY>
+        <!ATTLIST weekday date CDATA #REQUIRED>
+        <!ATTLIST class number CDATA #REQUIRED
+                        type CDATA #IMPLIED
+                        name CDATA #REQUIRED
+                        teacher CDATA #REQUIRED>

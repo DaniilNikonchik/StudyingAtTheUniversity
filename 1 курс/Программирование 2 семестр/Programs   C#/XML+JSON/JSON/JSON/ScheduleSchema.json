@@ -1,0 +1,92 @@
+{
+  "definitions": {},
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "schedule"
+  ],
+  "properties": {
+    "schedule": {
+      "$id": "#/properties/schedule",
+      "type": "array",
+      "title": "The Schedule Schema",
+      "required": [
+          "weekday"
+      ],
+        "properties": {
+          "weekday": {
+            "$id": "#/properties/schedule/properties/weekday",
+            "type": "object",
+            "title": "The weekday Schema",
+            "required": [
+              "-date",
+              "classcontainer"
+            ],
+            "properties": {
+              "-date": {
+                "$id": "#/properties/schedule/properties/weekday/properties/-date",
+                "type": "string",
+                "title": "The -date Schema"
+              },
+              "classcontainer": {
+                "$id": "#/properties/schedule/properties/weekday/properties/classcontainer",
+                "type": "array",
+                "title": "The classcontainer Schema",
+                "items": {
+                  "$id": "#/properties/schedule/properties/weekday/properties/classcontainer/items",
+                  "type": "object",
+                  "title": "The Items Schema",
+                  "required": [
+                    "class"
+                  ],
+                  "properties": {
+                    "class": {
+                      "$id": "#/properties/schedule/properties/weekday/properties/classcontainer/items/properties/class",
+                      "type": "object",
+                      "title": "The class Schema",
+                      "required": [
+                        "-number",
+                        "-type",
+                        "-name",
+                        "-teacher"
+                      ],
+                      "properties": {
+                        "-number": {
+                          "$id": "#/properties/schedule/properties/weekday/properties/classcontainer/items/properties/class/properties/-number",
+                          "type": "integer",
+                          "title": "The -number Schema",
+                          "default": 0
+                        },
+                        "-type": {
+                          "$id": "#/properties/schedule/properties/weekday/properties/classcontainer/items/properties/class/properties/-type",
+                          "type": "string",
+                          "title": "The -type Schema",
+                          "default": "",
+                          "pattern": "^(.*)$"
+                        },
+                        "-name": {
+                          "$id": "#/properties/schedule/properties/weekday/properties/classcontainer/items/properties/class/properties/-name",
+                          "type": "string",
+                          "title": "The -name Schema",
+                          "default": "",
+                          "pattern": "^(.*)$"
+                        },
+                        "-teacher": {
+                          "$id": "#/properties/schedule/properties/weekday/properties/classcontainer/items/properties/class/properties/-teacher",
+                          "type": "string",
+                          "title": "The -teacher Schema",
+                          "default": "",
+                          "pattern": "^(.*)$"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    }
+  }
+}

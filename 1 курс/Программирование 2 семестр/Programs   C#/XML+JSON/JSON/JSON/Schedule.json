@@ -1,0 +1,214 @@
+{
+  "schedule": [
+    {
+      "weekday": {
+        "-date": "MONDAY",
+        "classcontainer": [
+          {
+            "class": {
+              "-number": 1,
+              "-type": "Lecture",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich"
+            }
+          },
+          {
+            "class": {
+              "-number": 2,
+              "-type": "Practical",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich/ Chaiko V.V."
+            }
+          },
+          {
+            "class": {
+              "-number": 3,
+              "-type": "Practical",
+              "-name": "UP",
+              "-teacher": "S.I. Kashkevich"
+            }
+          },
+          {
+            "class": {
+              "-number": 4,
+              "-type": "Practical",
+              "-name": "English",
+              "-teacher": "Sitnikova T.V."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "weekday": {
+        "-date": "TUESDAY",
+        "classcontainer": [
+          {
+            "class": {
+              "-number": 1,
+              "-type": "Lecture",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich"
+            }
+          },
+          {
+            "class": {
+              "-number": 2,
+              "-type": "Practical",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich/ Chaiko V.V."
+            }
+          },
+          {
+            "class": {
+              "-number": 3,
+              "-type": "Practical",
+              "-name": "UP",
+              "-teacher": "S.I. Kashkevich"
+            }
+          },
+          {
+            "class": {
+              "-number": 4,
+              "-type": "Practical",
+              "-name": "English",
+              "-teacher": "Sitnikova T.V."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "weekday": {
+        "-date": "WEDNESDAY",
+        "classcontainer": [
+          {
+            "class": {
+              "-number": 1,
+              "-type": "Lecture",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich"
+            }
+          },
+          {
+            "class": {
+              "-number": 2,
+              "-type": "Practical",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich/ Chaiko V.V."
+            }
+          },
+          {
+            "class": {
+              "-number": 3,
+              "-type": "Practical",
+              "-name": "UP",
+              "-teacher": "S.I. Kashkevich"
+            }
+          },
+          {
+            "class": {
+              "-number": 4,
+              "-type": "Practical",
+              "-name": "English",
+              "-teacher": "Sitnikova T.V."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "weekday": {
+        "-date": "THURSDAY",
+        "classcontainer": [
+          {
+            "class": {
+              "-number": 1,
+              "-type": "Lecture",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich"
+            }
+          },
+          {
+            "class": {
+              "-number": 2,
+              "-type": "Practical",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich/ Chaiko V.V."
+            }
+          },
+          {
+            "class": {
+              "-number": 3,
+              "-type": "Practical",
+              "-name": "UP",
+              "-teacher": "S.I. Kashkevich"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "weekday": {
+        "-date": "FRIDAY",
+        "classcontainer": [
+          {
+            "class": {
+              "-number": 1,
+              "-type": "Lecture",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich"
+            }
+          },
+          {
+            "class": {
+              "-number": 2,
+              "-type": "Practical",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich/ Chaiko V.V."
+            }
+          },
+          {
+            "class": {
+              "-number": 3,
+              "-type": "Practical",
+              "-name": "UP",
+              "-teacher": "S.I. Kashkevich"
+            }
+          },
+          {
+            "class": {
+              "-number": 4,
+              "-type": "Practical",
+              "-name": "English",
+              "-teacher": "Sitnikova T.V."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "weekday": {
+        "-date": "SATURDAY",
+        "classcontainer": [
+          {
+            "class": {
+              "-number": 1,
+              "-type": "Lecture",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich"
+            }
+          },
+          {
+            "class": {
+              "-number": 2,
+              "-type": "Practical",
+              "-name": "Programming",
+              "-teacher": "S.I. Kashkevich/ Chaiko V.V."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

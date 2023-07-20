@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE schedule SYSTEM "Schedule.dtd">
+<schedule>
+  <weekday date="Понедельник">
+    <classСontainer>
+      <class number="1" type="Лекция" name="Программирование"  teacher ="Кашкевич С.И."/>
+      <class number="2" type="Практика" name="Программирование" teacher ="Кашкевич С.И./ Чайко В.В."/>
+      <class number="3" type="Лаб. з." name="УП"  teacher ="Кашкевич С.И."/>
+      <class number="4" type="Практика" name="Английский язык" teacher ="Ситникова Т.В."/>
+    </classСontainer>
+  </weekday>
+  <weekday  date="Вторник">
+    <classСontainer>
+      <class number="1" type="Лекция" name="Математический анализ"  teacher ="Мартыненко И.М."/>
+      <class number="2" type="Практика" name="Математический анализ" teacher ="Мартыненко И.М."/>
+      <class number="3" type="Практика" name="Теория графов" teacher ="Шур Н.А."/>
+      <class number="4" type="Практика" name="Белорусский язык"  teacher ="Ленкевич Е.В."/>
+    </classСontainer>
+  </weekday>
+  <weekday  date="Среда">
+    <classСontainer>
+      <class number="1" name="Физическая культура"  teacher ="Лебедев А.С."/>
+      <class number="2" type="Лекция" name="Математический анализ" teacher ="Мартыненко И.М."/>
+      <class number="3" type="Практика" name="Математический анализ"  teacher ="Мартыненко И.М."/>
+      <class number="4" type="Практика" name="Программирование" teacher ="Кашкевич С.И./ Чайко В.В."/>
+    </classСontainer>
+  </weekday>
+  <weekday  date="Четверг">
+    <classСontainer>
+      <class number="1" type="Лекция" name="Программирование"  teacher ="Кашкевич С.И."/>
+      <class number="2" type="Практика" name="Программирование"  teacher ="Кашкевич С.И./ Чайко В.В."/>
+      <class number="3" type="Практика" name="Английский язык" teacher ="Ситникова Т.В."/>
+    </classСontainer>
+  </weekday>
+  <weekday  date="Пятница">
+    <classСontainer>
+      <class number="1" name="Физическая культура"  teacher ="Лебедев А.С."/>
+      <class number="2" type="Лекция" name="АиТЧ" teacher ="Матвеев Г.В."/>
+      <class number="3" type="Лекция" name="Теория графов"  teacher ="Орлович Ю.Л."/>
+      <class number="4" type="Практика" name="АиТЧ" teacher ="Матвеев Г.В."/>
+    </classСontainer>
+  </weekday>
+  <weekday  date="Суббота">
+    <classСontainer>
+      <class number="1" type="Практика" name="ДГС"  teacher ="Вальвачёв А.Н."/>
+      <class number="2" type="Лекция" name="ДГС" teacher ="Вальвачёв А.Н."/>
+    </classСontainer>
+  </weekday>
+</schedule>
