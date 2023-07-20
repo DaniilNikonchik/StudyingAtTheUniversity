@@ -1,0 +1,126 @@
+<html>
+<head><title>Тест из нескольких вопросов</title>
+<style>
+p {
+	font-size:24px;
+}
+input {
+	font-size:24px;
+}
+</style>
+</head>
+<body style="background-color:#d9ffd6;">
+<p>Выполните задания теста:</p>
+<p>Из какого материала делается?
+<input type="text" id="z_1"></p>
+<p>Чем заправляется?
+<input type="text" id="z_2"></p>
+<p>Если выпить топливо, отравимся?
+<input type="text" id="z_3"></p>
+<p>Если поднести близко к лицу, можно спалить ресницы? 
+<input type="text" id="z_4"></p>
+<p>Ей можно поджигать?
+<input type="text" id="z_5"></p>
+<p>При покупке она сразу заправленна?
+<input type="text" id="z_6"></p>
+<p>Заправить можно?
+<input type="text" id="z_7"></p>
+<p>Разбить о землю можно?
+<input type="text" id="z_8"></p>
+<p>Есть инструкция по использованию?
+<input type="text" id="z_9"></p>
+<p>Есть срок годности?
+<input type="text" id="z_10"></p>
+<p>Везде работает?(на воздухе, в воде и в космосе?)
+<input type="text" id="z_11"></p>
+<p>Если намочить и высушить, будет работать?
+<input type="text" id="z_12"></p>
+<p>Топливо жидкое?
+<input type="text" id="z_13"></p>
+<p>Какая длина?
+<input type="text" id="z_14"></p>
+<button onClick="proverit();">Проверить</button>
+<div id="rezultat"></div>
+<script>
+function proverit(){
+pr_otv_zadachi_1 = пластмасы; 
+pr_otv_zadachi_2 = газом;
+pr_otv_zadachi_3 = да;
+pr_otv_zadachi_4 = да;
+pr_otv_zadachi_5 = да;
+pr_otv_zadachi_7 = да;
+pr_otv_zadachi_8 = да;
+pr_otv_zadachi_9 = нет;
+pr_otv_zadachi_10 = нет;
+pr_otv_zadachi_11 = нет;
+pr_otv_zadachi_12 = да;
+pr_otv_zadachi_13 = да;
+pr_otv_zadachi_14 = 10см;
+otv_uch_1 = document.getElementById('z_1').value;
+otv_uch_2 = document.getElementById('z_2').value;
+otv_uch_3 = document.getElementById('z_3').value;
+otv_uch_4 = document.getElementById('z_4').value;
+otv_uch_5 = document.getElementById('z_5').value;
+otv_uch_6 = document.getElementById('z_6').value;
+otv_uch_7 = document.getElementById('z_7').value;
+otv_uch_8 = document.getElementById('z_8').value;
+otv_uch_9 = document.getElementById('z_9').value;
+otv_uch_10 = document.getElementById('z_10').value;
+otv_uch_11 = document.getElementById('z_11').value;
+otv_uch_12 = document.getElementById('z_12').value;
+otv_uch_13 = document.getElementById('z_13').value;
+otv_uch_14 = document.getElementById('z_14').value;
+ball = 0;
+if(otv_uch_1 == pr_otv_zadachi_1){
+ball +=1;
+}
+if(otv_uch_2 == pr_otv_zadachi_2){
+ball +=1;
+}
+if(otv_uch_3 == pr_otv_zadachi_3){
+ball +=1;
+}
+if(otv_uch_4 == pr_otv_zadachi_4){
+ball +=1;
+}
+if(otv_uch_5 == pr_otv_zadachi_5){
+ball +=1;
+}
+if(otv_uch_6 == pr_otv_zadachi_6){
+ball +=1;
+}
+if(otv_uch_7 == pr_otv_zadachi_7){
+ball +=1;
+}
+if(otv_uch_8 == pr_otv_zadachi_8){
+ball +=1;
+}
+if(otv_uch_3 == pr_otv_zadachi_3){
+ball +=1;
+}
+if(otv_uch_9 == pr_otv_zadachi_9){
+ball +=1;
+}
+if(otv_uch_10 == pr_otv_zadachi_10){
+ball +=1;
+}
+if(otv_uch_11 == pr_otv_zadachi_11){
+ball +=1;
+}
+if(otv_uch_12 == pr_otv_zadachi_12){
+ball +=1;
+}
+if(otv_uch_13 == pr_otv_zadachi_13){
+ball +=1;
+}
+if(otv_uch_14 == pr_otv_zadachi_14){
+ball +=1;
+}
+
+vsego_zadach = 14;
+procent_vip = ball/vsego_zadach * 100;
+document.getElementById('rezultat').innerHTML = "Задания выполнены верно на "+procent_vip+"%.";
+}
+</script>
+</body>
+</html>

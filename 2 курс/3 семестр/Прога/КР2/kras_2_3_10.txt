@@ -1,0 +1,7578 @@
+САШИН ВАРИК ИЗ 1 КР РАБОЧИЙ
+import java.util.ArrayList; 
+import java.util.Collections; 
+import java.util.Scanner; 
+import java.util.StringTokenizer; 
+ 
+/* Вариант 25 
+* прочитать все данные с входного потока, разделить на слов, 
+* выделить лексемы Java,представляющие собой дробные числа(float) со знаком. 
+* Хранить эти значения с номерами входных строк. Вывести, предварительно отсортировав в порядке убывания значений. 
+* 
+*/ 
+ 
+class MyFloat implements Comparable <MyFloat> { 
+ 
+ String str; 
+ int lineNumber; 
+ float fl; 
+ 
+ public MyFloat (String s, int l) { 
+ str = s; 
+ lineNumber = l; 
+ fl=Float.parseFloat(s); 
+ } 
+ 
+public int compareTo(MyFloat mf) { 
+return Float.compare(Math.abs(mf.fl), Math.abs(fl)); 
+}
+ 
+ public static boolean isFloat (String str) { 
+ if (!str.contains("f") && !str.contains("F")) 
+ return false; 
+ try { 
+ Float.parseFloat(str); 
+ return true; 
+ } 
+ catch (Exception e) { 
+ return false; 
+ } 
+ } 
+ 
+ public String toString () { 
+ return str + " in " + lineNumber + " line."; 
+ } 
+} 
+ 
+public class task_18 { 
+ 
+ static ArrayList<MyFloat> floats = new ArrayList<MyFloat>(); 
+ 
+ static void processLine (String line, int lineNumber) { 
+ StringTokenizer sttok = new StringTokenizer(line); 
+ while (sttok.hasMoreTokens()) { 
+ String word = sttok.nextToken(); 
+ if ( MyFloat.isFloat(word) ) { 
+ floats.add(new MyFloat(word, lineNumber)); 
+ } 
+ } 
+ } 
+ 
+ public static void main(String[] args) { 
+ System.out.println("Enter text or Ctrl+Z:"); 
+ Scanner in = new Scanner(System.in); 
+ int lineNumber = 0; 
+ while (in.hasNextLine()) { 
+ String line = in.nextLine(); 
+ processLine(line, lineNumber++); 
+ } 
+ in.close(); 
+ System.out.println("floats:" + ((floats.size() == 0)?"no floats...":"")); 
+ Collections.sort(floats); 
+ for (MyFloat fl: floats) 
+ System.out.println(fl); 
+ System.out.println("the end."); 
+ } 
+}
+_________________________________________
+Вариант 1
+
+Из стандартного входного потока прочитать текст
+и в стандартный выходной поток вывести все цитаты.
+Цитата — это текст между двойными кавычками
+
+Вариант 2
+
+Программа читает текст из стандартного входного потока, находит слова,
+начинающиеся с заглавной буквы и выводит в стандартный выходной поток
+с новой строки
+
+Вариант 3
+
+Вводишь текст, а потом его надо вывести так,
+чтобы каждое новое предложение начиналось с новой строки)
+
+Вариант 4
+
+Стандартный входной поток.
+Найти все вопросительные предложения и вывести каждый с новой строки.
+
+Вариант 5
+
+найти длинные числа, отсортировать и вывести с номерами строк,
+ в которых они встречались
+
+Вариант 6
+
+найти в тексте слова состоящие из цифр и вывести их по слову в строку
+
+Вариант 7
+
+В тексте найти слова, состоящие из цифр, вывести их шестнадцатиричные записи, 
+каждую запись выводить с новой строки
+
+Вариант 8
+
+Слова разделены пробелами. Все слова в строке которые состоят только из букв
+ отсортировать и сохранять количество пробелов
+
+Вариант 9
+
+Из стандартного входного потока считываются строки.
+В каждой строке необходимо переставить слова в обратном порядке.
+
+Вариант 10
+
+Создать программу, которая читает текст из стандартного входного потока
+и печатает в выходной поток предложения исходного текста, в которых встречается фраза,
+указанная как обязательный параметр программы.
+
+Вариант 11
+
+В строке слова состоят только из букв, все остальное — разделители. 
+Найти палиндромы, отсортировать их и вернуть строку с правильно отсортированными палиндромами.
+Все остальное оставить на месте, сохранять пробелы
+
+Вариант 12
+
+Переставить в строке слова,
+состоящие только из цифр так, чтобы они были упорядочены по возрастанию суммы их цифр.
+При этом другие слова должны оставаться на месте, количество пробелов должно
+оставаться таким же, как и в исходной строке.
+
+Вариант 13
+
+заменить в строке 8 пробелов стоящих подряд на символ табуляции 
+
+Вариант 14
+
+Поиск самого длинного слова
+
+Вариант 15
+
+Найти слова, кторые заканчиваются на L l
+и вывести их
+
+Вариант 16
+
+Найти в тексте слова, которые состоят только из букв, отсоритировать их в строке
+
+Вариант 17
+
+Транспонировать матрицу
+
+Вариант 18
+
+Удалить в тексте всю пунктуацию
+
+______________________________
+import java.sql.Array;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+ 
+public class test {
+    //task 1
+//    public static void main(String[] args) {
+//        ArrayList<String> result = new ArrayList<String>();
+//        Scanner in = new Scanner(System.in);
+//        while (in.hasNextLine()) {
+//            String str = in.nextLine();
+//            int indexOfBegin = 0, indexOfEnd = 0;
+//            while (indexOfBegin != -1 && indexOfEnd != -1) {
+//                indexOfBegin = str.indexOf('"',indexOfBegin);
+//                indexOfEnd = str.indexOf('"',indexOfBegin + 1);
+//                if (indexOfEnd != -1 && indexOfBegin != -1) {
+//                    result.add(str.substring(indexOfBegin + 1, indexOfEnd));
+//                    indexOfBegin = indexOfEnd + 1;
+//                }
+//            }
+//        }
+//        for (String str: result)
+//            System.out.println(str);
+//    }
+ 
+    //task‚ 2
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        ArrayList<String> result = new ArrayList<>();
+//        while (in.hasNextLine()) {
+//            String str = in.nextLine();
+//            StringTokenizer words = new StringTokenizer(str);
+//            while (words.hasMoreTokens()) {
+//                String word = words.nextToken();
+//                if (word.matches("[A-Z][a-zA-Z]+"))
+//                    result.add(word);
+//            }
+//        }
+//        for (String word: result)
+//            System.out.println(word);
+//    }
+ 
+//    task 3
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        String str = "";
+//        while (in.hasNextLine())
+//            str += in.nextLine();
+//        String result = "";
+//        int index = 0;
+//        while (index < str.length()) {
+//            if (str.charAt(index) == '.' || str.charAt(index) == '?') {
+//                result += str.substring(0, index + 1) + " ";
+//                str = str.substring(index + 1, str.length());
+//                index = 0;
+//            } else if (str.charAt(index) == '!') {
+//                result += str.substring(0, index + 1).toUpperCase();
+//                str = str.substring(index + 1, str.length());
+//                index = 0;
+//            }
+//            index ++;
+//        }
+//        System.out.println(result);
+//    }
+ 
+//    task 4
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        ArrayList<String> result = new ArrayList<>();
+//        String str = "";
+//        while (in.hasNextLine())
+//            str += in.nextLine();
+//        int index = 0;
+//        while (index < str.length()) {
+//            if (str.charAt(index) == '.' || str.charAt(index) == '!') {
+//                str = str.substring(index + 1);
+//                index = 0;
+//            } else if (str.charAt(index) == '?') {
+//                result.add(str.substring(0, index + 1));
+//                str = str.substring(index + 1);
+//                index = 0;
+//            }
+//            index ++;
+//        }
+//        for (String buf: result)
+//            System.out.println(buf);
+//    }
+ 
+//   task 5
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        int line = 0;
+//        HashMap<Long, Integer> result = new HashMap<Long, Integer>();
+//        while (in.hasNextLine()) {
+//            String str = in.nextLine();
+//            StringTokenizer words = new StringTokenizer(str);
+//            while (words.hasMoreTokens()) {
+//                String word = words.nextToken();
+//                if (word.matches("[0-9]+[lL]"))
+//                    result.put(Long.parseLong(word.substring(0,word.length() - 1)), line);
+//            }
+//        }
+//        ArrayList<Long> sorted = new ArrayList<>(result.keySet());
+//        Collections.sort(sorted);
+//        for (Long value: sorted)
+//            System.out.println(value + " (" + result.get(value) + ")");
+//    }
+ 
+//    task 6
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        ArrayList<String> result = new ArrayList<>();
+//        while (in.hasNextLine()) {
+//            String str = in.nextLine();
+//            StringTokenizer words = new StringTokenizer(str);
+//            while (words.hasMoreTokens()) {
+//                String word = words.nextToken();
+//                if (word.matches("[0-9]+"))
+//                    result.add(word);
+//            }
+//        }
+//        for (String word: result)
+//            System.out.println(word);
+//    }
+ 
+//    task 7
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        String result = "";
+//        while (in.hasNextLine()) {
+//            String str = in.nextLine();
+//            StringTokenizer words = new StringTokenizer(str);
+//            while (words.hasMoreTokens()) {
+//                String word = words.nextToken();
+//                if (word.matches("[0-9]+"))
+//                    result += Integer.toHexString(Integer.parseInt(word)) + " ";
+//            }
+//        }
+//        System.out.println(result);
+//    }
+ 
+//    task 8
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        while (in.hasNextLine()) {
+//            ArrayList<String> sortedResult = new ArrayList<>();
+//            String str = in.nextLine(), result = "";
+//            StringTokenizer words = new StringTokenizer(str);
+//            while (words.hasMoreTokens()) {
+//                String word = words.nextToken();
+//                if (word.matches("[a-zA-Z]+"))
+//                    sortedResult.add(word);
+//            }
+//            Collections.sort(sortedResult);
+//            for (int i = 0; i < sortedResult.size(); ++i) {
+//                str = str.replaceFirst("[a-zA-Z]+", sortedResult.get(i));
+//                result += str.substring(0, str.indexOf(sortedResult.get(i)) + sortedResult.get(i).length() );
+//                str = str.substring(str.indexOf(sortedResult.get(i)) + sortedResult.get(i).length());
+//            }
+//            System.out.println(result);
+//        }
+//    }
+ 
+   // task 9
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        while (in.hasNextLine()) {
+//            ArrayList<String> reversedResult = new ArrayList<>();
+//            String str = in.nextLine(), result = "";
+//            StringTokenizer words = new StringTokenizer(str);
+//            while (words.hasMoreTokens()) {
+//                String word = words.nextToken();
+//                if (word.matches("[0-9a-zA-Z]+"))
+//                    reversedResult.add(word);
+//            }
+//            Collections.reverse(reversedResult);
+//            for (int i = 0; i < reversedResult.size(); ++i) {
+//                str = str.replaceFirst("[0-9a-zA-Z]+", reversedResult.get(i));
+//                result += str.substring(0, str.indexOf(reversedResult.get(i)) + reversedResult.get(i).length() );
+//                str = str.substring(str.indexOf(reversedResult.get(i)) + reversedResult.get(i).length() );
+//            }
+//            System.out.println(result);
+//        }
+//    }
+ 
+//   task 10
+//    public static void main(String[] args) {
+//        String phrase = args[0];
+//        Scanner in = new Scanner(System.in);
+//        String str = "";
+//        while (in.hasNextLine())
+//            str += in.nextLine();
+//        StringTokenizer sentences = new StringTokenizer(str, ".!?");
+//        while (sentences.hasMoreTokens()) {
+//            String sentence = sentences.nextToken();
+//            if (sentence.indexOf(phrase) != -1)
+//                System.out.println(sentence);
+//        }
+//    }
+ 
+//    task 11
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        String str = "";
+//        ArrayList<String> polindroms = new ArrayList<>();
+//        while (in.hasNextLine())
+//            str += in.nextLine();
+//        StringBuffer result = new StringBuffer(str);
+//        Pattern pattern = Pattern.compile("[a-zа-яA-ZА-Я]+");
+//        Matcher matcher = pattern.matcher(str);
+//        int begin, end;
+//        while (matcher.find()) {
+//            begin = matcher.start();
+//            end = matcher.end();
+//            StringBuffer word = new StringBuffer(str.substring(begin, end));
+//            if (word.reverse().toString().equals((str.substring(begin, end))))
+//                polindroms.add((str.substring(begin, end)));
+//        }
+//        Collections.sort(polindroms);
+//        int i = 0;
+//        matcher = pattern.matcher(str);
+//        while (matcher.find()) {
+//            begin = matcher.start();
+//            end = matcher.end();
+//            StringBuffer word = new StringBuffer(str.substring(begin, end));
+//            if (word.reverse().toString().equals((str.substring(begin, end)))) {
+//                result.replace(begin, end, polindroms.get(i));
+//                ++i;
+//            }
+//        }
+//        System.out.println(result);
+//    }
+ 
+  //  task 12
+//    public static class my_Comparator implements Comparator<String>{
+//        @Override
+//        public int compare(String s, String t1) {
+//            int num1 = Integer.parseInt(s);
+//            int num2 = Integer.parseInt(t1);
+//            int res1=0,res2=0;
+//            while (num1!=0){
+//                res1 +=num1%10;
+//                num1=num1/10;
+//            }
+//            while (num2!=0){
+//                res2 +=num2%10;
+//                num2=num2/10;
+//            }
+//            if (res1>res2){
+//                return 1;
+//            }
+//            if (res2>res1){
+//                return -1;
+//            }
+//            return 0;
+//        }
+//    }
+//    public static void main(String[] args) {
+//        ArrayList<String> numbers= new ArrayList<>();
+//        String result = "";
+//        String answer = "";
+//        Scanner sc = new Scanner(System.in);
+//        while (sc.hasNext()){
+//            result+=sc.nextLine();
+//        }
+//        StringTokenizer tokenizer = new StringTokenizer(result);
+//        while (tokenizer.hasMoreElements()){
+//            String word = tokenizer.nextToken();
+//            if (word.matches("\\b[0-9]+\\b")){
+//                numbers.add(word);
+//            }
+//        }
+//        Collections.sort(numbers);
+//        numbers.sort(new my_Comparator());
+//        for (int i = 0;i<numbers.size();++i){
+//            result = result.replaceFirst("\\b[0-9]+\\b",numbers.get(i));
+//            answer +=result.substring(0,result.indexOf(numbers.get(i))+numbers.get(i).length());
+//            result = result.substring(result.indexOf(numbers.get(i))+numbers.get(i).length());
+//        }
+//        answer+=result;
+//        System.out.println(answer);
+//    }
+ 
+ 
+ 
+//    task 13
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        while (in.hasNextLine()) {
+//            String str = in.nextLine();
+//            str = str.replaceAll("[\\s]{8}","\t");
+//            System.out.println(str);
+//        }
+//    }
+ 
+//    task 14
+//    public static void main(String[] args) {
+//        Scanner in = new Scanner(System.in);
+//        ArrayList<String> words = new ArrayList<>();
+//        while (in.hasNextLine()) {
+//            StringTokenizer wordsInLine = new StringTokenizer(in.nextLine());
+//            while (wordsInLine.hasMoreTokens())
+//                words.add(wordsInLine.nextToken());
+//        }
+//        String longestWord = "";
+//        int maxLong = 0;
+//        for (String word: words) {
+//            if (word.length() > maxLong) {
+//                maxLong = word.length();
+//                longestWord = word;
+//            }
+//        }
+//        int count = 0;
+//        for (String word: words) {
+//            if (word.equals(longestWord))
+//                count ++;
+//        }
+//        System.out.println(longestWord + " " + count);
+//    }
+ 
+ //task 15 решён отдельно(на компе это вариаент 5)
+ 
+// task 16
+//    public static void main(String[] args) {
+//        ArrayList<String> numbers= new ArrayList<>();
+//        String result = "";
+//        String answer = "";
+//        Scanner sc = new Scanner(System.in);
+//        while (sc.hasNext()){
+//            result+=sc.nextLine();
+//        }
+//        StringTokenizer tokenizer = new StringTokenizer(result);
+//        while (tokenizer.hasMoreElements()){
+//            String word = tokenizer.nextToken();
+//            if (word.matches("\\b[a-zA-z]+\\b")){
+//                numbers.add(word);
+//            }
+//        }
+//        Collections.sort(numbers);
+//        //numbers.sort(new my_Comparator());
+//        for (int i = 0;i<numbers.size();++i){
+//            result = result.replaceFirst("\\b[a-zA-z]+\\b",numbers.get(i));
+//            answer +=result.substring(0,result.indexOf(numbers.get(i))+numbers.get(i).length());
+//            result = result.substring(result.indexOf(numbers.get(i))+numbers.get(i).length());
+//        }
+//        answer+=result;
+//        System.out.println(answer);
+//    }
+ 
+//task 17
+//public static void main(String[] args) {
+//    Scanner sc = new Scanner(System.in);
+//    int size = sc.nextInt();
+//    int[][] matrix = new int[size][size];
+//    for (int i = 0; i < size; ++i) {
+//        for (int j = 0; j < size; ++j) {
+//            matrix[i][j] = new Random().nextInt(2 * size + 1) - size;
+//        }
+//    }
+//    for (int i = 0; i < size; ++i) {
+//        for (int j = 0; j < size; ++j) {
+//            System.out.print(matrix[i][j] + "\t");
+//        }
+//        System.out.println();
+//    }
+//    System.out.println();
+//    for (int i = 0; i < size; ++i) {
+//        for (int j = 0; j < size; ++j) {
+//            if (i>j) {
+//                int tmp = matrix[i][j];
+//                matrix[i][j] = matrix[j][i];
+//                matrix[j][i] = tmp;
+//            }
+//        }
+//    }
+//    System.out.println();
+//    for (int i = 0; i < size; ++i) {
+//        for (int j = 0; j < size; ++j) {
+//            System.out.print(matrix[i][j] + "\t");
+//        }
+//        System.out.println();
+//    }
+//
+//}
+ 
+ 
+    //task18
+//public static void main(String[] args) {
+//    Scanner sc = new Scanner(System.in);
+//    LinkedList<String> text = new LinkedList<>();
+//    LinkedList<String>new_text = new LinkedList<>();
+//    while (sc.hasNextLine()) {
+//        String line = sc.nextLine();
+//        line = line.replaceAll("\\t", " ");
+//        line = line.replaceAll("\\s+", " ");
+//        line = line.trim();
+//        line = line.replaceAll("\\s+(?=\\p{Punct})", "");
+//        text.add(line);
+//    }
+//    String temp="";
+//    for(String st:text){
+//        st+=temp;
+//        while (st.length()>=80){
+//            if (st.length() == 80){
+//                new_text.add(st.trim());
+//                temp="";
+//                st="";
+//            }
+//            else{
+//                int index = 80;
+//                while (st.charAt(index)!=' '){
+//                    index--;
+//                }
+//                String tmp = st.substring(0,index-1);
+//                st = st.substring(index);
+//                new_text.add(tmp.trim());
+//            }
+//
+//        }
+//        temp = st;
+//
+//    }
+//    if (temp!=""){
+//        new_text.add(temp);
+//    }
+//    for (String tmp:new_text){
+//        System.out.println(tmp);
+//    }
+//
+//}
+ 
+ 
+//    //task 25
+//    public static class Word implements Comparable<Word> {
+//        String num;
+//        int line;
+//
+//        public Word(String num, int line) {
+//            this.num = num;
+//            this.line = line;
+//        }
+//
+//        @Override
+//        public int compareTo(Word word) {
+//            double w1 = Double.parseDouble(this.num);
+//            double w2 = Double.parseDouble(word.num);
+//            if (w1 > w2) {
+//                return 1;
+//            }
+//            if (w2>w1){
+//                return -1;
+//            }
+//
+//            return 0;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return ""+num+" at line #"+line+".";
+//        }
+//    }
+//    public static void main(String[] args) {
+//    Scanner sc = new Scanner(System.in);
+//    ArrayList<Word> answer = new ArrayList<>();
+//    int num_line =1;
+//    while (sc.hasNext()){
+//        String line = sc.nextLine();
+//        StringTokenizer tokenizer = new StringTokenizer(line);
+//        while (tokenizer.hasMoreElements()){
+//            String word = tokenizer.nextToken();
+//            if (word.matches("-?[0-9]+(\\.[0-9]+)?")){
+//                answer.add(new Word(word,num_line));
+//            }
+//        }
+//        num_line++;
+//    }
+//    Collections.sort(answer);
+//    for (Word w:answer){
+//        System.out.println(w);
+//    }
+//
+//    }
+ 
+    //task 27
+ 
+//    public static class Word  {
+//        String num;
+//        int line;
+//
+//        public Word(String num, int line) {
+//            this.num = num;
+//            this.line = line;
+//        }
+//
+//
+//
+//        @Override
+//        public String toString() {
+//            return ""+num+" at line #"+line+".";
+//        }
+//    }
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        ArrayList<Word> answer = new ArrayList<>();
+//        int num_line =1;
+//        while (sc.hasNext()){
+//            String line = sc.nextLine();
+//            StringTokenizer tokenizer = new StringTokenizer(line);
+//            while (tokenizer.hasMoreElements()){
+//                String word = tokenizer.nextToken();
+//                if (word.matches("0([0-9]+)?")){
+//                    answer.add(new Word(word,num_line));
+//                }
+//            }
+//            num_line++;
+//        }
+//        for (Word w:answer){
+//            System.out.println(w);
+//        }
+//
+//    }
+ 
+ 
+}
+___________________________________________________
+import java.applet.Applet;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.util.Random;
+
+/* ������� 20 АППЛЕТ С ЛИНИЕЙ И ТОЧКАМИ КРАСНЫМИ
+ * � ��������� �������� ��������� ��������������� ������� � ���� �������:
+ * 1. ������� ������ Point � Line. �������� ������ �� n �������� ������ Point.
+ * ��� ������� ������ Line ���������� ����� �� �������� Point ����� �� ����� �������
+ * �� ������ ����� � ����� - �� ������. ����������� ���� ������ ��� ������� Line �
+ * ��������� ������� ������ ��� �������� Point.
+ */
+
+class Point extends Canvas {
+    private static final long serialVersionUID = 1L;
+    Color clr;
+    int x, y;
+    Dimension dim = new Dimension(20, 20);
+    public Point (int appWidth, int appHeight) {
+        super();
+        setMaximumSize(dim);
+        setBackground(null);
+        setBounds(0, 0, dim.width, dim.height);
+        clr = Color.black;
+        x = new Random().nextInt(appWidth - dim.width) + dim.width / 2;
+        y = new Random().nextInt(appHeight - dim.height) + dim.height / 2;
+    }
+    public void paint (Graphics g) {
+        g.setColor(clr);
+        g.fillOval(0, 0, dim.width, dim.height);
+    }
+    public void setColor (Color clr) {
+        this.clr = clr;
+    }
+    public Dimension getMinimumSize () { return dim; }
+    public Dimension getPreferredSize () { return dim; }
+}
+
+class Line {
+    Color clr;
+    int x1, y1, x2, y2;
+    public Line (Color c, int x1, int y1, int x2, int y2) {
+        clr = c;
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+    }
+    public int compare (Point p) {
+        double tg = (double)(y2 - y1) / (x2 - x1);
+        int xt = (int)(x1 - (double)(y1 - p.y) / tg);
+        if ( p.x < xt )
+            return -1;
+        else if ( p.x > xt )
+            return 1;
+
+        int yt = (int)(y1 - tg * (x1 - p.x));
+        if ( p.y < yt )
+            return 1;
+        else if ( p.y > yt )
+            return -1;
+        return 0;
+    }
+}
+
+public class task_19 extends Applet {
+
+    private static final long serialVersionUID = 1L;
+    static final int CX = 600, CY = 500;
+    Canvas points[];
+    Line line;
+
+    public Color getHtmlColor (String rgb, Color def) {
+        if ( rgb == null || rgb.charAt(0) != '#' )
+            return def;
+        try {
+            return new Color(Integer.parseInt(rgb.substring(1), 16));
+        } catch (NumberFormatException e) {
+            return def;
+        }
+    }
+
+    public void init () {
+        setSize(CX, CY);
+        setLayout(null);
+        setBackground(Color.white);
+        Color clr = Color.BLACK;
+        int x1 = 0, y1 = 0, x2 = 0, y2 = 0, n = 0;
+        try {
+            clr = getHtmlColor(getParameter("lineColor"), Color.BLACK);
+            x1 = Integer.parseInt((getParameter("x1") == null)?"50":getParameter("x1"));
+            y1 = Integer.parseInt((getParameter("y1") == null)?"50":getParameter("y1"));
+            x2 = Integer.parseInt((getParameter("x2") == null)?"550":getParameter("x2"));
+            y2 = Integer.parseInt((getParameter("y2") == null)?"450":getParameter("y2"));
+            n = Integer.parseInt((getParameter("n") == null)?"10":getParameter("n"));
+        } catch (Exception e) {}
+        line = new Line(clr, x1, y1, x2, y2);
+        points = new Point[n];
+        for (Canvas p: points) {
+            p = new Point(this.getWidth(), this.getHeight());
+            int ans = ((Line)line).compare((Point)p);
+            Color cl;
+            switch (ans) {
+                case -1: cl = Color.red; break;
+                case 1: cl = Color.green; break;
+                default: cl = Color.yellow;
+            }
+            ((Point)p).setColor(cl);
+            p.setLocation(((Point)p).x, ((Point)p).y);
+            add(p);
+        }
+        repaint();
+    }
+    public void paint (Graphics g) {
+        g.setColor(line.clr);
+        g.drawLine(line.x1, line.y1, line.x2, line.y2);
+    }
+
+}
+_______________________________________________________
+import java.applet.Applet;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+/* ������� 21 АППЛЕТ ТОЧКА ДВИЖЕТСЯ ПО ЛИНИИ
+ * ���������� � ���� ������� ������������� ��������� ����� ����� ����������
+ * ��������������� �������. ���� ����� ������� ����� q, �� ���������� �� ����� �� ������
+ * ����� � ������ ������� t ����� ������� ������ q(1+cos(wt))/2,��� w - ��������� ���������.
+ * ��������� �������� �������� ����� ��������� �������.
+ */
+
+class MyCanv extends Canvas {
+	private static final long serialVersionUID = 1L;
+	int q, w, x, t;
+	Dimension dim;
+	private int func () {
+		return (int)(0.5 * (double)q * (1. + Math.cos(1.0 * w * t)));
+	}
+	
+	public MyCanv (int q, int w) {
+		super();
+		this.q = q;
+		this.w = w;
+		t = 0;
+		x = func();
+		dim = new Dimension(q, 10);
+		setBackground(Color.WHITE);
+		setMaximumSize(dim);
+		setBounds(0, 0, dim.width, dim.height);
+	}
+	public void paint (Graphics g) {
+		g.setColor(Color.RED);
+		g.drawLine(0, dim.height / 2, q, dim.height / 2);
+		g.setColor(Color.black);
+		g.fillOval(x - 5, 0, 10, dim.height);
+	}
+	public Dimension getMinimumSize () { return dim; }
+	public Dimension getPreferredSize () { return dim; }
+	
+	public void doMove () {
+		t += 10;
+		x = func();
+	}
+}
+
+public class task_21 extends Applet implements Runnable {
+
+	private static final long serialVersionUID = 1L;
+	
+	static final int CX = 600, CY = 500;
+	Canvas canv;
+	Thread t = null;
+	
+	public void init () {
+		setSize(CX, CY);
+		setLayout(null);
+		setBackground(Color.WHITE);
+		int q = 0, w = 0;
+		try {
+			q = Integer.parseInt((getParameter("q") == null)?"150":getParameter("q"));
+			w = Integer.parseInt((getParameter("w") == null)?"2":getParameter("w"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+		canv = new MyCanv(q, w);
+		canv.setLocation(this.getWidth() / 2 - ((MyCanv)canv).q / 2, this.getHeight() / 2);
+		add(canv);
+		if ( t == null )
+			t = new Thread(this);
+		t.start();
+	}
+	
+	void doMove () {
+		((MyCanv)canv).doMove();
+		canv.setLocation(this.getWidth() / 2 - ((MyCanv)canv).q / 2, this.getHeight() / 2);
+		canv.repaint();
+	}
+	
+	public void run () {
+		mySuspend();
+		while (true) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				break;
+			}
+			if ( !isSuspended() )
+				doMove();
+		}
+	}
+	
+	public void start () {
+		myResume();
+	}
+	public void stop () {
+		mySuspend();
+	}
+	public void destroy () {
+		if ( t != null ) {
+			t.interrupt();
+			t = null;
+		}
+	}
+	
+	volatile boolean f_suspend = false;
+	boolean isSuspended () { return f_suspend; }
+	void mySuspend () { f_suspend = true; }
+	void myResume () { f_suspend = false; }
+	
+}
+______________________________________________________
+
+import java.applet.Applet;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+АППЛЕТ ГРАФИК ПАРАБОЛЫ
+//������ � ��������� - ���� �� ������������ �� ��������
+// � ���� ������� ���������� �������� y=x^2-1 �� ���������� [-1;2] � ����� 0.05
+
+class Coordinates {
+	int xP, yP;
+	double x, y;
+	double grToPix;
+	
+	public Coordinates (double x, double y) {
+		int xP0 = Graphic.centerX;
+		int yP0 = Graphic.centerY;
+		grToPix = task_22.CY / 6;
+		this.x = x;
+		this.y = y;
+		xP = xP0 + (int)(x * grToPix);
+		yP = yP0 - (int)(y * grToPix);
+	}
+	
+}
+
+class Graphic extends Canvas {
+	private static final long serialVersionUID = 1L;
+	
+	Dimension dim = new Dimension(task_22.CX, task_22.CY);
+	static final int centerX = task_22.CX / 2, centerY = 2 * task_22.CY / 3;
+	double dx = 0.05;//���
+	
+	double func (double x) { return x*x - 1; }//�������
+	
+	public Graphic () {
+		super();
+		setMaximumSize(dim);
+		setBackground(Color.white);
+		setBounds(0, 0, dim.width, dim.height);
+	}
+	public void paint (Graphics g) {
+		drawGraph(g);
+		drawCoord(g);
+	}
+	public void drawGraph (Graphics g) {
+		g.setColor(Color.RED);
+		for (double x = -1; x < 2; x += dx) {//����������
+			Coordinates c1 = new Coordinates(x, func(x));
+			Coordinates c2 = new Coordinates(x+dx, func(x+dx));
+			g.drawLine(c1.xP, c1.yP, c2.xP, c2.yP);
+		}
+	}
+	public void drawCoord (Graphics g) {
+		g.setColor(Color.black);
+		g.drawLine(0, centerY, task_22.CX, centerY);
+		g.drawLine(centerX, 0, centerX, task_22.CY);
+		
+	}
+	public Dimension getPreferredSize () { return dim; }
+	public Dimension getMinimumSize () { return dim; }
+}
+
+public class task_22 extends Applet{
+	private static final long serialVersionUID = 1L;
+	static final int CX = 600, CY = 600;
+	Canvas canv;
+	
+	public void init () {
+		setSize(CX, CY);
+		setLayout(null);
+		setBackground(Color.WHITE);
+		canv = new Graphic();
+		add(canv);
+	}
+}
+
+
+_______________________________________
+import java.applet.Applet;
+import java.awt.*;
+//АППЛЕТ БУКВЫ СОБИРАЮТСЯ В ИМЯ
+class Point_1
+{
+	int x;
+	int y;
+	public void setx(int xo)
+	{
+		x=xo;
+	}
+	public void sety(int yo)
+	{
+		y=yo;
+	}
+	public Point_1() {}
+	public Point_1(int xi,int yi)
+	{
+		x=xi;
+		y=yi;
+	}
+}
+
+public class task_23 extends Applet {
+
+	private static final long serialVersionUID = 1L;
+	
+	static final int CX = 400, CY = 400;
+    static String str = "Alexa";
+    static int pose1 = 10;
+    static int pose2 = 10;
+    static int pose3 = 10;
+    static int pose4 = 10;
+    static int next =0;
+    static String our="";
+    static int point=0;
+    static char cur1=str.charAt(point);
+    static char cur2=str.charAt(++point);
+    static char cur3=str.charAt(++point);
+    static char cur4=str.charAt(++point);    
+    public Color getHtmlColor( String strRGB, Color def )
+    {
+        // in form #RRGGBB
+        if ( strRGB != null && strRGB.charAt(0)== '#' )
+        {
+            try
+            {
+                return new Color(
+                    Integer.parseInt( strRGB.substring( 1 ), 16 ) );
+            }
+            catch ( NumberFormatException e ) 
+            {
+                return def;
+            }
+        }
+        return def;
+    }
+
+    public void init()
+    {
+        setSize( CX, CY );
+        setLayout( null );
+        Color col = getHtmlColor(getParameter( "AppBkColor" ), new Color( 90, 90, 160 ));
+        setBackground( col );
+        Color colx = getHtmlColor(getParameter( "DrawBkColor" ), new Color( 64, 64, 64 ));
+        col = getHtmlColor(	getParameter( "DrawColor" ), Color.WHITE );
+        
+    }
+    public void paint(Graphics g) 
+    {
+    	g.drawString(cur1+" ",pose1,pose1);
+    	g.drawString(cur2+" ",400-pose2,pose2);
+    	g.drawString(cur3+" ",400-pose3,400-pose3);
+    	g.drawString(cur4+" ",pose4,400-pose4);
+    	g.drawString(our,100,200);
+    	
+    }
+
+    public void start() {
+    	startThread();
+    }
+
+    public void stop() {
+    	stopThread();
+    }
+
+    public void destroy() {
+    	stopThread();
+    }
+
+    private AppletThread t = null;
+    private void createThread() {
+        if ( t == null ) {
+            t = new AppletThread( this );
+        }
+    }
+
+    private void startThread() {
+    	createThread();
+        t.start();
+    }
+
+    private void stopThread() {
+        if ( t != null ) {
+            t.interrupt();
+            t = null;
+        }
+    }
+}
+
+class AppletThread extends Thread {
+    task_23 pa = null;
+  	boolean stFlag  = false;
+    public AppletThread( task_23 pa ) {
+    	super();
+    	this.pa = pa;
+    }
+
+    public void run()
+    {
+    	while ( true ) {
+            try
+            {
+            	
+                Thread.sleep( 100 );
+                if(!stFlag)
+                doMove();
+            } catch ( InterruptedException e ) {
+                break;
+            }
+        }
+    }
+
+    public synchronized void doMove()
+    {    	
+    	if(pa.next==0)
+    	{
+    		pa.pose1+=10;
+    		pa.repaint();
+    		if(pa.pose1==200)
+    		{
+    			pa.pose1=10;
+    			pa.next+=1;
+    			pa.our+=pa.cur1;
+    			pa.point++;
+    			if(pa.point>=pa.str.length())
+    			{	
+    				pa.cur1=' ';
+    			}
+    			else
+    			{
+    				pa.cur1=pa.str.charAt(pa.point);
+    			}
+    			if ( pa.cur1 == ' ' && pa.cur2 == ' ' &&pa.cur3 == ' ' && pa.cur4 == ' ')
+    			{
+    				stFlag = true;
+    			}
+    			
+    		}    		
+    	}
+    	else if(pa.next==1)
+    	{
+    		pa.pose2+=10;
+    		pa.repaint();
+    		if(pa.pose2==200)
+    		{
+    			pa.pose2=10;
+    			pa.next+=1;
+    			pa.our+=pa.cur2;
+    			pa.point++;
+    			if(pa.point>=pa.str.length())
+    			{
+    				pa.cur2=' ';
+    			}
+    			else
+    			{
+    				pa.cur2=pa.str.charAt(pa.point);
+    			}
+    			if ( pa.cur1 == ' ' && pa.cur2 == ' ' &&pa.cur3 == ' ' && pa.cur4 == ' ')
+    			{
+    				stFlag = true;
+    			}
+    		}
+    	}
+    	else if(pa.next==2)
+    	{
+    		pa.pose3+=10;
+    		pa.repaint();
+    		if(pa.pose3==200)
+    		{
+    			pa.pose3=10;
+    			pa.next+=1;
+    			pa.our+=pa.cur3;
+    			pa.point++;
+    			if(pa.point>=pa.str.length())
+    			{
+    				pa.cur3=' ';
+    			}
+    			else
+    			{
+    				pa.cur3=pa.str.charAt(pa.point);
+   				}
+    			if ( pa.cur1 == ' ' && pa.cur2 == ' ' &&pa.cur3 == ' ' && pa.cur4 == ' ')
+    			{
+    				stFlag = true;
+    			}
+    		}
+    	}
+    	else
+    	{
+    		pa.pose4+=10;
+    		pa.repaint();
+    		if(pa.pose4==200)
+    		{
+    			pa.pose4=10;
+    			pa.next=0;
+    			pa.our+=pa.cur4;
+    			pa.point++;
+    			if(pa.point>=pa.str.length())
+    			{
+    				pa.cur4=' ';
+    			}
+    			else
+    			{
+    				pa.cur4=pa.str.charAt(pa.point);
+    			}
+    			if ( pa.cur1 == ' ' && pa.cur2 == ' ' &&pa.cur3 == ' ' && pa.cur4 == ' ')
+    			{
+    				stFlag = true;
+    			}
+    		}
+    	}   	
+    	
+    }
+}
+_________________________________________
+import java.applet.Applet;
+import java.awt.*;
+import java.util.*;
+//АППЛЕТ СТРОКА ДВИЖЕТСЯ И МЕНЯЕТ ЦВЕТ
+/* C������ ������ �� �������, ������� �������� �������������,
+ * ��������� �� ������ ������� � ����� ��� ���� ���� ���� �� ����.
+ * ������ �������� ����� ��������� �������.
+ */
+
+class Stroka extends Canvas {
+
+	private static final long serialVersionUID = 1L;
+	
+	String str;
+	Color color;
+	int x1, x2, y;
+	Dimension dim;
+	
+	public Stroka (String str, Color color) {
+		super();
+		this.str = str;
+		this.color = color;
+		x1 = 0;
+		y = task_24.CY / 2;
+		dim = new Dimension(8*(str.length()+1), 15);
+		x2 = x1 + dim.width;
+		setBackground(Color.white);
+		setMaximumSize(dim);
+		setBounds(0, 0, dim.width, dim.height);
+	}
+	public void paint (Graphics g) {
+		g.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		g.setColor(color);
+		g.drawString(str, 0, dim.height);
+	}	
+	public Dimension getMinimumSize () { return dim; }
+	public Dimension getPreferredSize () { return dim; }
+	
+	boolean toRight = true;
+	public void doMove (int appWidth, int appHeight) {
+		int dx = 10;
+		if ( toRight ) {
+			x1 += dx;
+			x2 += dx;
+			if ( x2 > appWidth ) {
+				x2 = appWidth;
+				x1 = x2 - dim.width;
+				changeColor();
+				toRight = false;
+			}
+		}
+		else {
+			x1 -= dx;
+			x2 -= dx;
+			if ( x1 < 0 ) {
+				x1 = 0;
+				x2 = dim.width;
+				changeColor();
+				toRight = true;
+			}
+		}
+		y = appHeight / 2;
+	}
+	void changeColor () {
+		int r = new Random().nextInt(256);
+		int g = new Random().nextInt(256);
+		int b = new Random().nextInt(256);
+		color = new Color(r, g, b);
+	}
+	
+}
+
+public class task_24 extends Applet implements Runnable {
+
+	private static final long serialVersionUID = 1L;
+	
+	static final int CX = 600, CY = 500;
+	Canvas canv;
+	Thread t = null;
+	
+	public void init () {
+		setSize(CX, CY);
+		setLayout(null);
+		setBackground(Color.white);
+		String str = getParameter("str");
+		canv = new Stroka(((str == null)?"NEST":str), Color.BLACK);
+		canv.setLocation(0, this.getHeight() / 2);
+		add(canv);
+		if ( t == null )
+			t = new Thread(this);
+		t.start();
+	}
+	
+	public void doMove () {
+		int w = this.getWidth(), h = this.getHeight();
+		((Stroka)canv).doMove(w, h);
+		canv.setLocation(((Stroka)canv).x1, ((Stroka)canv).y);
+		canv.repaint();
+	}
+	public void run () {
+		mySuspend();
+		while (true) {
+			try {
+				Thread.sleep(100);
+			} catch (Exception e) {
+				break;
+			}
+			if ( !isSuspended() )
+				doMove();
+		}
+	}
+	public void start () {
+		myResume();
+	}
+	public void stop () {
+		mySuspend();
+	}
+	public void destroy () {
+		if ( t != null ) {
+			t.interrupt();
+			t = null;
+		}
+	}
+	
+	volatile boolean f_suspend = false;
+	boolean isSuspended () { return f_suspend; }
+	void mySuspend () { f_suspend = true; }
+	void myResume () { f_suspend = false; }
+
+}
+_______________________________
+
+//АППЛЕТ ДВИЖЕТСЯ КРУГ
+/* � ���� ������� �� ����������� ��������� ����������, ��������� �� ������ �������.
+�� �� ������ ����������, � ���������� ������� ������������. */
+
+
+import java.applet.Applet;
+import java.awt.*;
+
+class Drawing extends Canvas {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public int x;
+	public int y;
+	public int R;
+	public int prs;
+	public boolean way;
+	public boolean refl;
+	
+	Color colEl;
+    Dimension dim = new Dimension( 500, 500 );
+	
+    public Drawing( Color ElColor, Color BkColor, int x1, int y1, int Rad) {
+        
+    	super();
+        colEl = ElColor;
+        
+        x = x1;
+        y = y1;
+        R = Rad;
+        way = true;
+        refl = false;
+    	
+        setBackground( BkColor );
+        setMaximumSize( dim );
+        setBounds( 0, 0, dim.width, dim.height );
+    }
+	
+    public void paint(Graphics g) {
+    	g.setColor(colEl);
+    	g.fillOval(x, y, R - prs, R + prs);
+    	g.drawOval(x, y, R - prs, R + prs);  
+    	if (x + R == dim.width && way == true) refl = true;
+    	if (x == 0 && way == false) refl = true;
+    	if (prs > (R / 4) ) {
+    		if (way == true) way = false;
+    		else way = true;
+    		refl = false;
+    	}
+    }
+}
+
+public class task_201 extends Applet implements Runnable {
+	
+	private static final long serialVersionUID = 1L;
+
+	static final int CX = 500, CY = 500;
+    
+    Thread t = null;
+    Drawing c;
+	
+    public void init() {   	
+
+    	setSize( CX, CY );
+        setLayout( null );
+        Color colBk = new Color ( 255, 255, 255);
+        
+        setBackground( colBk );       
+	    Color colEl = new Color( 0, 255, 0 );
+  
+        int x1 = 50;
+        int y1 = 150;
+        int R = 100;
+       
+        c = new Drawing( colEl, colBk, x1, y1, R);
+        
+        add(c);
+       
+        if ( t == null ) {
+            t = new Thread( this );
+        }
+        t.start();
+    }
+    
+    static volatile int ni = 0;
+    
+    public synchronized void doMove() {
+    	if (c.way == true && c.refl == false) {
+    		if (c.prs > 0) c.prs = c.prs - 5;
+    		c.x = c.x + 5;
+    	}
+    	else if (c.way == true && c.refl == true) {
+    		c.prs = c.prs + 5;
+    		c.x = c.x + 5;
+    	}
+    	else if (c.way == false && c.refl == false) {
+    		if (c.prs > 0) c.prs = c.prs - 5;
+    		c.x = c.x - 5;
+    	}
+    	else if (c.way == false && c.refl == true) {
+    		c.prs = c.prs + 5;
+    		c.x = c.x - 5;
+    	}
+    	
+    	c.colEl = new Color(c.prs * 5, 255 - (c.prs * 5), 0);
+    	
+    	c.repaint();
+      	
+    }
+    
+    public void start() { 
+    	myResume();
+    } 
+
+    public void stop() {
+    	mySuspend();
+    } 
+    
+    public void destroy() {
+        if ( t != null ) {
+            t.interrupt();
+            t = null;
+        }
+    }
+
+    public void run() {
+        mySuspend();
+        while ( true ) {
+            try {
+                Thread.sleep( 100 );
+            } catch ( Exception e ) {
+                break;
+            }
+            if ( isSuspended()== false ) {
+                doMove();
+            }
+        }
+    }
+
+    volatile boolean f_suspend = false;
+    public synchronized boolean getFSuspend() {
+    	return f_suspend;
+    }
+    public synchronized void setFSuspend( boolean value) { 
+    	f_suspend = value;
+    }
+    
+    void mySuspend() {
+    	setFSuspend( true );
+    }
+    void myResume() {
+    	setFSuspend( false );
+    }
+    boolean isSuspended() {
+    	return getFSuspend();
+    }   
+}
+_____________________________________
+//АППЛЕТ С ГРАФИКОМ
+package ReadParam;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Stroke;
+import java.awt.geom.Line2D;
+import java.applet.Applet;
+import java.util.ArrayList;
+
+
+public class ReadParam extends Applet {
+	
+	
+	private static final long serialVersionUID = 1L;
+	ArrayList<Float> mas= new ArrayList<Float>();
+
+public void init() {
+	
+
+
+
+	String param;
+
+	try {
+			
+		int i=0;
+		param = getParameter("param_"+i);
+		while( param != null){
+			if(Float.parseFloat(param)<=100 && Float.parseFloat(param)>0)
+				{
+				mas.add(Float.parseFloat(param)) ;
+				i++;	
+				param = getParameter("param_"+i);
+				}
+			else
+			{
+				System.err.println("Input values must be in the range");
+				break;
+				
+			}
+		}
+		
+
+	}
+	catch(NumberFormatException e) {
+		
+	}
+
+}
+
+public void paint(Graphics g) {
+	
+	Dimension d = this.getSize();
+	System.out.println(d. width + "," + d.height);
+
+	
+	
+	Graphics2D g2 = (Graphics2D) g;
+	
+	g2.setStroke(new BasicStroke(2.0f));
+	
+	g2.drawString("������� ��������� ������� (%)", 15, 15); 
+	g2.drawString("���� ������������", d. width-130, d.height-5);
+	
+	g2.draw(new Line2D.Float(45, 30, 45,d.height -30));
+	g2.draw(new Line2D.Float(45, d.height -30, d. width-15,d.height -30));
+	
+	float step=(d.height-60)/10;
+	
+	for(int i=0;i<11;i++){
+		g2.drawString((i*10)+ "%", 10, d.height -30-step*i);
+		g2.draw(new Line2D.Float(40, d.height -30-step*i, 50, d.height -30-step*i));
+	}
+	
+	g2.setStroke(new BasicStroke(3.0f)); 
+	
+	Color oldColor = g2.getColor();
+	Color newColor = new Color(0, 0, 255);
+	g2.setColor(newColor);
+
+	
+	
+	float mul=(d.height-60)/10;
+	int i=1;
+	int X = 45;
+	step=(d. width -60)/mas.size();
+	float Y_start=mas.get(0)/10;
+	g2.drawString(mas.get(0)+ " %", X+5, d.height -30 - (Y_start*mul));
+	g2.drawString("0" , 50, d.height -15);
+	g2.draw(new Line2D.Float(X, d.height -35, X, d.height -25));
+	
+	while( ! mas.isEmpty()){
+			
+		float Y_finish=mas.get(i)/10;
+		g2.draw(new Line2D.Float(X, d.height -30 - (Y_start * mul) , X+step,  d.height -30 - (Y_finish * mul)));
+		g2.drawString( mas.get(i)+ " %", X+step+5, d.height -30 - (Y_finish * mul));
+		
+		g2.drawString(i+"" , X+step+5, d.height -15);
+		g2.draw(new Line2D.Float(X+step, d.height -35, X+step, d.height -25));
+		Y_start=Y_finish;
+		X+=step;
+		i++;	
+	}
+		
+		
+	g2.setColor(oldColor);
+
+}
+
+}
+____________________________________
+//АППЛЕТ С КРУГОВОЙ ДИАГРАММОЙ
+package zad_8;
+
+import java.applet.Applet;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.ArrayList;
+
+public class krug extends Applet {
+	
+	String str;
+	 int sum=0;
+	int i=0;
+	
+	ArrayList<Integer> arr_1 =new ArrayList<Integer>();
+	ArrayList<String> arr_2 =new ArrayList<String>();
+	
+	public void init(){
+		
+		setSize(300,300);
+		
+		str=getParameter("param_"+i);
+		i=i+1;
+		
+		try{
+			
+			while(i != 4){
+				
+		int a=(getParameter("param_"+i).indexOf(" "));
+		int d=Integer.parseInt((getParameter("param_"+(i))).substring(0,a));
+		arr_1.add(d);
+		System.out.println(d);
+		arr_2.add((getParameter("param_"+i)).substring(a));
+		i++;
+		sum+=d;
+		}
+			
+			System.out.println(sum);
+		}
+		catch(Exception e){	
+			System.out.println("�������� ������");
+		}
+	}
+	
+	
+	public void paint( Graphics g){
+		
+		g.drawString(str,10,10);
+		System.out.println(i);
+		int a=0;
+		i--;
+		g.setColor(Color.red);
+		while(i!=-1)
+		{
+		 int k= arr_1.get(i)*360/sum;
+		 System.out.println(k);
+			if(i==1)
+				g.setColor(Color.green);
+			if(i==0)
+				g.setColor(Color.black);
+			
+		g.fillArc(40,40,220,220,a,k);
+		a=a+k;
+		System.out.println(a);
+		i--;
+		}
+		
+	}
+
+}
+_____________________________
+//АППЛЕТ С КРУТЯЩЕЙСЯ ЛИНИЕЙ
+package zad_9;
+
+import java.applet.Applet;
+import java.awt.*;
+import static java.lang.Math.cos;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.sin;
+
+
+public class LINE extends Applet implements Runnable {
+
+    private boolean stop;
+    private int x1, x2, y1,  y2,  xp, yp;
+    private double args1;
+    private boolean w = true;
+    private double modul1, modul2;
+    private Color linec, pointc;
+    private Thread timer = null;
+
+    public void init(){
+        this.xp = 150;
+        this.yp = 150;
+        this.x1 = 150;
+        this.x2 = 250;
+        this.y1 = 150;
+        this.y2 = 150;
+        args1 = 0;
+        modul1 = 0;
+        this.modul2 = (sqrt((y1-y2)*(y2-y1) + (x2 - x1)*(x2 - x1)));
+        this.setBackground(new Color(254, 221, 97));
+        this.linec = new Color(255, 0, 3);
+        this.pointc = new Color(70, 0, 0);
+        timer = new Thread(this);
+        timer.start();
+    }
+    public void start() {
+        super.start();
+        stop = false;
+        if (timer == null) {
+            timer = new Thread(this);
+            timer.start();
+        }
+    }
+
+    public void stop() {
+        super.stop();
+        stop = true;
+
+    }
+
+    public void destroy() {
+        super.destroy();
+        stop = true;
+
+    }
+    public void run(){
+        while (!stop) {
+            try {
+                Thread.sleep( 100 );
+                repaint();
+                args1 += 0.1;
+            } catch (Exception err) {
+                System.err.println("Thread Error!");
+            }
+        }
+
+    }
+
+    public void paint(Graphics g){
+        double args = args1;
+        if(w) {
+            make1(g, args);
+        }
+        else {
+            make2(g, args);
+        }
+    }
+
+    private void make1(Graphics g, double args){
+        int xp1, yp1;
+        if (y2 > y1)
+            yp1= yp + 1;
+        else
+            yp1 = yp - 1;
+        if (x2 > x1)
+            xp1 = xp + 1;
+        else
+            xp1 = xp- 1;
+        modul1++;
+        modul2--;
+
+
+        y1 = yp + (int) (sin(args) * modul1);
+        x1 = xp - (int) (cos(args) * modul1);
+        y2 = yp - (int) (sin(args) * modul2);
+        x2 = xp + (int) (cos(args) * modul2);
+        xp = xp1;
+        yp = yp1;
+        g.setColor(linec);
+        g.drawLine(x1, y1, x2, y2);
+        g.setColor(pointc);
+        g.drawOval(xp - 1, yp - 1, 2, 2);
+        if (modul2 < 5) {
+            w = false;
+        }
+    }
+
+    private void make2(Graphics g, double args){
+        int xp1, yp1;
+        if (y2 > y1)
+            yp1 = yp -  1;
+        else
+            yp1 = yp + 1;
+        if (x2 > x1)
+            xp1= xp - 1;
+        else
+            xp1 = xp + 1;
+        modul1--;
+        modul2++;
+
+        y1 = yp + (int) (sin(args) * modul1);
+        x1 = xp - (int) (cos(args) * modul1);
+        y2 = yp - (int) (sin(args) * modul2);
+        x2 = xp + (int) (cos(args) * modul2);
+        xp = xp1;
+        yp = yp1;
+        g.setColor(linec);
+        g.drawLine(x2, y2, x1, y1);
+        g.setColor(pointc);
+        g.drawOval(xp - 1, yp - 1, 2, 2);
+        if (modul1 < 5) {
+            w = true;
+        }
+    }
+
+}
+______________________________________
+//АПЛЕТ С КРУТЯЩИМСЯ ТРЕУГОЛЬНИКОМ
+package triangle;
+
+
+import java.applet.*;
+import java.awt.*;
+
+public class RotateTriangle extends Applet implements Runnable
+{
+	private static final long serialVersionUID = 1L;
+	public Color getHtmlColor(String strRGB, Color def)
+	{
+        if (strRGB != null && strRGB.charAt(0)=='#')
+        {
+            try
+            {
+            	return new Color(Integer.parseInt(strRGB.substring(1),16));
+            }
+            catch (NumberFormatException e)
+            {
+                return def;
+            }
+        }
+        return def;
+    }
+	public Integer getcoord(String co,int val)
+	{
+		if(co!=null)
+		{
+			try
+			{
+				return Integer.parseInt(co);
+			}
+			catch(NumberFormatException e)
+			{
+				return val;
+			}
+		}
+		return val;
+	}
+	
+	static final int CX = 600, CY = 600;
+	Thread tr=null;
+	static int x1, x2, x3;
+	static int y1, y2, y3;
+	static double xCentre, yCentre;
+    static int masx[],masy[];
+    Color bgcol,trcol;
+    int angle=0;
+    
+    public void init()
+    {
+        setSize(CX, CY);
+        setLayout(null);
+        x1=getcoord(getParameter("x1"),229);
+    	y1=getcoord(getParameter("y1"),120);
+    	x2=getcoord(getParameter("x2"),107);
+    	y2=getcoord(getParameter("y2"),350);
+    	x3=getcoord(getParameter("x3"),345);
+    	y3=getcoord(getParameter("y3"),170);
+    	bgcol=getHtmlColor(getParameter("Backgroundclr"),Color.YELLOW);
+    	trcol=getHtmlColor(getParameter("TriangleColor"),Color.GREEN);
+    	xCentre=(x1+x2+x3)/3;
+    	yCentre=(y1+y2+y3)/3;
+    	masx=new int[]{x1,x2,x3};
+    	masy=new int[]{y1,y2,y3};
+    	setBackground(bgcol);
+    	tr = new Thread(this);
+    	tr.start();
+    	
+    }
+    public void paint(Graphics2D g)
+    {
+    	Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(trcol);
+        g2d.rotate(Math.toRadians(angle),xCentre,yCentre);
+        Polygon p = new Polygon(masx,masy,3);
+        g2d.fillPolygon(p);
+        rotateTr();
+    }
+    public void run()
+    {
+    	while (true)
+    	{
+    		repaint();
+            try
+            {
+                Thread.sleep(20);
+            } catch (InterruptedException e)
+            {
+                break;
+            }
+        }
+    }
+    public void rotateTr()
+    {
+    	angle++;
+    	if(angle>360)
+    		angle-=360;
+    }   
+}
+____________________________
+//АППЛЕТ С ЛИНИЕЙ И ТОЧКОЙ (ПОФИКСИТЬ)
+import java.applet.Applet;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.util.Random;
+
+class Point_ extends Canvas {
+    private static final long serialVersionUID = 1L;
+    Color clr;
+    int x, y;
+    Dimension dim = new Dimension(20, 20);
+    public Point_ (int appWidth, int appHeight) {
+        super();
+        setMaximumSize(dim);
+        setBackground(null);
+        setBounds(0, 0, dim.width, dim.height);
+        clr = Color.black;
+        x = new Random().nextInt(appWidth - dim.width) + dim.width / 2;
+        y = new Random().nextInt(appHeight - dim.height) + dim.height / 2;
+    }
+    public void paint (Graphics g) {
+        g.setColor(clr);
+        g.fillOval(0, 0, dim.width, dim.height);
+    }
+    public void setColor (Color clr) {
+        this.clr = clr;
+    }
+    public Dimension getMinimumSize () { return dim; }
+    public Dimension getPreferredSize () { return dim; }
+}
+
+class Line_ {
+    Color clr;
+    int x1, y1, x2, y2;
+    public Line_ (Color c, int x1, int y1, int x2, int y2) {
+        clr = c;
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+    }
+    public int compare (Point_ p) {
+        double tg = (double)(y2 - y1) / (x2 - x1);
+        int xt = (int)(x1 - (double)(y1 - p.y) / tg);
+        if ( p.x < xt )
+            return -1;
+        else if ( p.x > xt )
+            return 1;
+
+        int yt = (int)(y1 - tg * (x1 - p.x));
+        if ( p.y < yt )
+            return 1;
+        else if ( p.y > yt )
+            return -1;
+        return 0;
+    }
+}
+
+public class task_19 extends Applet {
+
+    private static final long serialVersionUID = 1L;
+    static final int CX = 600, CY = 500;
+    Canvas point_first;
+    Canvas point_second;
+    Line_ Line_;
+    String s;
+
+    public Color getHtmlColor (String rgb, Color def) {
+        if ( rgb == null || rgb.charAt(0) != '#' )
+            return def;
+        try {
+            return new Color(Integer.parseInt(rgb.substring(1), 16));
+        } catch (NumberFormatException e) {
+            return def;
+        }
+    }
+
+    public void init () {
+        setSize(CX, CY);
+        setLayout(null);
+        setBackground(Color.white);
+        Color clr = Color.BLACK;
+        int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+        try {
+            clr = getHtmlColor(getParameter("Line_Color"), Color.BLACK);
+            x1 = Integer.parseInt((getParameter("x1") == null)?"50":getParameter("x1"));
+            y1 = Integer.parseInt((getParameter("y1") == null)?"50":getParameter("y1"));
+            x2 = Integer.parseInt((getParameter("x2") == null)?"550":getParameter("x2"));
+            y2 = Integer.parseInt((getParameter("y2") == null)?"450":getParameter("y2"));
+        } catch (Exception e) {}
+        Line_ = new Line_(clr, x1, y1, x2, y2);
+        point_first = new Point_(this.getWidth(), this.getHeight());
+        point_second = new Point_(this.getWidth(), this.getHeight());
+
+        int ans_first = ((Line_)Line_).compare((Point_)point_first);
+        int ans_second = ((Line_)Line_).compare((Point_)point_second);
+
+        Color cl_first = Color.red;
+        Color cl_second = Color.red;
+
+        s = new String();
+
+        switch (ans_first) {
+            case -1: cl_first = Color.red; break;
+            case 1: cl_first = Color.green; break;
+            default: cl_first = Color.yellow;
+        }
+        switch (ans_second) {
+            case -1: cl_second = Color.red; break;
+            case 1: cl_second = Color.green; break;
+            default: cl_second = Color.yellow;
+        }
+        if(ans_second == ans_first){
+            if(ans_second == -1)
+                s="����� ����� ����� �� ������";
+            if(ans_second == 1)
+                s="����� ����� ������ �� ������";
+            if(ans_second == 0)
+                s="����� ����� �� ������";
+        }else{
+            if(ans_second + ans_first == 0)
+                s="����� ����� �� ������ ������� �� ������";
+            else{
+                s="���� ����� ����� �� ������, � ������";
+                if(ans_second==-1 || ans_first==-1)
+                    s+=" ������";
+                else
+                    s+=" �����";
+                s+=" �� ������";
+            }
+        }
+
+        ((Point_)point_first).setColor(cl_first);
+        point_first.setLocation(((Point_)point_first).x, ((Point_)point_first).y);
+        add(point_first);
+
+        ((Point_)point_second).setColor(cl_second);
+        point_second.setLocation(((Point_)point_second).x, ((Point_)point_second).y);
+        add(point_second);
+
+        repaint();
+    }
+    public void paint (Graphics g) {
+        g.drawString(s, 0, 280);
+        g.setColor(Line_.clr);
+        g.drawLine(Line_.x1, Line_.y1, Line_.x2, Line_.y2);
+    }
+
+}
+____________________________
+//АППЛЕТ С СЕКТОРОМ (ПОФИКСИТЬ)
+import java.applet.Applet;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+
+public class Sectcitcle extends Applet implements Runnable {
+
+    private static final long serialVersionUID = 1L;
+    static int w,h;
+    static int radius;
+    int angle=0;
+
+    private Thread timer = null;
+
+    public void init(){
+
+        w=Integer.parseInt(getParameter("wight"));
+        h=Integer.parseInt(getParameter("hight"));
+
+        setSize(w,h);
+        setBackground( new Color(Integer.parseInt((getParameter("bgc")).substring(1),16)));
+
+        if(w < h)
+            radius=(w-30)/2;
+        else
+            radius=(h-30)/2;
+
+        timer = new Thread(this);
+        timer.start();
+
+    }
+
+    public void paint(Graphics g){
+
+        Graphics2D g2 = (Graphics2D)g;
+
+        g2.setColor(new Color(Integer.parseInt((getParameter("crc")).substring(1),16)));
+        g2.fillOval(15, 15,h-30,h-30);
+
+        g2.rotate(Math.toRadians(angle),radius+15,radius+15);
+
+        g2.setColor(new Color(Integer.parseInt((getParameter("src")).substring(1),16)));
+        g2.fillArc(15, 15,h-30,h-30, 45,80);
+
+        rotateTr();
+
+    }
+
+
+
+    public void run()
+    {
+        while (true)
+        {
+            repaint();
+            try
+            {
+                Thread.sleep(20);
+            } catch (InterruptedException e)
+            {
+                break;
+            }
+        }
+    }
+
+
+    public void rotateTr()
+    {
+        angle++;
+        if(angle>360)
+            angle-=360;
+    }
+
+
+
+
+}
+
+_______________________________
+//АППЛЕТ С ЦВЕТНОЙ СТРОКОЙ
+package zad_7;
+
+import java.applet.Applet;
+import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+
+public class Str extends Applet implements Runnable{
+	
+	private static final long serialVersionUID = 1L;
+	static String str;
+	static Thread t=null;
+	int k=0;
+	int step=2;
+	int x=-2;
+	
+	public void init()
+	{
+		setSize(300,300);
+		 str=getParameter("text");
+		 
+		 
+		 t = new Thread(this);
+		 t.start();		 
+	}
+	
+	public void paint(Graphics g){
+		
+	FontMetrics font=g.getFontMetrics(); 
+	int width=font.stringWidth(str);
+		
+	g.setColor(new Color(Integer.parseInt((getParameter("color_"+k)).substring(1),16)));
+	g.drawString(str, x+step, 30);
+	x+=step;
+	if( x+width >= 300 || x<= -2){
+		step=-step;
+		if(k==5)
+			k=-1;
+		k++;
+	}
+	
+	}
+
+	
+	public void run(){
+		while (true)
+    	{
+    		repaint();
+            try
+            {
+                Thread.sleep(20);
+            } catch (InterruptedException e)
+            {
+                break;
+            }
+        }
+	}
+	
+	
+
+}
+
+______________________________
+//АППЛЕТ СО ЗВЕЗДОЙ
+import java.util.Scanner;
+
+
+public class prioritet {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner in=new Scanner(System.in);
+		String result="";
+		String s="";
+		
+		int p=0,m=0,u=0,d=0;
+		
+		while(in.hasNext())
+		{
+			
+			if((s=in.nextLine()).equalsIgnoreCase("EXIT"))
+				break;
+			char[] str = s.toCharArray();
+			for(int i=0;i<str.length;i++)
+			{
+				if(1== ChekZnak(str[i]))
+					u++;
+				if(2== ChekZnak(str[i]))
+					d++;
+				if(3== ChekZnak(str[i]))
+					p++;
+				if(4== ChekZnak(str[i]))
+					m++;
+			}
+			for(int i=0;i<str.length;i++)
+			{
+				if('-'== (str[i])||'+'== (str[i])||'*'== (str[i])||'/'== (str[i])){
+				if(u!=0){
+					str[i]='*';
+					 u--;
+					 continue;
+				}
+				if(d!=0){
+					str[i]='/';
+					 d--;
+					 continue;
+				}
+				if(p!=0){
+					str[i]='+';
+					 p--;
+					 continue;
+				}
+				if(m!=0){
+					str[i]='-';
+					 m--;
+					 continue;
+				}
+				
+				}
+			}
+			System.out.println(new String(str));
+			
+		}
+		System.out.println(result);
+	}
+	
+	private static int ChekZnak(char i)
+	{
+		if(i=='*')
+			return 1;
+		if(i=='/')
+			return 2;
+		if(i=='+')
+			return 3;
+		if(i=='-')
+			return 4;
+		return 0;
+		
+	}
+
+}
+________________________
+//ЦИТАТЫ
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class task_1 {
+	//Из стандартного входного потока прочитать текст
+	//
+	//и в стандартный выходной поток вывести все цитаты.
+	//
+	//Цитата — это текст между двойными кавычками
+	
+	static ArrayList<String> ql = new ArrayList<String>(); //quotes list
+	
+	static void procLine(String line){
+		
+		int begq = line.indexOf('"');
+		int endq = line.indexOf('"',begq+1);
+		
+		while(endq != -1){
+			
+			ql.add(line.substring(begq+1, endq));
+			line = line.substring(0, begq) + line.substring(endq+1, line.length());
+			
+			begq = line.indexOf('"',begq);
+			endq = line.indexOf('"',begq+1);
+		}
+	}
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insert your text with quotes by line:");
+		while(sc.hasNextLine()){
+			procLine(sc.nextLine());
+		}
+		sc.close();
+		
+		System.out.println("All quotes: ");
+		for(String s : ql){
+			System.out.println(s);
+		}
+		System.out.println("----end----\n");
+	}
+}
+_____________________
+//СЛОВА С ЗАГЛАВНОЙ БУКВЫ
+import java.util.*;
+
+public class task_2 {
+	//Программа читает текст из стандартного входного потока, находит слова,
+	//
+	//начинающиеся с заглавной буквы и выводит в стандартный выходной поток
+	//
+	//с новой строки
+
+	static ArrayList<String> tl = new ArrayList<String>(); //list of lines
+	
+	static void procLine(String line)
+	{
+		StringTokenizer st = new StringTokenizer(line);
+		int idx = 0;
+		while(st.hasMoreElements())
+		{
+			String s = st.nextToken();
+			if(Character.isUpperCase(s.charAt(idx)))
+			{
+				tl.add(s);
+			}
+		}
+	}
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insert your text line by line:");
+		String text = "";
+		while(sc.hasNextLine()){
+			text = text + " " + sc.nextLine();
+		}
+		sc.close();
+		procLine(text);
+		System.out.println("---Full text---: ");
+		for(String s : tl){
+			System.out.println(s);
+		}
+		System.out.println("------end------\n");
+	}
+}
+___________________________________
+//ПРЕДЛОЖЕНИЕ С НОВОЙ СТРОКИ
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class task_3 {
+	//Вводишь текст, а потом его надо вывести так,
+	//чтобы каждое новое предложение начиналось с новой строки)
+	
+	static ArrayList<String> tl = new ArrayList<String>(); //list of lines
+	
+	static void procLine(String line){
+		
+		int idx = 0;
+		while(idx<line.length()){
+			
+			if(line.charAt(idx) == '.' || line.charAt(idx) == '?'){
+				
+				tl.add(line.substring(0, idx+1));
+				line = line.substring(idx+1);
+				idx = 0;
+			}else
+				if(line.charAt(idx) == '!'){
+
+					tl.add(line.substring(0, idx+1).toUpperCase());
+					line = line.substring(idx+1);
+					idx = 0;
+				}
+			idx++;
+		}
+	}
+	
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insert your text line by line:");
+		String text = "";
+		while(sc.hasNextLine()){
+			text = text +sc.nextLine();
+		}
+		procLine(text);
+
+		sc.close();
+		
+		System.out.println("---Full text---: ");
+		for(String s : tl){
+			System.out.println(s);
+		}
+		System.out.println("------end------\n");
+	}
+}
+________________________________
+//ВОПРОСЫ С НОВОЙ СТРОКИ
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class task_4 {
+	//Стандартный входной поток.
+	//Найти все вопросительные предложения и вывести каждый с новой строки.
+	static ArrayList<String> tl = new ArrayList<String>(); //list of lines
+	static String tmpLine = new String();
+	
+	static void procLine(String line){
+		
+		int idx = 0;
+		while(idx<line.length()){
+			
+			if(line.charAt(idx) == '.' || line.charAt(idx) == '!'){
+				tmpLine = "";
+				line = line.substring(idx+1);
+				idx = 0;
+			}else
+				if(line.charAt(idx) == '?'){
+					
+					tmpLine += line.substring(0, idx+1);
+					tl.add(tmpLine);
+					tmpLine = "";
+					
+					line = line.substring(idx+1);
+					idx = 0;
+				}
+			idx++;
+		}
+		if(line.indexOf('.') == -1 && line.indexOf('!') == -1 && line.indexOf('?') == -1){
+			tmpLine += line;
+		}
+	}
+	
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insert your text line by line:");
+
+		tmpLine = "";
+		while(sc.hasNextLine()){
+			procLine(sc.nextLine());
+		}
+		if(!tmpLine.isEmpty())
+			tl.add(tmpLine);
+		sc.close();
+		
+		System.out.println("---Full text---: ");
+		for(String s : tl){
+			System.out.println(s);
+		}
+		System.out.println("------end------\n");
+	}
+}
+__________________________
+//СОРТИРОВКА ДЛИННЫХ ЧИСЕЛ
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
+public class task_5 {
+	//найти длинные числа, отсортировать и вывести с номерами строк, в которых они встречались
+	/public static class Word {
+		private int pos;
+		private String word;
+		
+		protected Word(String _word,int _pos){
+			pos = _pos;
+			word = _word;
+		}
+		public String toString(){
+			return new String(word+"("+pos+")");
+		}
+	}
+	public static class WLongInt extends Word implements Comparable<WLongInt>,Comparator<Long>{
+		protected long value;
+		
+		protected WLongInt(String _word,int _pos,long _value){
+			super(_word,_pos);
+			value = _value;
+		}
+
+		public int compareTo(WLongInt wli){
+			return (new Long(value)).compareTo(wli.value);
+		}
+
+		public int compare(Long arg0, Long arg1) {
+			return (int)(arg0 - arg1);
+		}
+		public static WLongInt parseLong(String _word,int _pos){
+			try{
+				long _value;
+				if(_word.charAt(_word.length()-1) == 'l' ||
+						_word.charAt(_word.length()-1) == 'L')
+					_value = Long.parseLong(_word.substring(0, _word.length()-1));
+				else
+					_value = Long.parseLong(_word);
+				return new WLongInt(_word,_pos,_value);
+			}catch(Exception e){}
+			return null;
+		}
+	}
+	
+	static void procLine(String line,int pos){
+		StringTokenizer st = new StringTokenizer(line," \n\t");
+		while(st.hasMoreTokens()){
+			String word = new String(st.nextToken());
+			Object obj = WLongInt.parseLong(word,pos);
+			if(obj != null){
+				li.add((WLongInt) obj);
+			}
+		}
+	}
+	static List<WLongInt> li = new Vector<WLongInt>(); 
+	
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Insert your text line by line:");
+		int n=0;
+		while(sc.hasNextLine()){
+			procLine(sc.nextLine(),n++);
+		}
+		sc.close();
+		li.sort(null);
+		System.out.println("---All long nums---: ");
+		for(WLongInt i:li)
+			System.out.print(i);
+		System.out.println("---End---: ");
+	}
+}
+_________________________________
+//НАЙТИ СЛОВА ЧИСЛА
+import java.util.*;
+//найти в тексте слова состоящие из цифр и вывести их по слову в строку
+public class task_6 {
+	
+	public static boolean check(String userNameString) {
+		for (int i = 0; i < userNameString.length(); i++)
+			if (Character.isDigit(userNameString.charAt(i)) == false)
+					return false;
+			return true;
+	}
+	
+	
+	public static void main (String args[]) {
+		
+		System.out.println("вводите текст");
+		Scanner in = new Scanner(System.in);
+		ArrayList<String> List = new ArrayList<String>(); 
+		
+		
+		while (in.hasNextLine()) {
+			
+			String str = in.nextLine();
+			StringTokenizer strtok = new StringTokenizer(str);
+			
+			while (strtok.hasMoreTokens()) {
+				String word = strtok.nextToken();
+				if (check(word) == true) List.add(word);
+			}	
+		}
+		
+		if (List.isEmpty() == true) System.out.println("??? ????, ????????? ?? ????!");
+		else {
+		for (String i: List)
+			System.out.println(i);
+		}
+		
+		
+		in.close();
+		System.exit(0);
+		
+	}
+
+}
+_________________________
+//ШЕСТНАДЦЕТИРИЧНЫЕ ЧИСЛА
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class task_7 {
+	/* В тексте найти слова, состоящие из цифр, вывести их шестнадцатиричные записи, каждую запись выводить с новой строки*/
+
+	static ArrayList<String> hexs = new ArrayList<String>();
+	
+	static void processLine (String line) {
+		
+		StringTokenizer sttok = new StringTokenizer(line);
+		while (sttok.hasMoreTokens()) {
+			String word = sttok.nextToken();
+			if ( word.matches("[0-9]+") ) {
+				try {
+					String hex = Integer.toHexString(Integer.parseInt(word));
+					hexs.add(word + ": " + hex);
+				}
+				catch (Exception e) {
+					hexs.add(word + " can't be converted.");
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			processLine(line);
+		}
+		in.close();
+		System.out.println("Hexs:" + ((hexs.size() == 0)?" ...":""));
+		for (String word: hexs)
+			System.out.println(word);
+		System.out.println("the end.");
+		
+	}
+
+}
+____________________________
+//СОРТИРОВКА СЛОВ ИЗ БУКВ
+public class Task_8 {
+
+//Slova razdeleny probelami. Vse slova v stroke kotorye sostoyat
+//tol'ko iz bukv otsortirovat' i sohranyat' kolichestvo probelov
+
+    public static void main(String[] args) {
+
+        Scanner in=new Scanner(System.in);
+
+        ArrayList <String> result= new ArrayList <String>();
+
+        while (in.hasNext()) {
+
+            String stroka = in.nextLine();
+
+            if(stroka.equals("exit"))
+                break;
+
+            ArrayList <String> str= new ArrayList <String>();
+            String[] arr = stroka.split(" ");
+
+            for (int i = 0; i < arr.length; i++)
+                if (isWord(arr[i])) {
+                    str.add(arr[i]);
+                    arr[i] = null;
+                }
+
+            Collections.sort(str,new Comparator <String> () {
+                public int compare(String o1, String o2) { return o1.compareTo(o2); } });
+
+            int j = 0;
+            String s = "";
+
+            for (String i : arr) {
+                if (i == null)
+                    s += str.get(j++);
+                else
+                    s += i;
+                s += " ";
+            }
+            result.add(s);
+        }
+
+        for(String i : result)
+            System.out.println(i);
+    }
+
+
+    private static boolean isWord(String word) {
+        Pattern p = Pattern.compile("^[A-z,A-y]+");
+        Matcher m = p.matcher(word);
+        return m.matches();
+    }
+}
+__________________________________
+//СЛОВА В ОБРАТНОМ ПОРЯДКЕ
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/*Из стандартного входного потока считываются строки.
+В каждой строке необходимо переставить слова в обратном порядке.
+*/ 
+class Word {
+	String str;
+	int begPos, endPos;
+	public Word (String str, int begPos) {
+		this.str = str;
+		this.begPos = begPos;
+		endPos = begPos + str.length() - 1;
+	}
+}
+
+public class task_9 {
+
+	static ArrayList<String> lines = new ArrayList<String>();
+	
+	static String getReverseLine (String line) {
+		StringBuffer res = new StringBuffer(line);
+		ArrayList<Word> list = new ArrayList<Word>();
+		ArrayList<String> rList = new ArrayList<String>();
+		StringTokenizer sttok = new StringTokenizer(line);
+		int pos = 0;
+		while (sttok.hasMoreElements()) {
+			String token = sttok.nextToken();
+			pos = line.indexOf(token, pos);
+			list.add(new Word(token, pos));
+			rList.add(token);
+			pos += token.length();
+		}
+		for (int i = list.size() - 1; i >= 0; --i)
+			res.replace(list.get(i).begPos, list.get(i).endPos + 1, rList.get(list.size() - 1 - i));
+		return res.toString();
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("??????? ?????, ??? ????????? ??????????? Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			lines.add(getReverseLine(line));
+		}
+		in.close();
+		System.out.println("Text:");
+		for (String item: lines)
+			System.out.println(item);
+		if ( lines.size() == 0 )
+			System.err.println("?????? ???...");
+		System.out.println("????????? ????????? ???????.");
+		
+	}
+
+}
+__________________________________
+//ПОИСК СЛОВА ИЗ ПАРАМЕТРА
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class task_10 {
+	/* Создать программу, которая читает текст из стандартного входного потока
+и печатает в выходной поток предложения исходного текста, в которых встречается фраза,
+указанная как обязательный параметр программы. */
+	
+	static ArrayList<String> tl = new ArrayList<String>(); //list of lines
+	
+	static void procLine(String text, String arg){
+		
+		int idx = 0;
+		while(idx<text.length()){
+			
+			if(text.charAt(idx) == '.' || text.charAt(idx) == '?' || text.charAt(idx) == '!'){
+				
+				if(text.substring(0, idx+1).contains(arg))
+					tl.add(text.substring(0, idx+1));
+				text = text.substring(idx+1);
+				idx = 0;
+			}
+			idx++;
+		}
+	}
+	
+	public static void main(String[] args){
+		
+		if ( args.length != 1 )
+			throw new IllegalArgumentException("You don't enter one argument.");
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insert your text line by line:");
+		String text = "";
+		while(sc.hasNextLine()){
+			text = text +sc.nextLine();
+		}
+		procLine(text, args[0]);
+
+		sc.close();
+		
+		System.out.println("---Full text---: ");
+		for(String s : tl){
+			System.out.println(s);
+		}
+		System.out.println("------end------\n");
+	}
+}
+______________________________
+//СОРТИРОВКА СЛОВ ПОЛИНДРОМОВ
+import java.util.*;
+
+/* В строке слова состоят только из букв, все остальное — разделители. 
+Найти палиндромы, отсортировать их и вернуть строку с правильно отсортированными палиндромами. 
+Все остальное оставить на месте, сохранять пробелы*/
+
+class Palindrom implements Comparable<Palindrom> {
+	String str;
+	int oldBegPos, oldEndPos;
+	public Palindrom (String str, int oldBegPos) {
+		this.str = str;
+		this.oldBegPos = oldBegPos;
+		this.oldEndPos = oldBegPos + str.length() - 1;
+	}
+	public Palindrom (Palindrom p) {
+		str = p.str;
+		oldBegPos = p.oldBegPos;
+		oldEndPos = p.oldEndPos;
+	}
+	public int compareTo (Palindrom p) {
+		return str.compareTo(p.str);
+	}
+	public static boolean isPalindrom (String str) {
+		String rev = "";
+		for (int i = str.length() - 1; i >= 0; i--)
+			rev = rev.concat("" + str.charAt(i));
+		return rev.equals(str);		
+	}
+}
+
+public class task_11 {
+
+	static ArrayList<String> text = new ArrayList<String>();
+	
+	static String getDelim (String str) {
+		String res = "";
+		for (int i = 0; i < str.length(); ++i) {
+			char ch = str.charAt(i);
+			if ( !Character.isLetter(ch) )
+				res = res.concat("" + ch);
+		}
+		return res;
+	}
+	
+	static String processLine (String line) {
+		StringBuilder res = new StringBuilder(line);
+		ArrayList<Palindrom> list = new ArrayList<Palindrom>();
+		ArrayList<Palindrom> sortlist = new ArrayList<Palindrom>();
+		StringTokenizer sttok = new StringTokenizer(line, getDelim(line));
+		int endPos = 0;
+		while (sttok.hasMoreElements()) {
+			String word = sttok.nextToken();
+			endPos = line.indexOf(word, endPos);
+			if ( Palindrom.isPalindrom(word) ) {
+				Palindrom p = new Palindrom(word, endPos);
+				list.add(p);
+				sortlist.add(p);
+			}
+			endPos += word.length();
+		}
+		Collections.sort(sortlist);
+		for (int i = sortlist.size() - 1; i >= 0; --i) {
+			res.replace(list.get(i).oldBegPos, list.get(i).oldEndPos + 1, sortlist.get(i).str);
+		}
+		return res.toString();
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			text.add(processLine(line));
+		}
+		in.close();
+		System.out.println("\nText:");
+		if ( text.size() == 0 )
+			System.err.println("....");
+		for (String line: text)
+			System.out.println(line);
+		System.out.println("The end.");
+		
+	}
+
+}
+________________________-
+//СОРТИРОВКА ПО СУММЕ ЦИФР
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/* Переставить в строке слова,
+состоящие только из цифр так, чтобы они были упорядочены по возрастанию суммы их цифр.
+При этом другие слова должны оставаться на месте, количество пробелов должно
+оставаться таким же, как и в исходной строке.
+*/
+
+class DigitWord implements Comparable <DigitWord> {
+	String str;
+	int beginPos, endPos, sum;
+	public DigitWord (String str, int beginPos) {
+		this.str = str;
+		this.beginPos = beginPos;
+		endPos = beginPos + str.length() - 1;
+		sum = 0;
+		for (int i = 0; i < str.length(); ++i)
+			sum += str.charAt(i) - '0';
+	}
+	public int compareTo (DigitWord dw) {
+		return (sum < dw.sum) ? -1 : (sum == dw.sum) ? 0 : 1;
+	}
+	public static boolean isDigitWord (String word) {
+		String delim = "0123456789";
+		StringTokenizer sttok = new StringTokenizer(word, delim);
+		return !sttok.hasMoreElements();
+	}
+}
+
+public class task_12 {
+
+	static String processLine (String line) {
+		StringBuilder res = new StringBuilder(line);
+		ArrayList<DigitWord> list = new ArrayList<DigitWord>();
+		ArrayList<DigitWord> sortList = new ArrayList<DigitWord>();
+		StringTokenizer sttok = new StringTokenizer(line, " \t");
+		int pos = 0;
+		while (sttok.hasMoreElements()) {
+			String word = sttok.nextToken();
+			pos = line.indexOf(word, pos);
+			if ( DigitWord.isDigitWord(word) ) {
+				DigitWord dw = new DigitWord(word, pos);
+				list.add(dw);
+				sortList.add(dw);
+			}
+			pos += word.length();
+		}
+		Collections.sort(sortList);
+		for (int i = sortList.size() - 1; i >= 0; --i)
+			res.replace(list.get(i).beginPos, list.get(i).endPos + 1, sortList.get(i).str);
+		return res.toString();
+	}
+	
+	static ArrayList<String> list = new ArrayList<String>();
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			list.add(processLine(line));
+		}
+		in.close();
+		System.out.println("\nText:");
+		if ( list.size() == 0 )
+			System.err.println("...");
+		for (String line: list)
+			System.out.println(line);
+	}
+
+}
+________________________________-
+//8 ПРОБЕЛОВ НА ТАБ
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// заменить в строке 8 пробелов стоящих подряд на символ табуляции
+public class task_13 {
+
+	static ArrayList<String> list = new ArrayList<String>();
+	
+	public static void main(String[] args) {
+		
+		System.out.println("start:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			StringBuilder res = new StringBuilder(in.nextLine());
+			String spaces = "        ";
+			int pos = res.indexOf(spaces);
+			while ( pos != -1 ) {
+				res.replace(pos, pos + 8, "\t");
+				pos = res.indexOf(spaces);
+			}
+			list.add(res.toString());
+		}
+		in.close();
+		System.out.println("Text:");
+		if ( list.size() == 0 )
+			System.out.println("...");
+		for (String line: list)
+			System.out.println(line);
+	}
+
+}
+_________________________
+//ПОИСК САМОГО ДЛИННОГО СЛОВА
+import java.util.ArrayList;
+import java.util.Scanner;
+
+//поиск самого длинного слова
+
+public class task_14 {
+
+    public static int maxCount=0;
+    public static String maxString;
+  
+    public static void main(String[] args){
+        System.out.println("Begining of the work:");
+        try (Scanner in = new Scanner(System.in)){
+            read(in);
+            System.out.println(maxString+" "+maxCount);
+        }catch (Exception e){
+            System.err.println(e);
+        }
+    }
+
+    private static void read(Scanner in) throws Exception {
+    	
+    	class Word {
+    	    String s;
+    	    int count;
+            public Word(String s, int c){
+    	        this.s = new String(s);
+    	        this.count=c;
+            }
+    	}
+        ArrayList<Word> words = new ArrayList<Word>();
+        while (in.hasNext()) {
+            String[] arr = in.nextLine().split(" ");
+            boolean f = true;
+            for (int i = 0; i < arr.length; i++){
+                for (int j=0;j<words.size();j++){//?????????, ???? ?? ??? ????? ?????
+                    if(arr[i].compareTo(words.get(j).s)==0){
+                        words.get(j).count++;
+                        f=false;
+                        break;
+                    }
+                }
+                if(f){//????? ?????
+                	words.add(new Word(arr[i],1));
+                }
+                f=true;
+            }
+        }//??? ????? ? ????????? ??????? ???????????
+        for (int i=0;i<words.size();i++){
+            if(words.get(i).count > maxCount && words.get(i).s.compareTo("")!=0){
+                maxString=words.get(i).s;
+                maxCount=words.get(i).count;
+            }
+        }
+    }
+}
+____________________________________
+//ЛОНГ ЧИСЛА
+public class Test {
+ 
+    public static class SlovoComparator implements Comparator<Slovo> {
+        @Override
+        public int compare(Slovo slovo, Slovo t1) {
+            return slovo.getNum().compareTo(t1.getNum());
+        }
+    }
+ 
+    public static void main(String[] args) {
+        ArrayList<Slovo> mas = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int lineNumber = 1;
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+            StringTokenizer tokenizer = new StringTokenizer(line);
+            while (tokenizer.hasMoreElements()) {
+                String tmp = tokenizer.nextToken();
+                if (tmp.charAt(tmp.length() - 1) == 'l' || tmp.charAt(tmp.length() - 1) == 'L') {
+                    String value = tmp.substring(0, tmp.length() - 1);
+                    try {
+                        Long.parseLong(value);
+                        Slovo temp = new Slovo(value, lineNumber);
+                        mas.add(temp);
+                    }
+                    catch (NumberFormatException e) {}
+                }
+            }
+            ++lineNumber;
+        }
+        mas.sort(new SlovoComparator());
+        for (Slovo slovo : mas) {
+            System.out.println(slovo);
+        }
+    }
+}
+
+public class Word {
+    private String  word;
+    private int beginPos;
+    private int endPos;
+ 
+    public  int getBeginPos(){
+        return beginPos;
+    }
+ 
+    public String getWord(){
+        return word;
+    }
+ 
+    public int getEndPos() {
+        return endPos;
+    }
+ 
+    public Word(String word, int pos){
+        this.beginPos =pos;
+        this.word=word;
+        this.endPos = beginPos + word.length();
+    }
+ 
+    @Override
+    public String toString(){
+        return this.word;
+    }
+ 
+}
+________________________
+//СЛОВА НА Л И
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
+
+/*
+ * Наити слова, которые заканчиваются на L l */
+
+public class task_15{
+	
+	public static void main(String[] args) {
+		
+		Scanner n = new Scanner (System.in);
+		try {
+			int number = 1;
+			HashMap<Long, StringBuilder> longs = new HashMap<Long, StringBuilder>();
+			while(n.hasNext()) {
+				String m = n.nextLine();
+				StringTokenizer st = new StringTokenizer( m," ");
+				while(st.hasMoreTokens()) {
+					String division = st.nextToken();	
+					if(division.charAt(division.length()-1)=='L' || division.charAt(division.length()-1)=='l') {
+						String nw  = division.substring(0, division.length()-1);
+						try {
+						    if(!longs.containsKey(Long.valueOf(nw)))
+						    	longs.put(Long.valueOf(nw), new StringBuilder("" + number));
+						    else
+								longs.put(Long.valueOf(nw), new StringBuilder( longs.get(Long.valueOf(nw))+" "+number));
+						} 
+						catch(Exception e){}
+					}		
+				} 
+				number++;
+			}
+			Map<Long, StringBuilder> treeMap = new TreeMap<Long, StringBuilder>(longs);
+			System.out.println(treeMap.toString());
+		} catch(Exception c) {
+			System.out.println(c.toString());
+		}finally{
+			n.close();
+		}
+	}
+}
+________________________
+//СОРТИРОВА СЛОВ ИЗ БУКВ
+import java.util.*;
+/*Найти в тексте слова, которыые момтоят только из букв отсортировать их в строке*/
+
+class Word_ implements Comparable<Word_> {
+	String str;
+	int oldBegPos, oldEndPos;
+	
+	public Word_ (String str, int oldBegPos) {
+		this.str = str;
+		this.oldBegPos = oldBegPos;
+		this.oldEndPos = oldBegPos + str.length() - 1;
+	}
+	
+	public Word_(Word_ w) {
+		str = w.str;
+		oldBegPos = w.oldBegPos;
+		oldEndPos = w.oldEndPos;
+	}
+	public int compareTo (Word_ w) {
+		return str.compareTo(w.str);
+	}
+	
+	public static boolean isMyWord (String str) {
+		for (int i = 0; i < str.length(); i++)
+			if (Character.isLetter(str.charAt(i)) == false)
+				return false;
+		return true;
+	}
+}
+
+public class task_16 {
+	
+	static ArrayList<String> text = new ArrayList<String>();
+	
+	static String processLine (String line) {
+		StringBuilder res = new StringBuilder(line);
+		
+		ArrayList<Word_> list = new ArrayList<Word_>();
+		ArrayList<Word_> sortlist = new ArrayList<Word_>();
+		
+		StringTokenizer sttok = new StringTokenizer(line);
+		int endPos = 0;
+		
+		while (sttok.hasMoreElements()) {
+			
+			String word = sttok.nextToken();
+			endPos = line.indexOf(word, endPos);
+			
+			if ( Word_.isMyWord(word) ) {
+				Word_ w = new Word_(word, endPos);
+				list.add(w);
+				sortlist.add(w);
+			}
+			endPos += word.length();
+		}
+		
+		Collections.sort(sortlist);
+		for (int i = sortlist.size() - 1; i >= 0; --i) {
+			res.replace(list.get(i).oldBegPos, list.get(i).oldEndPos + 1, sortlist.get(i).str);
+		}
+		return res.toString();
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			text.add(processLine(line));
+		}
+		in.close();
+		System.out.println("\nText:");
+		if ( text.size() == 0 )
+			System.err.println("....");
+		for (String line: text)
+			System.out.println(line);
+		System.out.println("The end.");
+		
+	}
+
+}
+_________________________
+//ТРАНСПОНИРОВАТЬ МАТРИЦУ
+
+import java.util.Random;
+import java.util.Scanner;
+
+/* Транспонировать матрицу */
+
+public class task_17 {
+
+	static int[][] getMatrix (int n) {
+		int[][] matrix = new int[n][n];
+		for (int i = 0; i < n; ++i)
+			for (int j = 0; j < n; ++j)
+				matrix[i][j] = new Random().nextInt(2*n+1) - n;		
+		return matrix;
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter matrix dimension:");
+		Scanner in = new Scanner(System.in);
+		int n = 0;
+		while (true) {
+			try {
+				n = in.nextInt();
+				if ( n <= 1 )
+					throw new IllegalArgumentException("n <= 1");
+				break;
+			}
+			catch (Exception e) {
+				System.out.println(e.getMessage() + "\nTry again...");
+				in.nextLine();
+			}
+		}
+		in.close();
+		
+		int[][] matrix = getMatrix(n);
+		System.out.println("Matrix:");
+		for (int i = 0; i < n; ++i) {
+			for (int j = 0; j < n; ++j)
+				System.out.printf("%4d ", matrix[i][j]);
+			System.out.println();
+		}
+		for (int i = 0; i < n; ++i)
+			for (int j = i + 1; j < n; ++j) {
+				int tmp = matrix[i][j];
+				matrix[i][j] = matrix[j][i];
+				matrix[j][i] = tmp;
+			}
+		System.out.println("Transpon matrix:");
+		for (int i = 0; i < n; ++i) {
+			for (int j = 0; j < n; ++j)
+				System.out.printf("%4d ", matrix[i][j]);
+			System.out.println();
+		}
+		System.out.println("the end.");
+	}
+}
+___________________________
+//80 СИМВОЛОВpublic static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    LinkedList<String> text = new LinkedList<>();
+    LinkedList<String>new_text = new LinkedList<>();
+    while (sc.hasNextLine()) {
+        String line = sc.nextLine();
+        line = line.replaceAll("\\t", " ");
+        line = line.replaceAll("\\s+", " ");
+        line = line.trim();
+        line = line.replaceAll("\\s+(?=\\p{Punct})", "");
+        text.add(line);
+    }
+    String temp="";
+    for(String st:text){
+        st+=temp;
+        while (st.length()>=80){
+            if (st.length() == 80){
+                new_text.add(st.trim());
+                temp="";
+                st="";
+            }
+            else{
+                int index = 80;
+                while (st.charAt(index)!=' '){
+                    index--;
+                }
+                String tmp = st.substring(0,index-1);
+                st = st.substring(index);
+                new_text.add(tmp.trim());
+            }
+ 
+        }
+        temp = st;
+ 
+    }
+    if (temp!=""){
+        new_text.add(temp);
+    }
+    for (String tmp:new_text){
+        System.out.println(tmp);
+    }
+ 
+}
+______________________________
+//80 СИМВОЛОВ
+package task_18;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class task_18{
+
+    public static void main(String[] args) {
+            ArrayList<String> text = new ArrayList<String>();
+            ArrayList<String> newText = new ArrayList<String>();
+            Scanner in = new Scanner(System.in);
+            System.out.println("Enter text or CTRL+Z to exit");
+            while (in.hasNextLine())
+            {
+                String str = in.nextLine();
+                text.add(str);
+            }
+            String add = "";
+            int i=0;
+            while(i!=text.size())
+            {
+                String line = text.get(i);
+                String[] mas = transformLine(add + " "+line);
+                line = mas[0];
+                newText.add(line);
+
+                add = mas[1];
+
+                while(add.length() > 80) {
+                    String[] tmp = transformLine(add);
+                    newText.add(tmp[0]);
+                    add = tmp[1];
+                }
+                i++;
+
+            }
+            if(!add.equals(""))
+            {
+                newText.add(add);
+            }
+            in.close();
+            System.out.println("\n Changed text:");
+            for (String s:newText)
+                System.out.println(s);
+        }
+
+        public static boolean isSeparator(String s){
+        String[] sep={",",".","!","?", ";",":",";"};
+        for (int i=0; i<sep.length; i++)
+            if (s.equals(sep[i]))
+                return true;
+            return false;
+        }
+    public static String[] transformLine(String line)
+    {
+        //line = line.trim();
+        line = deleteAllSpaces(line);
+
+        String[] mas = new String[2];
+
+        if(line.length() > 80)
+            mas = makeTransference(line);
+        else {
+            mas[0] = line;
+            mas[1] = "";
+        }
+        return mas;
+    }
+
+    public static String deleteAllSpaces(String line)
+    {
+        StringTokenizer str = new StringTokenizer(line);
+        String newStr=""; String buf=" ";
+        while(str.hasMoreTokens()){
+            String word = str.nextToken();
+            if (isSeparator(buf) || isSeparator(word) || endsWithSeps(buf))
+                newStr+=word;
+            else 
+            	newStr+=" "+word;
+            buf=word;
+        }
+        newStr=newStr.trim();
+        return newStr;
+    }
+
+    public static String[] makeTransference(String line)
+    {
+        int index = 80;
+        while(line.charAt(index) != ' '){
+            index--;
+        }
+        index++;
+        String[] mas = new String[2];
+        mas[0] = line.substring(0,index-1);
+        mas[1] = line.substring(index, line.length());
+        return mas;
+    }
+    
+    public static boolean endsWithSeps(String word) {
+    	char[] sep={'.',',','!','?', ':',';'};
+        for (int i=0; i<sep.length; i++)
+            if (word.charAt(word.length()-1)==sep[i])
+                return true;
+            return false;
+    }
+}
+________________________
+//УДАЛИТЬ ВСЮ ПУНКТУАЦИЮ
+import java.util.*;
+// удалить всю пунктуацию в тексте
+public class var18 {
+    public static void main(String[] args) {
+        String text = "";
+        Scanner in = new Scanner(System.in);
+        Character[] signs = {'.', ',', '!', '?'};
+        List<String> StrList = new ArrayList<String>();
+        while (in.hasNextLine()) {
+            String buffer = in.nextLine();
+            if (buffer.equals("exit"))
+                break;
+            text += buffer;
+        }
+        StringTokenizer str = new StringTokenizer(text, " \t", true);
+        while (str.hasMoreTokens()) {
+            String tok = str.nextToken();
+            if(tok.equals("\t"))
+                StrList.add(" ");
+            else
+                StrList.add(tok);
+        }
+        int amount = StrList.size();
+        for (int i = 0; i < amount; i++) {
+            String ch = StrList.get(i);
+            if (i != amount - 1 && i!=0)
+                if (ch.equals(" ") && StrList.get(i + 1).equals(" ")) {
+                    StrList.remove(i + 1);
+                    amount--;
+                    i--;
+                }
+        }
+        for (int i = 0; i < amount; i++)
+            if (StrList.get(i).equals(" ") && i!=amount-1) {
+                boolean flag = false;
+                for (int k = 0; k < signs.length; k++)
+                    if (StrList.get(i+1).charAt(0) == signs[k]) {
+                        flag = true;
+                    }
+                if (flag) {
+                    StrList.remove(i);
+                    amount--;
+                    i--;
+                }
+            }
+        String buffer="";
+        int text_size = StrList.size();
+        for(int i = 0 ; i < text_size; i++){
+            if((buffer.length()+StrList.get(i).length())<=80) {
+                buffer += StrList.get(i);
+                if(buffer.charAt(0)==' ')
+                    buffer = buffer.substring(1);
+                if(i==text_size-1)
+                    System.out.println(buffer);
+            }
+            else
+            {
+                if(buffer.charAt(buffer.length()-1)==' ')
+                    buffer = buffer.substring(0, buffer.length()-2);
+                System.out.println(buffer);
+                buffer="";
+                buffer+=StrList.get(i);
+            }
+
+        }
+    }
+}
+_____________________________
+//ПРИОРИТЕТ ОПЕРАЦИЙ
+import java.util.Scanner;
+
+
+public class prioritet {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner in=new Scanner(System.in);
+		String result="";
+		String s="";
+		
+		int p=0,m=0,u=0,d=0;
+		
+		while(in.hasNext())
+		{
+			
+			if((s=in.nextLine()).equalsIgnoreCase("EXIT"))
+				break;
+			char[] str = s.toCharArray();
+			for(int i=0;i<str.length;i++)
+			{
+				if(1== ChekZnak(str[i]))
+					u++;
+				if(2== ChekZnak(str[i]))
+					d++;
+				if(3== ChekZnak(str[i]))
+					p++;
+				if(4== ChekZnak(str[i]))
+					m++;
+			}
+			for(int i=0;i<str.length;i++)
+			{
+				if('-'== (str[i])||'+'== (str[i])||'*'== (str[i])||'/'== (str[i])){
+				if(u!=0){
+					str[i]='*';
+					 u--;
+					 continue;
+				}
+				if(d!=0){
+					str[i]='/';
+					 d--;
+					 continue;
+				}
+				if(p!=0){
+					str[i]='+';
+					 p--;
+					 continue;
+				}
+				if(m!=0){
+					str[i]='-';
+					 m--;
+					 continue;
+				}
+				
+				}
+			}
+			System.out.println(new String(str));
+			
+		}
+		System.out.println(result);
+	}
+	
+	private static int ChekZnak(char i)
+	{
+		if(i=='*')
+			return 1;
+		if(i=='/')
+			return 2;
+		if(i=='+')
+			return 3;
+		if(i=='-')
+			return 4;
+		return 0;
+		
+	}
+
+}
+
+__________________________________
+//ТОЧКА И ПРЯМАЯ
+import java.applet.Applet;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.util.Random;
+
+class Point_ extends Canvas {
+    private static final long serialVersionUID = 1L;
+    Color clr;
+    int x, y;
+    Dimension dim = new Dimension(20, 20);
+    public Point_ (int appWidth, int appHeight) {
+        super();
+        setMaximumSize(dim);
+        setBackground(null);
+        setBounds(0, 0, dim.width, dim.height);
+        clr = Color.black;
+        x = new Random().nextInt(appWidth - dim.width) + dim.width / 2;
+        y = new Random().nextInt(appHeight - dim.height) + dim.height / 2;
+    }
+    public void paint (Graphics g) {
+        g.setColor(clr);
+        g.fillOval(0, 0, dim.width, dim.height);
+    }
+    public void setColor (Color clr) {
+        this.clr = clr;
+    }
+    public Dimension getMinimumSize () { return dim; }
+    public Dimension getPreferredSize () { return dim; }
+}
+
+class Line_ {
+    Color clr;
+    int x1, y1, x2, y2;
+    public Line_ (Color c, int x1, int y1, int x2, int y2) {
+        clr = c;
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+    }
+    public int compare (Point_ p) {
+        double tg = (double)(y2 - y1) / (x2 - x1);
+        int xt = (int)(x1 - (double)(y1 - p.y) / tg);
+        if ( p.x < xt )
+            return -1;
+        else if ( p.x > xt )
+            return 1;
+
+        int yt = (int)(y1 - tg * (x1 - p.x));
+        if ( p.y < yt )
+            return 1;
+        else if ( p.y > yt )
+            return -1;
+        return 0;
+    }
+}
+
+public class task_19 extends Applet {
+
+    private static final long serialVersionUID = 1L;
+    static final int CX = 600, CY = 500;
+    Canvas point_first;
+    Canvas point_second;
+    Line_ Line_;
+    String s;
+
+    public Color getHtmlColor (String rgb, Color def) {
+        if ( rgb == null || rgb.charAt(0) != '#' )
+            return def;
+        try {
+            return new Color(Integer.parseInt(rgb.substring(1), 16));
+        } catch (NumberFormatException e) {
+            return def;
+        }
+    }
+
+    public void init () {
+        setSize(CX, CY);
+        setLayout(null);
+        setBackground(Color.white);
+        Color clr = Color.BLACK;
+        int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+        try {
+            clr = getHtmlColor(getParameter("Line_Color"), Color.BLACK);
+            x1 = Integer.parseInt((getParameter("x1") == null)?"50":getParameter("x1"));
+            y1 = Integer.parseInt((getParameter("y1") == null)?"50":getParameter("y1"));
+            x2 = Integer.parseInt((getParameter("x2") == null)?"550":getParameter("x2"));
+            y2 = Integer.parseInt((getParameter("y2") == null)?"450":getParameter("y2"));
+        } catch (Exception e) {}
+        Line_ = new Line_(clr, x1, y1, x2, y2);
+        point_first = new Point_(this.getWidth(), this.getHeight());
+        point_second = new Point_(this.getWidth(), this.getHeight());
+
+        int ans_first = ((Line_)Line_).compare((Point_)point_first);
+        int ans_second = ((Line_)Line_).compare((Point_)point_second);
+
+        Color cl_first = Color.red;
+        Color cl_second = Color.red;
+
+        s = new String();
+
+        switch (ans_first) {
+            case -1: cl_first = Color.red; break;
+            case 1: cl_first = Color.green; break;
+            default: cl_first = Color.yellow;
+        }
+        switch (ans_second) {
+            case -1: cl_second = Color.red; break;
+            case 1: cl_second = Color.green; break;
+            default: cl_second = Color.yellow;
+        }
+        if(ans_second == ans_first){
+            if(ans_second == -1)
+                s="точки лежат слева от прямой";
+            if(ans_second == 1)
+                s="точки лежат справа от прямой";
+            if(ans_second == 0)
+                s="точки лежат на прямой";
+        }else{
+            if(ans_second + ans_first == 0)
+                s="точки лежат по разные стороны от прямой";
+            else{
+                s="одна точка лежит на прямой, а вторая";
+                if(ans_second==-1 || ans_first==-1)
+                    s+=" справа";
+                else
+                    s+=" слева";
+                s+=" от прямой";
+            }
+        }
+
+        ((Point_)point_first).setColor(cl_first);
+        point_first.setLocation(((Point_)point_first).x, ((Point_)point_first).y);
+        add(point_first);
+
+        ((Point_)point_second).setColor(cl_second);
+        point_second.setLocation(((Point_)point_second).x, ((Point_)point_second).y);
+        add(point_second);
+
+        repaint();
+    }
+    public void paint (Graphics g) {
+        g.drawString(s, 0, 280);
+        g.setColor(Line_.clr);
+        g.drawLine(Line_.x1, Line_.y1, Line_.x2, Line_.y2);
+    }
+
+}
+__________________________
+//ФЛОАТ
+import java.util.*;
+
+class Main{
+    public static class Flooat implements Comparable<Flooat>{
+        int Line;
+        String Word;
+        Flooat(String L,int n){
+            Line=n;
+            Word=L;
+        }
+
+
+        public int compareTo (Flooat mf) {
+            double w1 = Double.parseDouble(this.Word);
+            double w2 = Double.parseDouble(mf.Word);
+            if (w1 > w2) {
+                return 1;
+            }
+            if (w2>w1){
+                return -1;
+            }
+
+            return 0;
+        }
+
+    }
+    static ArrayList<Flooat> floats = new ArrayList<Flooat>();
+    public static void processLine(String line, int num){
+        StringTokenizer st = new StringTokenizer(line);
+        while(st.hasMoreElements()){
+            String word = st.nextToken();
+            if(word.matches(("-?\\d+(\\.\\d+)?\\b"))){
+                Flooat a=new Flooat(word,num);
+                floats.add(a);
+
+            }
+        }
+    }
+    public static void main(String[] args) {
+        System.out.println("Enter text or Ctrl+Z:");
+        Scanner in = new Scanner(System.in);
+        int lineNumber = 0;
+        while (in.hasNextLine()) {
+            String line = in.nextLine();
+            processLine(line, lineNumber++);
+        }
+        Collections.sort(floats);
+        for(Flooat s:floats){
+            System.out.println(s.Word+":"+s.Line+1);
+        }
+    }
+}
+______________________
+//ВОСЬМИРИЧНЫЕ ЧИСЛА
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+
+public class INT_8 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner in =new Scanner(System.in);
+		
+		ArrayList<Couple> I_8=new ArrayList <Couple>();
+		int count=1;
+		
+		while(in.hasNext()){
+			String b=in.nextLine();
+			if(b.equals("exit"))
+				break;
+			StringTokenizer str = new StringTokenizer (b," ");
+			while(str.hasMoreTokens())
+			{
+				String c=str.nextToken();
+				if(c.startsWith("0"))
+				{
+					try{
+						Integer.parseInt(c,8);
+						I_8.add( new Couple(count,Integer.parseInt(c,8)) );
+					}
+					catch(Exception e)
+					{
+						continue;
+					}
+				}
+			}
+			count++;
+		}
+		
+		Collections.sort(I_8, new Comparator <Couple> () {
+			  public int compare(Couple o1, Couple o2) {
+				  if(o1.int_8 < o2.int_8)
+					  return 1;
+			    return  -1;
+			  }
+			  });
+		
+	
+		
+		for(Couple i:I_8)
+		{
+			System.out.println(i);
+		}
+		
+		
+	}
+
+}
+class Couple{
+	int int_8;
+	int number_str;
+	
+	 public int getInt_8(){return int_8;}
+	
+	Couple(int a,int b){
+		int_8=b;
+		number_str=a;
+	}
+	
+	
+	public String toString(){return int_8+ "  "+number_str;}
+}
+_____________________
+//ЛОМАНАЯ
+package loman;
+
+import java.util.ArrayList;
+
+public class loman implements Comparable<loman>{
+    int line;
+    double length;
+    ArrayList<Double> xCoord;
+    ArrayList<Double> yCoord;
+
+    public loman(ArrayList<Double>x, ArrayList<Double> y, int l) {
+        line=l;
+        xCoord=new ArrayList<Double>();
+        yCoord=new ArrayList<Double>();
+        xCoord.addAll(x);
+        yCoord.addAll(y);
+        length=countLength(xCoord, yCoord);
+    }
+
+    private double countLength(ArrayList<Double> x, ArrayList<Double> y) {
+        // TODO Auto-generated method stub
+        double sum;
+        double sqr;
+        double l=0;
+        for (int i=0;i<x.size()-1; i++) {
+            sum=0;
+            sum += ((y.get(i) - y.get(i + 1)) * (y.get(i) - y.get(i + 1)) + (x.get(i) - x.get(i + 1)) * (x.get(i) - x.get(i + 1)));
+            sqr= Math.sqrt(sum);
+            l+=sqr;
+        }
+        return l;
+    }
+
+    @Override
+    public int compareTo(loman l) {
+        // TODO Auto-generated method stub
+        return (new Double(l.length)).compareTo(new Double(length));
+    }
+
+    public String toString() {
+        String str="";
+        str+="#"+line+" ";
+        for (int i=0; i<xCoord.size(); i++)
+            str+="("+xCoord.get(i)+":"+yCoord.get(i)+") ";
+        str+="length = "+length;
+        return str;
+    }
+}
+
+
+
+package loman;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class test {
+
+	public static ArrayList<loman> lomanList=new ArrayList<loman>();
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList<String> text=new ArrayList<String>();
+		Scanner in=new Scanner(System.in);
+		System.out.println("Enter coordinates or press Ctrl+Z to exit");
+		while(in.hasNextLine())
+			text.add(in.nextLine());
+		in.close();
+		System.out.println("entering stopped");
+		for (int i=0; i<text.size(); i++)
+			processLine(text.get(i), i);
+		Collections.sort(lomanList);
+		System.out.println("Soted list of loman");
+		if (lomanList.isEmpty())
+			System.out.println("No loman");
+		for (loman l:lomanList)
+			System.out.println(l);
+	}
+
+//	private static void processLine(String string, int i) {
+//		// TODO Auto-generated method stub
+//		ArrayList<Double>x=new ArrayList<Double>();
+//		ArrayList<Double>y=new ArrayList<Double>();
+//		string= string.trim();
+//		StringTokenizer tokens=new StringTokenizer(string, ",");
+//		boolean flag=true;
+//		int index=0;
+//		while (tokens.hasMoreTokens())
+//		{
+//			String coord=tokens.nextToken();
+//			if (coord.charAt(0)!='(' || coord.charAt(coord.length()-1)!=')') {
+//				flag=false;
+//				break;
+//			}
+//			index=coord.indexOf(":");
+//			if (index==-1)
+//			{
+//				flag=false;
+//				break;
+//			}
+//			try {
+//				String sX=coord.substring(1,index);
+//				double cX=Double.parseDouble(sX);
+//				String sY=coord.substring(index+1, coord.length()-1);
+//				double cY=Double.parseDouble(sY);
+//				x.add(cX);
+//				y.add(cY);
+//			}
+//			catch(Exception e){
+//				flag=false;
+//				break;
+//			}
+//		}
+//		if (flag==true)
+//			lomanList.add(new loman(x,y,i));
+//		}
+	
+	private static void processLine(String string, int i) {
+		// TODO Auto-generated method stub
+		ArrayList<Double>x=new ArrayList<Double>();
+		ArrayList<Double>y=new ArrayList<Double>();
+		string= string.trim();
+		boolean flag=true;
+		int index1=0, index2=0, index3=0;
+		while (string.length()!=0)
+		{
+			index1=string.indexOf('(');
+			if (index1==-1) {
+				flag=false;
+				break;
+			}
+			index2=string.indexOf(')');
+			if (index2==-1) {
+				flag=false;
+				break;
+			}
+			String coord=string.substring(index1+1, index2);
+			index3=coord.indexOf(':');
+			if (index3==-1) {
+				flag=false;
+				break;
+			}
+			try {
+				String sX=coord.substring(0,index3);
+				double cX=Double.parseDouble(sX);
+				String sY=coord.substring(index3+1);
+				double cY=Double.parseDouble(sY);
+				x.add(cX);
+				y.add(cY);
+			}
+			catch(Exception e){
+				flag=false;
+				break;
+			}
+			string=string.substring(index2+1);
+		}
+		if (flag==true)
+			lomanList.add(new loman(x,y,i));
+		}
+		
+	}
+
+___________________________________-
+//РЯД
+package KR;
+
+import java.util.ArrayList;
+
+public class Sequence implements Comparable<Sequence> {
+
+	int line;
+	double M=0;
+	double D=0;
+	double S=0;
+	double C=0;
+	ArrayList<Double> arr;
+	ArrayList<String> arrStr;
+	public Sequence(ArrayList<Double> a,ArrayList<String> s , int l) {
+		arr = new ArrayList<Double>();
+		arrStr=new ArrayList<String>();
+		for (int i=0; i<a.size(); i++)
+			arr.add(a.get(i));
+		for (int i=0; i<a.size(); i++)
+			arrStr.add(s.get(i));
+		line=l;
+		if (arr.size()!=0) {
+			for (int i=0; i<arr.size(); i++)
+				M+=arr.get(i);
+			M/=arr.size();
+		}
+		if (arr.size()>1) {
+			for (int i=0; i<arr.size(); i++)
+				D+=((arr.get(i)-M)*(arr.get(i)-M));
+			D/=(arr.size()-1);
+		}
+		S=Math.sqrt(D);
+		if (M!=0)
+			C=(S/M)*100;
+	}
+	@Override
+	public int compareTo(Sequence o) {
+		// TODO Auto-generated method stub
+		return (new Double(C)).compareTo(new Double(o.C));
+	}
+	
+	public String toString() {
+		String str="#"+line+ " M="+ M+" D="+D+" C="+C+" Sequence: ";
+		for (int i=0; i<arrStr.size(); i++)
+			str+=arrStr.get(i)+" ";
+		return str;
+	}
+
+}
+
+package KR;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+
+
+public class test {
+	static ArrayList<Double> arrList=new ArrayList<Double>();
+	static ArrayList<String> strList=new ArrayList<String>();
+	static ArrayList<Sequence> seqList=new ArrayList<Sequence>();
+	public static void main(String[] args) {
+			Scanner in = new Scanner(System.in);
+			int ln = 0;
+			System.out.println("Input strings");
+			while(in.hasNextLine()) {
+				String s = in.nextLine();
+				if(s.equals("")) 
+					break;
+				arrList.clear();
+				strList.clear();
+				if (ProcLine(s)==true)
+					seqList.add(new Sequence(arrList,strList, ln));
+				ln++;
+			}
+			Collections.sort(seqList);
+			for (Sequence s:seqList)
+				System.out.println(s);
+			in.close();	
+		}
+	
+	
+	static boolean ProcLine(String str)
+	{
+		StringTokenizer st = new StringTokenizer(str,"\r\n ");
+		while(st.hasMoreTokens()) {
+			String token = st.nextToken();
+			int num = 0;
+			double dnum=0;
+			try {
+				if(token.charAt(0) == '0' &&  Character.toLowerCase(token.charAt(1))=='x') 
+					num = Integer.parseInt(token.substring(2), 16);
+				else throw new Exception();
+			}
+			catch (Exception e) {
+				try {
+					if(token.charAt(0) != '0') throw new Exception();
+					num = Integer.parseInt(token.substring(1), 8);
+				}
+				catch (Exception e1) {
+					try {
+						num = Integer.parseInt(token);
+					}
+					catch (Exception e2) {
+							try {
+								dnum = Double.parseDouble(token);
+							}
+							catch (Exception e3) {
+								//System.out.println("Wrong input string");
+								return false;
+							}	
+							arrList.add(dnum);
+							strList.add(token);
+							continue;
+							}
+					}	
+				}		
+		arrList.add((double)num);
+		strList.add(token);
+		}
+		return true;
+	}
+}
+
+package KR;
+
+import java.util.ArrayList;
+
+public class Sequence implements Comparable<Sequence> {
+
+	int line;
+	double M=0;
+	double D=0;
+	double S=0;
+	double C=0;
+	ArrayList<Double> arr;
+	ArrayList<String> arrStr;
+	public Sequence(ArrayList<Double> a,ArrayList<String> s , int l) {
+		arr = new ArrayList<Double>();
+		arrStr=new ArrayList<String>();
+		for (int i=0; i<a.size(); i++)
+			arr.add(a.get(i));
+		for (int i=0; i<a.size(); i++)
+			arrStr.add(s.get(i));
+		line=l;
+		if (arr.size()!=0) {
+			for (int i=0; i<arr.size(); i++)
+				M+=arr.get(i);
+			M/=arr.size();
+		}
+		if (arr.size()>1) {
+			for (int i=0; i<arr.size(); i++)
+				D+=((arr.get(i)-M)*(arr.get(i)-M));
+			D/=(arr.size()-1);
+		}
+		S=Math.sqrt(D);
+		if (M!=0)
+			C=(S/M)*100;
+	}
+	@Override
+	public int compareTo(Sequence o) {
+		// TODO Auto-generated method stub
+		return (new Double(C)).compareTo(new Double(o.C));
+	}
+	
+	public String toString() {
+		String str="#"+line+ " M="+ M+" D="+D+" C="+C+" Sequence: ";
+		for (int i=0; i<arrStr.size(); i++)
+			str+=arrStr.get(i)+" ";
+		return str;
+	}
+
+}
+
+package KR;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+
+
+public class test {
+	static ArrayList<Double> arrList=new ArrayList<Double>();
+	static ArrayList<String> strList=new ArrayList<String>();
+	static ArrayList<Sequence> seqList=new ArrayList<Sequence>();
+	public static void main(String[] args) {
+			Scanner in = new Scanner(System.in);
+			int ln = 0;
+			System.out.println("Input strings");
+			while(in.hasNextLine()) {
+				String s = in.nextLine();
+				if(s.equals("")) 
+					break;
+				arrList.clear();
+				strList.clear();
+				if (ProcLine(s)==true)
+					seqList.add(new Sequence(arrList,strList, ln));
+				ln++;
+			}
+			Collections.sort(seqList);
+			for (Sequence s:seqList)
+				System.out.println(s);
+			in.close();	
+		}
+	
+	
+	static boolean ProcLine(String str)
+	{
+		StringTokenizer st = new StringTokenizer(str,"\r\n ");
+		while(st.hasMoreTokens()) {
+			String token = st.nextToken();
+			int num = 0;
+			double dnum=0;
+			try {
+				if(token.charAt(0) == '0' &&  Character.toLowerCase(token.charAt(1))=='x') 
+					num = Integer.parseInt(token.substring(2), 16);
+				else throw new Exception();
+			}
+			catch (Exception e) {
+				try {
+					if(token.charAt(0) != '0') throw new Exception();
+					num = Integer.parseInt(token.substring(1), 8);
+				}
+				catch (Exception e1) {
+					try {
+						num = Integer.parseInt(token);
+					}
+					catch (Exception e2) {
+							try {
+								dnum = Double.parseDouble(token);
+							}
+							catch (Exception e3) {
+								//System.out.println("Wrong input string");
+								return false;
+							}	
+							arrList.add(dnum);
+							strList.add(token);
+							continue;
+							}
+					}	
+				}		
+		arrList.add((double)num);
+		strList.add(token);
+		}
+		return true;
+	}
+}
+
+__________________________________
+//СТРОКА НА ГРУППЫ
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class string {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		// TODO Auto-generated method stub
+		
+//		Scanner in = new Scanner(new File("input.txt"));
+		
+		Scanner in = new Scanner(System.in);
+		
+		ArrayList<�ouple<Double>> EXP = new ArrayList<�ouple<Double>>();
+		ArrayList<�ouple<String>> WORD = new ArrayList<�ouple<String>>();
+		ArrayList<�ouple<Double>> DOBL = new ArrayList<�ouple<Double>>();
+		ArrayList<�ouple<Integer>> I_10 = new ArrayList<�ouple<Integer>>();
+		ArrayList<�ouple<Integer>> I_16 = new ArrayList<�ouple<Integer>>();
+		
+		int num_str=1;
+		
+		while(in.hasNext())
+		{
+			String str=in.nextLine();
+			if(str.equals("EXIT"))
+				break;
+			StringTokenizer st = new StringTokenizer(str, " \t\n\r");
+			while (st.hasMoreTokens()) {
+				
+				String a=st.nextToken();
+				try{
+					Integer.parseInt(a);
+					I_10.add(new �ouple<Integer>(Integer.parseInt(a),num_str));
+					continue;	
+				}
+				catch (Exception e)
+				{ 
+					try{
+					Integer.parseInt(a,16);
+					I_16.add(new �ouple<Integer>(Integer.parseInt(a,16),num_str));
+					continue;
+					}
+					catch(Exception ex){
+						try{
+							Double.parseDouble(a);
+							if(a.contains("E+")||a.contains("E-")||a.contains("e-")||a.contains("e-")||
+									a.contains("E")||a.contains("e")){
+								EXP.add(new �ouple<Double>(Double.parseDouble(a),num_str));
+								continue;
+							}
+							DOBL.add(new �ouple<Double>(Double.parseDouble(a),num_str));
+							continue;
+						}
+						catch(Exception exc){	
+						}
+					}
+				}
+		
+				WORD.add(new �ouple<String>(a,num_str));
+					
+			}
+			num_str++;
+		}
+		
+		in.close();
+		
+		System.out.println("Word ----------------------");
+		for(�ouple<String> state : WORD)
+			System.out.println(state);
+		System.out.println("exp ----------------------");
+		for(�ouple<Double> state : EXP)
+            System.out.println(state);
+		System.out.println("DOUBL----------------------");
+		for(�ouple<Double> state : DOBL)
+            System.out.println(state);
+		System.out.println("10 ----------------------");
+		for(�ouple<Integer> state : I_10)
+            System.out.println(state);
+    	System.out.println("16 ----------------------");
+		for(�ouple<Integer> state : I_16)
+            System.out.println(state);
+    	
+		Collections.sort(WORD, new Comparator<�ouple<String>>() {
+			  public int compare(�ouple<String> o1, �ouple<String> o2) {
+			    return o1.word.compareTo(o2.word);
+			  }
+			  });
+		
+		System.out.println("Word ----------------------");
+		for(�ouple<String> state : WORD)
+			System.out.println(state);
+		
+	}
+		
+
+}
+
+class �ouple<E>{
+    
+     E word;
+     int number_str;
+    
+    public  �ouple(E w,int ns){
+    	word=w;
+    	number_str=ns;
+    }
+    public E getWord(){return word;}
+    int getNumber(){return number_str;}
+    
+    
+    public String toString() {
+        return word+"  "+ number_str;	
+    }
+    
+}
+____________________________
+_________________________________________________________ 
+/////////////////////////////////////////////////////////
+------------------------------------------------------------
+////////////////////////////////////////////////////////////
+___________________________________________________________
+1 КОНТРОЛЬНАЯ РАБОТА
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class task_1 {
+	//Вариант 1.
+	//Из стандартного входного потока прочитать текст
+	//и в стандартный выходной поток вывести все цитаты.
+	//Цитата — это текст между двойными кавычками
+	
+	static ArrayList<String> ql = new ArrayList<String>(); //quotes list
+	
+	static void procLine(String line){
+		
+		int begq = line.indexOf('"');
+		int endq = line.indexOf('"',begq+1);
+		
+		while(endq != -1){
+			
+			ql.add(line.substring(begq+1, endq));
+			line = line.substring(0, begq) + line.substring(endq+1, line.length());
+			
+			begq = line.indexOf('"',begq);
+			endq = line.indexOf('"',begq+1);
+		}
+	}
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insert your text with quotes by line:");
+		while(sc.hasNextLine()){
+			procLine(sc.nextLine());
+		}
+		sc.close();
+		
+		System.out.println("All quotes: ");
+		for(String s : ql){
+			System.out.println(s);
+		}
+		System.out.println("----end----\n");
+	}
+}
+/////////////////////////////////////////////////
+import java.util.*;
+
+public class task_2 {
+	//Вариант 2
+	//Программа читает текст из стандартного входного потока, находит слова,
+	//начинающиеся с заглавной буквы и выводит в стандартный выходной поток
+	//с новой строки
+
+	static ArrayList<String> tl = new ArrayList<String>(); //list of lines
+	
+	static void procLine(String line)
+	{
+		StringTokenizer st = new StringTokenizer(line);
+		int idx = 0;
+		while(st.hasMoreElements())
+		{
+			String s = st.nextToken();
+			if(Character.isUpperCase(s.charAt(idx)))
+			{
+				tl.add(s);
+			}
+		}
+	}
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insert your text line by line:");
+		String text = "";
+		while(sc.hasNextLine()){
+			text = text + " " + sc.nextLine();
+		}
+		sc.close();
+		procLine(text);
+		System.out.println("---Full text---: ");
+		for(String s : tl){
+			System.out.println(s);
+		}
+		System.out.println("------end------\n");
+	}
+}
+///////////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class task_3 {
+	//Вариант 3
+	//Создать программу, котоая читает текст из стандартного входного потока,
+	//разбивает его на предложения и выводит их в стандартный поток по одному 
+	//предложению в строке, переводя все слова Восклицательных предложений
+	//в верхний регистр.
+	
+	static ArrayList<String> tl = new ArrayList<String>(); //list of lines
+	
+	static void procLine(String line){
+		
+		int idx = 0;
+		while(idx<line.length()){
+			
+			if(line.charAt(idx) == '.' || line.charAt(idx) == '?'){
+				
+				tl.add(line.substring(0, idx+1));
+				line = line.substring(idx+1);
+				idx = 0;
+			}else
+				if(line.charAt(idx) == '!'){
+
+					tl.add(line.substring(0, idx+1).toUpperCase());
+					line = line.substring(idx+1);
+					idx = 0;
+				}
+			idx++;
+		}
+	}
+	
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insert your text line by line:");
+		String text = "";
+		while(sc.hasNextLine()){
+			text = text +sc.nextLine();
+		}
+		procLine(text);
+
+		sc.close();
+		
+		System.out.println("---Full text---: ");
+		for(String s : tl){
+			System.out.println(s);
+		}
+		System.out.println("------end------\n");
+	}
+}
+///////////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class task_4 {
+	//Вариант 4
+	//Стандартный входной поток.
+	//Найти все вопросительные предложения и вывести каждый с новой строки.
+
+	static ArrayList<String> tl = new ArrayList<String>(); //list of lines
+	static String tmpLine = new String();
+	
+	static void procLine(String line){
+		
+		int idx = 0;
+		while(idx<line.length()){
+			
+			if(line.charAt(idx) == '.' || line.charAt(idx) == '!'){
+				tmpLine = "";
+				line = line.substring(idx+1);
+				idx = 0;
+			}else
+				if(line.charAt(idx) == '?'){
+					
+					tmpLine += line.substring(0, idx+1);
+					tl.add(tmpLine);
+					tmpLine = "";
+					
+					line = line.substring(idx+1);
+					idx = 0;
+				}
+			idx++;
+		}
+		if(line.indexOf('.') == -1 && line.indexOf('!') == -1 && line.indexOf('?') == -1){
+			tmpLine += line;
+		}
+	}
+	
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insert your text line by line:");
+
+		tmpLine = "";
+		while(sc.hasNextLine()){
+			procLine(sc.nextLine());
+		}
+		if(!tmpLine.isEmpty())
+			tl.add(tmpLine);
+		sc.close();
+		
+		System.out.println("---Full text---: ");
+		for(String s : tl){
+			System.out.println(s);
+		}
+		System.out.println("------end------\n");
+	}
+}
+////////////////////////////////////////////////////////////////////////
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
+public class task_5 {
+	//Вариант 5
+	//найти длинные числа, отсортировать и вывести с номерами строк, в которых они встречались
+	public static class Word {
+		private int pos;
+		private String word;
+		
+		protected Word(String _word,int _pos){
+			pos = _pos;
+			word = _word;
+		}
+		public String toString(){
+			return new String(word+"("+pos+")");
+		}
+	}
+	public static class WLongInt extends Word implements Comparable<WLongInt>,Comparator<Long>{
+		protected long value;
+		
+		protected WLongInt(String _word,int _pos,long _value){
+			super(_word,_pos);
+			value = _value;
+		}
+
+		public int compareTo(WLongInt wli){
+			return (new Long(value)).compareTo(wli.value);
+		}
+
+		public int compare(Long arg0, Long arg1) {
+			return (int)(arg0 - arg1);
+		}
+		public static WLongInt parseLong(String _word,int _pos){
+			try{
+				long _value;
+				if(_word.charAt(_word.length()-1) == 'l' ||
+						_word.charAt(_word.length()-1) == 'L')
+					_value = Long.parseLong(_word.substring(0, _word.length()-1));
+				else
+					_value = Long.parseLong(_word);
+				return new WLongInt(_word,_pos,_value);
+			}catch(Exception e){}
+			return null;
+		}
+	}
+	
+	static void procLine(String line,int pos){
+		StringTokenizer st = new StringTokenizer(line," \n\t");
+		while(st.hasMoreTokens()){
+			String word = new String(st.nextToken());
+			Object obj = WLongInt.parseLong(word,pos);
+			if(obj != null){
+				li.add((WLongInt) obj);
+			}
+		}
+	}
+	static List<WLongInt> li = new Vector<WLongInt>(); 
+	
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Insert your text line by line:");
+		int n=0;
+		while(sc.hasNextLine()){
+			procLine(sc.nextLine(),n++);
+		}
+		sc.close();
+		li.sort(null);
+		System.out.println("---All long nums---: ");
+		for(WLongInt i:li)
+			System.out.print(i);
+		System.out.println("---End---: ");
+	}
+}
+///////////////////////////////////////////////////////////////////////
+import java.util.*;
+
+public class task_6 {
+	
+	public static boolean check(String userNameString) {
+		for (int i = 0; i < userNameString.length(); i++)
+			if (Character.isDigit(userNameString.charAt(i)) == false)
+					return false;
+			return true;
+	}
+	
+	
+	public static void main (String args[]) {
+		
+		System.out.println("Введите данные. Для окончания ввода жми Ctrl + z");
+		Scanner in = new Scanner(System.in);
+		ArrayList<String> List = new ArrayList<String>(); 
+		
+		
+		while (in.hasNextLine()) {
+			
+			String str = in.nextLine();
+			StringTokenizer strtok = new StringTokenizer(str);
+			
+			while (strtok.hasMoreTokens()) {
+				String word = strtok.nextToken();
+				if (check(word) == true) List.add(word);
+			}	
+		}
+		
+		if (List.isEmpty() == true) System.out.println("Нет слов, состоящих из цифр!");
+		else {
+		for (String i: List)
+			System.out.println(i);
+		}
+		
+		
+		in.close();
+		System.exit(0);
+		
+	}
+
+}
+/////////////////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class task_7 {
+	/* 如 怩钿眍泐 镱蝾赅 镳铟栩囹� 耠钼�.
+	 * 义 觐蝾瘥� 蝾朦觐 桤 鲨麴 镳孱狃噻钼囹� � 16-� 玎镨顸 � 恹忮耱� 1 耠钼�/耱痤牦
+	 */
+
+	static ArrayList<String> hexs = new ArrayList<String>();
+	
+	static void processLine (String line) {
+		
+		StringTokenizer sttok = new StringTokenizer(line);
+		while (sttok.hasMoreTokens()) {
+			String word = sttok.nextToken();
+			if ( word.matches("[0-9]+") ) {
+				try {
+					String hex = Integer.toHexString(Integer.parseInt(word));
+					hexs.add(word + ": " + hex);
+				}
+				catch (Exception e) {
+					hexs.add(word + " can't be converted.");
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			processLine(line);
+		}
+		in.close();
+		System.out.println("Hexs:" + ((hexs.size() == 0)?" ...":""));
+		for (String word: hexs)
+			System.out.println(word);
+		System.out.println("the end.");
+		
+	}
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Task_8 {
+	
+	//Slova razdeleny probelami. Vse slova v stroke kotorye sostoyat 
+	//tol'ko iz bukv otsortirovat' i sohranyat' kolichestvo probelov
+
+	public static void main(String[] args) {
+
+		Scanner in=new Scanner(System.in);
+		
+		ArrayList <String> result= new ArrayList <String>();
+		
+        while (in.hasNext()) {
+        	
+        	String stroka = in.nextLine();
+        	
+        	if(stroka.equals("exit"))
+        		break;
+        	
+        	ArrayList <String> str= new ArrayList <String>();
+            String[] arr = stroka.split(" ");
+            
+            for (int i = 0; i < arr.length; i++)
+                if (isWord(arr[i])) {
+                    str.add(arr[i]);
+                    arr[i] = null;
+                }
+                 
+            Collections.sort(str,new Comparator <String> () {
+                public int compare(String o1, String o2) { return o1.compareTo(o2); }  });
+            
+            int j = 0;
+            String s = "";
+            
+            for (String i : arr) {
+                if (i == null)
+                    s += str.get(j++);
+                else
+                    s += i;
+                s += " ";
+            }
+            result.add(s);       
+        }
+        
+        for(String i : result)
+        	System.out.println(i);
+	}
+
+
+private static boolean isWord(String word) {
+    Pattern p = Pattern.compile("^[A-z,A-y]+");
+    Matcher m = p.matcher(word);
+    return m.matches();
+}
+}
+/////////////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/* Вариант 9
+ * Из стандартного входного потока считываются строки.
+ * В каждой строке необходимо переставить слова в обратном порядке.
+ * Вывести весь текст в стандартный выходной поток
+ * Кол-во пробелов между словами оставлять?????
+ */
+// тут не точное условие, придётся дописывать самим((
+class Word {
+	String str;
+	int begPos, endPos;
+	public Word (String str, int begPos) {
+		this.str = str;
+		this.begPos = begPos;
+		endPos = begPos + str.length() - 1;
+	}
+}
+
+public class task_9 {
+
+	static ArrayList<String> lines = new ArrayList<String>();
+	
+	static String getReverseLine (String line) {
+		StringBuffer res = new StringBuffer(line);
+		ArrayList<Word> list = new ArrayList<Word>();
+		ArrayList<String> rList = new ArrayList<String>();
+		StringTokenizer sttok = new StringTokenizer(line);
+		int pos = 0;
+		while (sttok.hasMoreElements()) {
+			String token = sttok.nextToken();
+			pos = line.indexOf(token, pos);
+			list.add(new Word(token, pos));
+			rList.add(token);
+			pos += token.length();
+		}
+		for (int i = list.size() - 1; i >= 0; --i)
+			res.replace(list.get(i).begPos, list.get(i).endPos + 1, rList.get(list.size() - 1 - i));
+		return res.toString();
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Введите текст, для окончания используйте Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			lines.add(getReverseLine(line));
+		}
+		in.close();
+		System.out.println("Text:");
+		for (String item: lines)
+			System.out.println(item);
+		if ( lines.size() == 0 )
+			System.err.println("Текста нет...");
+		System.out.println("Программа завершена успешно.");
+		
+	}
+
+}
+////////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class task_10 {
+	/* 锣痂囗� 10
+	 * 杨玟囹� 镳钽疣祆�, 觐蝾疣 麒蜞弪 蝈犟� 桤 耱囗溧痱眍泐 怩钿眍泐 镱蝾赅
+	 * � 镥鬣蜞弪 � 恹躅漤铋 镱蝾� 镳邃腩驽龛 桉躅漤钽� 蝈犟蜞, � 觐蝾瘥� 怦蝠鬻噱蝰 麴噻�,
+	 * 箨噻囗磬 赅� 钺玎蝈朦睇� 镟疣戾蝠 镳钽疣祆�.
+	 */
+	
+	static ArrayList<String> tl = new ArrayList<String>(); //list of lines
+	
+	static void procLine(String text, String arg){
+		
+		int idx = 0;
+		while(idx<text.length()){
+			
+			if(text.charAt(idx) == '.' || text.charAt(idx) == '?' || text.charAt(idx) == '!'){
+				
+				if(text.substring(0, idx+1).contains(arg))
+					tl.add(text.substring(0, idx+1));
+				text = text.substring(idx+1);
+				idx = 0;
+			}
+			idx++;
+		}
+	}
+	
+	public static void main(String[] args){
+		
+		if ( args.length != 1 )
+			throw new IllegalArgumentException("You don't enter one argument.");
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insert your text line by line:");
+		String text = "";
+		while(sc.hasNextLine()){
+			text = text +sc.nextLine();
+		}
+		procLine(text, args[0]);
+
+		sc.close();
+		
+		System.out.println("---Full text---: ");
+		for(String s : tl){
+			System.out.println(s);
+		}
+		System.out.println("------end------\n");
+	}
+}
+////////////////////////////////////////////////////////////////////////////
+import java.util.*;
+
+/* 锣痂囗� 11
+ * 耦 耱囗溧痱眍泐 怩钿眍泐 镱蝾赅 镳铟栩囹� 耱痤觇 � 镳孱狃噻钼囹� 耠邃簋� 钺疣珙�:
+ * 耠钼� 耦耱�� 蝾朦觐 桤 狍赈, 怦� 铖蜞朦眍� 聍栩囹� 疣玟咫栩咫扈;
+ * 磬轵� 怦� 镟腓礓痤禧, 铗耦痱桊钼囹� � 桉躅漤铋 耱痤赍;
+ * 铖蜞朦睇� 耠钼� 戾�螯� 礤 漕腈睇, 疣玟咫栩咫� 漕腈睇 铖蜞忄螯� 磬 戾耱圊 � 觐腓麇耱忸 镳钺咫钼 铖蜞忄螯� 镳彐龛�
+ */
+
+class Palindrom implements Comparable<Palindrom> {
+	String str;
+	int oldBegPos, oldEndPos;
+	public Palindrom (String str, int oldBegPos) {
+		this.str = str;
+		this.oldBegPos = oldBegPos;
+		this.oldEndPos = oldBegPos + str.length() - 1;
+	}
+	public Palindrom (Palindrom p) {
+		str = p.str;
+		oldBegPos = p.oldBegPos;
+		oldEndPos = p.oldEndPos;
+	}
+	public int compareTo (Palindrom p) {
+		return str.compareTo(p.str);
+	}
+	public static boolean isPalindrom (String str) {
+		String rev = "";
+		for (int i = str.length() - 1; i >= 0; i--)
+			rev = rev.concat("" + str.charAt(i));
+		return rev.equals(str);		
+	}
+}
+
+public class task_11 {
+
+	static ArrayList<String> text = new ArrayList<String>();
+	
+	static String getDelim (String str) {
+		String res = "";
+		for (int i = 0; i < str.length(); ++i) {
+			char ch = str.charAt(i);
+			if ( !Character.isLetter(ch) )
+				res = res.concat("" + ch);
+		}
+		return res;
+	}
+	
+	static String processLine (String line) {
+		StringBuilder res = new StringBuilder(line);
+		ArrayList<Palindrom> list = new ArrayList<Palindrom>();
+		ArrayList<Palindrom> sortlist = new ArrayList<Palindrom>();
+		StringTokenizer sttok = new StringTokenizer(line, getDelim(line));
+		int endPos = 0;
+		while (sttok.hasMoreElements()) {
+			String word = sttok.nextToken();
+			endPos = line.indexOf(word, endPos);
+			if ( Palindrom.isPalindrom(word) ) {
+				Palindrom p = new Palindrom(word, endPos);
+				list.add(p);
+				sortlist.add(p);
+			}
+			endPos += word.length();
+		}
+		Collections.sort(sortlist);
+		for (int i = sortlist.size() - 1; i >= 0; --i) {
+			res.replace(list.get(i).oldBegPos, list.get(i).oldEndPos + 1, sortlist.get(i).str);
+		}
+		return res.toString();
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			text.add(processLine(line));
+		}
+		in.close();
+		System.out.println("\nText:");
+		if ( text.size() == 0 )
+			System.err.println("....");
+		for (String line: text)
+			System.out.println(line);
+		System.out.println("The end.");
+		
+	}
+
+}
+////////////////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/* 锣痂囗� 12
+ * 耦溴疰桁铄 耱囗溧痱眍泐 怩钿眍泐 镱蝾赅 耜铒桊钼囹� � 恹躅漤铋, 镳孱狃噻� 耱痤觇 怩钿眍泐 羿殡� 耠邃簋� 钺疣珙�:
+ * 赅驿� 怩钿磬 耱痤赅 耦耱铊� 桤 耠钼, 疣玟咫屙睇� 钿龛� 桦� 礤耜铍桁� 镳钺咫囔�.
+ * 襄疱耱噔栩� � 礤� 耠钼�, 耦耱�� 蝾朦觐 桤 鲨麴 蜞�, 黩钺� 铐� 猁腓 箫铕漕麇睇 镱 忸琊囫蜞龛� 耋祆� 桴 鲨麴.
+ * 橡� 铎 漯筱桢 耠钼� 漕腈睇 铖蜞忄螯� 磬 戾耱�, 觐腓麇耱忸 镳钺咫钼 漕腈眍 铖蜞忄螯� 蜞觇� 驽, 赅� � � 桉躅漤铋 耱痤赍.
+ */
+
+class DigitWord implements Comparable <DigitWord> {
+	String str;
+	int beginPos, endPos, sum;
+	public DigitWord (String str, int beginPos) {
+		this.str = str;
+		this.beginPos = beginPos;
+		endPos = beginPos + str.length() - 1;
+		sum = 0;
+		for (int i = 0; i < str.length(); ++i)
+			sum += str.charAt(i) - '0';
+	}
+	public int compareTo (DigitWord dw) {
+		return (sum < dw.sum) ? -1 : (sum == dw.sum) ? 0 : 1;
+	}
+	public static boolean isDigitWord (String word) {
+		String delim = "0123456789";
+		StringTokenizer sttok = new StringTokenizer(word, delim);
+		return !sttok.hasMoreElements();
+	}
+}
+
+public class task_12 {
+
+	static String processLine (String line) {
+		StringBuilder res = new StringBuilder(line);
+		ArrayList<DigitWord> list = new ArrayList<DigitWord>();
+		ArrayList<DigitWord> sortList = new ArrayList<DigitWord>();
+		StringTokenizer sttok = new StringTokenizer(line, " \t");
+		int pos = 0;
+		while (sttok.hasMoreElements()) {
+			String word = sttok.nextToken();
+			pos = line.indexOf(word, pos);
+			if ( DigitWord.isDigitWord(word) ) {
+				DigitWord dw = new DigitWord(word, pos);
+				list.add(dw);
+				sortList.add(dw);
+			}
+			pos += word.length();
+		}
+		Collections.sort(sortList);
+		for (int i = sortList.size() - 1; i >= 0; --i)
+			res.replace(list.get(i).beginPos, list.get(i).endPos + 1, sortList.get(i).str);
+		return res.toString();
+	}
+	
+	static ArrayList<String> list = new ArrayList<String>();
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			list.add(processLine(line));
+		}
+		in.close();
+		System.out.println("\nText:");
+		if ( list.size() == 0 )
+			System.err.println("...");
+		for (String line: list)
+			System.out.println(line);
+	}
+
+}
+////////////////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/* Вариант 13
+ * заменить в строке 8 пробелов стоящих подряд на символ табуляции */
+
+public class task_13 {
+
+	static ArrayList<String> list = new ArrayList<String>();
+	
+	public static void main(String[] args) {
+		
+		System.out.println("start:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			StringBuilder res = new StringBuilder(in.nextLine());
+			String spaces = "        ";
+			int pos = res.indexOf(spaces);
+			while ( pos != -1 ) {
+				res.replace(pos, pos + 8, "\t");
+				pos = res.indexOf(spaces);
+			}
+			list.add(res.toString());
+		}
+		in.close();
+		System.out.println("Text:");
+		if ( list.size() == 0 )
+			System.out.println("...");
+		for (String line: list)
+			System.out.println(line);
+	}
+
+}
+////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Scanner;
+
+//Вариант 14
+//Ввести через стандартный поток текст,
+//найти слово максимальной длины и вывести слово 
+//и сколько раз встречается
+
+public class task_14 {
+
+    public static int maxCount=0;
+    public static String maxString;
+  
+    public static void main(String[] args){
+        System.out.println("Begining of the work:");
+        try (Scanner in = new Scanner(System.in)){
+            read(in);
+            System.out.println(maxString+" "+maxCount);
+        }catch (Exception e){
+            System.err.println(e);
+        }
+    }
+
+    private static void read(Scanner in) throws Exception {
+    	
+    	class Word {
+    	    String s;
+    	    int count;
+            public Word(String s, int c){
+    	        this.s = new String(s);
+    	        this.count=c;
+            }
+    	}
+        ArrayList<Word> words = new ArrayList<Word>();
+        while (in.hasNext()) {
+            String[] arr = in.nextLine().split(" ");
+            boolean f = true;
+            for (int i = 0; i < arr.length; i++){
+                for (int j=0;j<words.size();j++){//проверяет, были ли уже такие слова
+                    if(arr[i].compareTo(words.get(j).s)==0){
+                        words.get(j).count++;
+                        f=false;
+                        break;
+                    }
+                }
+                if(f){//слово новое
+                	words.add(new Word(arr[i],1));
+                }
+                f=true;
+            }
+        }//тут можно и частотный словарь распечатать
+        for (int i=0;i<words.size();i++){
+            if(words.get(i).count > maxCount && words.get(i).s.compareTo("")!=0){
+                maxString=words.get(i).s;
+                maxCount=words.get(i).count;
+            }
+        }
+    }
+}
+//////////////////////////////////////////////////////////////
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
+
+/*Âàðèàíò 15
+ * íàéòè äëèííûå ÷èñëà, îòñîðòèðîâàòü è âûâåñòè ñ 
+ * íîìåðàìè ñòðîê, â êîòîðûõ îíè âñòðå÷àëèñü
+ */
+
+public class task_15{
+	
+	public static void main(String[] args) {
+		
+		Scanner n = new Scanner (System.in);
+		try {
+			int number = 1;
+			HashMap<Long, StringBuilder> longs = new HashMap<Long, StringBuilder>();
+			while(n.hasNext()) {
+				String m = n.nextLine();
+				StringTokenizer st = new StringTokenizer( m," ");
+				while(st.hasMoreTokens()) {
+					String division = st.nextToken();	
+					if(division.charAt(division.length()-1)=='L' || division.charAt(division.length()-1)=='l') {
+						String nw  = division.substring(0, division.length()-1);
+						try {
+						    if(!longs.containsKey(Long.valueOf(nw)))
+						    	longs.put(Long.valueOf(nw), new StringBuilder("" + number));
+						    else
+								longs.put(Long.valueOf(nw), new StringBuilder( longs.get(Long.valueOf(nw))+" "+number));
+						} 
+						catch(Exception e){}
+					}		
+				} 
+				number++;
+			}
+			Map<Long, StringBuilder> treeMap = new TreeMap<Long, StringBuilder>(longs);
+			System.out.println(treeMap.toString());
+		} catch(Exception c) {
+			System.out.println(c.toString());
+		}finally{
+			n.close();
+		}
+	}
+}
+/////////////////////////////////////////////////////////////////
+import java.util.*;
+/* 忄痂囗� 16
+ * 耦溴疰桁铄 耱囗溧痱眍泐 怩钿眍泐 镱蝾赅 耜铒桊钼囹� � 恹躅漤铋, 镳孱狃噻� 耱痤觇 怩钿眍泐 羿殡� 耠邃簋� 钺疣珙�:
+ * 赅驿� 怩钿磬 耱痤赅 耦耱铊� 桤 耠钼, 疣玟咫屙睇� 钿龛� 桦� 礤耜铍桁� 镳钺咫囔�.
+ * 襄疱耱噔栩� � 礤� 耠钼�, 耦耱�� 蝾朦觐 桤 狍赈 蜞�, 黩钺� 铐� 猁腓 箫铕漕麇睇 镱 嚯羿忤蝮.
+ * 橡� 铎 漯筱桢 耠钼� 漕腈睇 铖蜞忄螯� 磬 戾耱�, 觐腓麇耱忸 镳钺咫钼 漕腈眍 铖蜞忄螯� 蜞觇� 驽, 赅� � � 桉躅漤铋 耱痤赍. 
+ */
+
+class Word_ implements Comparable<Word_> {
+	String str;
+	int oldBegPos, oldEndPos;
+	
+	public Word_ (String str, int oldBegPos) {
+		this.str = str;
+		this.oldBegPos = oldBegPos;
+		this.oldEndPos = oldBegPos + str.length() - 1;
+	}
+	
+	public Word_(Word_ w) {
+		str = w.str;
+		oldBegPos = w.oldBegPos;
+		oldEndPos = w.oldEndPos;
+	}
+	public int compareTo (Word_ w) {
+		return str.compareTo(w.str);
+	}
+	
+	public static boolean isMyWord (String str) {
+		for (int i = 0; i < str.length(); i++)
+			if (Character.isLetter(str.charAt(i)) == false)
+				return false;
+		return true;
+	}
+}
+
+public class task_16 {
+	
+	static ArrayList<String> text = new ArrayList<String>();
+	
+	static String processLine (String line) {
+		StringBuilder res = new StringBuilder(line);
+		
+		ArrayList<Word_> list = new ArrayList<Word_>();
+		ArrayList<Word_> sortlist = new ArrayList<Word_>();
+		
+		StringTokenizer sttok = new StringTokenizer(line);
+		int endPos = 0;
+		
+		while (sttok.hasMoreElements()) {
+			
+			String word = sttok.nextToken();
+			endPos = line.indexOf(word, endPos);
+			
+			if ( Word_.isMyWord(word) ) {
+				Word_ w = new Word_(word, endPos);
+				list.add(w);
+				sortlist.add(w);
+			}
+			endPos += word.length();
+		}
+		
+		Collections.sort(sortlist);
+		for (int i = sortlist.size() - 1; i >= 0; --i) {
+			res.replace(list.get(i).oldBegPos, list.get(i).oldEndPos + 1, sortlist.get(i).str);
+		}
+		return res.toString();
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			text.add(processLine(line));
+		}
+		in.close();
+		System.out.println("\nText:");
+		if ( text.size() == 0 )
+			System.err.println("....");
+		for (String line: text)
+			System.out.println(line);
+		System.out.println("The end.");
+		
+	}
+
+}
+////////////////////////////////////////////////////////////////////////////////
+import java.util.Random;
+import java.util.Scanner;
+
+/* 锣痂囗� 17
+ * 聍栩囹� � 觐眈铍� 疣珈屦眍耱� n 爨蝠桷�.
+ * 锑蝠桷� 玎镱腠栩� 疣礓铎睇扈 麒耠囔� 桤 滂囡噻铐� 铗 -n 漕 n.
+ * 茵囗耧铐桊钼囹� 爨蝠桷� � 恹忮耱� 疱珞朦蜞�
+ */
+
+public class task_17 {
+
+	static int[][] getMatrix (int n) {
+		int[][] matrix = new int[n][n];
+		for (int i = 0; i < n; ++i)
+			for (int j = 0; j < n; ++j)
+				matrix[i][j] = new Random().nextInt(2*n+1) - n;		
+		return matrix;
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter matrix dimension:");
+		Scanner in = new Scanner(System.in);
+		int n = 0;
+		while (true) {
+			try {
+				n = in.nextInt();
+				if ( n <= 1 )
+					throw new IllegalArgumentException("n <= 1");
+				break;
+			}
+			catch (Exception e) {
+				System.out.println(e.getMessage() + "\nTry again...");
+				in.nextLine();
+			}
+		}
+		in.close();
+		
+		int[][] matrix = getMatrix(n);
+		System.out.println("Matrix:");
+		for (int i = 0; i < n; ++i) {
+			for (int j = 0; j < n; ++j)
+				System.out.printf("%4d ", matrix[i][j]);
+			System.out.println();
+		}
+		for (int i = 0; i < n; ++i)
+			for (int j = i + 1; j < n; ++j) {
+				int tmp = matrix[i][j];
+				matrix[i][j] = matrix[j][i];
+				matrix[j][i] = tmp;
+			}
+		System.out.println("Transpon matrix:");
+		for (int i = 0; i < n; ++i) {
+			for (int j = 0; j < n; ++j)
+				System.out.printf("%4d ", matrix[i][j]);
+			System.out.println();
+		}
+		System.out.println("the end.");
+	}
+}
+////////////////////////////////////////////////////////////////
+//18 таска
+package ПробелыПереносСтроки;
+
+import java.io.*;
+
+public class Test {
+    public static final String fileNameIn = "in.txt";
+    public static final String fileNameOut = "out.txt";
+    public static void main(String[] args) {
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(fileNameIn));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileNameOut)))
+        {
+            String add = "";
+            while(reader.ready())
+            {
+                String line = reader.readLine();
+                String[] mas = transformLine(add + line);
+                line = mas[0];
+                writer.write(line + "\n");
+
+                add = mas[1];
+
+                while(add.length() > 80) {
+                    String[] tmp = transformLine(add);
+                    writer.write(tmp[0] + "\n");
+                    add = tmp[1];
+                }
+
+            }
+            if(!add.equals(""))
+            {
+
+                writer.write(add + "\n");
+
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+    public static String[] transformLine(String line)
+    {
+        line = line.replaceAll("\\s+", " ").trim();
+        line = deleteAllSpaces(line);
+
+        boolean flag = true;
+        String[] mas = new String[2];
+
+        if(line.length() > 80)
+        {
+            mas = makeTransference(line);
+        }
+        else {
+            mas[0] = line;
+            mas[1] = "";
+        }
+        return mas;
+    }
+    public static String deleteSpace(String line, char c)
+    {
+        char space = ' ';
+        int index = line.length();
+        StringBuilder result = new StringBuilder(line);
+        while(true)
+        {
+            index = line.lastIndexOf(c, --index);
+            if(index == -1)
+                break;
+
+            if(index-1 != -1 && line.charAt(index-1) == space)
+                result.delete(index-1, index);
+        }
+        return result.toString();
+    }
+    public static String deleteAllSpaces(String line)
+    {
+        char[] separators = {',','.','!','?', ';',':',';'};
+        for (int i = 0; i < separators.length; i++)
+            line = deleteSpace(line, separators[i]);
+        return line;
+    }
+    public static String[] makeTransference(String line)
+    {
+        int index = 80;
+        while(line.charAt(index) != ' ')
+        {
+            index--;
+        }
+        index++;
+        String word = line.substring(index, line.length());
+        StringBuilder old = new StringBuilder(line);
+        old.delete(index, line.length());
+        String[] mas = new String[2];
+        mas[0] = old.toString();
+        mas[1] = word;
+        return mas;
+    }
+}
+///////////////////////////////////////////////////////
+//19 task
+import java.applet.Applet;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.util.Random;
+
+class Point_ extends Canvas {
+	private static final long serialVersionUID = 1L;	
+	Color clr;
+	int x, y;
+	Dimension dim = фnew Dimension(20, 20);	
+	public Point_ (int appWidth, int appHeight) {
+		super();
+		setMaximumSize(dim);
+		setBackground(null);
+		setBounds(0, 0, dim.width, dim.height);
+		clr = Color.black;
+		x = new Random().nextInt(appWidth - dim.width) + dim.width / 2;
+		y = new Random().nextInt(appHeight - dim.height) + dim.height / 2;
+	}
+	public void paint (Graphics g) {
+		g.setColor(clr);
+		g.fillOval(0, 0, dim.width, dim.height);
+	}
+	public void setColor (Color clr) {
+		this.clr = clr;
+	}
+	public Dimension getMinimumSize () { return dim; }
+	public Dimension getPreferredSize () { return dim; }
+}
+
+class Line_ {
+	Color clr;
+	int x1, y1, x2, y2;
+	public Line_ (Color c, int x1, int y1, int x2, int y2) {
+		clr = c;
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+	}
+	public int compare (Point_ p) {
+		double tg = (double)(y2 - y1) / (x2 - x1);
+		int xt = (int)(x1 - (double)(y1 - p.y) / tg);
+		if ( p.x < xt )
+			return -1;
+		else if ( p.x > xt )
+			return 1;
+		
+		int yt = (int)(y1 - tg * (x1 - p.x));
+		if ( p.y < yt )
+			return 1;
+		else if ( p.y > yt )
+			return -1;
+		return 0;
+	}
+}
+
+public class task_19 extends Applet {
+	
+	private static final long serialVersionUID = 1L;
+	static final int CX = 600, CY = 500;
+	Canvas point_first;
+	Canvas point_second;
+	Line_ Line_;
+	String s;
+	
+	public Color getHtmlColor (String rgb, Color def) {
+		if ( rgb == null || rgb.charAt(0) != '#' )
+			return def;
+		try {
+			return new Color(Integer.parseInt(rgb.substring(1), 16));
+		} catch (NumberFormatException e) {
+			return def;
+		}
+	}
+	
+	public void init () {
+		setSize(CX, CY);
+		setLayout(null);
+		setBackground(Color.white);
+		Color clr = Color.BLACK;
+		int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+		try {
+			clr = getHtmlColor(getParameter("Line_Color"), Color.BLACK);
+			x1 = Integer.parseInt((getParameter("x1") == null)?"50":getParameter("x1"));
+			y1 = Integer.parseInt((getParameter("y1") == null)?"50":getParameter("y1"));
+			x2 = Integer.parseInt((getParameter("x2") == null)?"550":getParameter("x2"));
+			y2 = Integer.parseInt((getParameter("y2") == null)?"450":getParameter("y2"));
+		} catch (Exception e) {}
+		Line_ = new Line_(clr, x1, y1, x2, y2);
+		point_first = new Point_(this.getWidth(), this.getHeight());
+		point_second = new Point_(this.getWidth(), this.getHeight());
+		
+		int ans_first = ((Line_)Line_).compare((Point_)point_first);
+		int ans_second = ((Line_)Line_).compare((Point_)point_second);
+		
+		Color cl_first = Color.red;
+		Color cl_second = Color.red;
+		
+		s = new String();
+		
+		switch (ans_first) {
+		case -1: cl_first = Color.red; break;
+		case 1: cl_first = Color.green; break;
+		default: cl_first = Color.yellow;
+		}
+		switch (ans_second) {
+		case -1: cl_second = Color.red; break;
+		case 1: cl_second = Color.green; break;
+		default: cl_second = Color.yellow;
+		}
+		if(ans_second == ans_first){
+			if(ans_second == -1)
+				s="точки лежат слева от прямой";
+			if(ans_second == 1)
+				s="точки лежат справа от прямой";
+			if(ans_second == 0)
+				s="точки лежат на прямой";
+		}else{
+			if(ans_second + ans_first == 0)
+				s="точки лежат по разные стороны от прямой";
+			else{
+				s="одна точка лежит на прямой, а вторая";
+				if(ans_second==-1 || ans_first==-1)
+					s+=" справа";
+				else
+					s+=" слева";
+				s+=" от прямой";
+			}
+		}
+		
+		((Point_)point_first).setColor(cl_first);
+		point_first.setLocation(((Point_)point_first).x, ((Point_)point_first).y);
+		add(point_first);
+		
+		((Point_)point_second).setColor(cl_second);
+		point_second.setLocation(((Point_)point_second).x, ((Point_)point_second).y);
+		add(point_second);
+		
+		repaint();
+	}
+	public void paint (Graphics g) {
+		g.drawString(s, 0, 280);
+		g.setColor(Line_.clr);
+		g.drawLine(Line_.x1, Line_.y1, Line_.x2, Line_.y2);
+	}
+
+}
+/////////////////////////////////////////////////////////
+import java.applet.Applet;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.util.Random;
+
+/* Вариант 20
+ * В следующих заданиях выполнить соответствующий рисунок в окне апплета:
+ * 1. Создать классы Point и Line. Объявить массив из n объектов класса Point.
+ * Для объекта класса Line определить какие из объектов Point лежат на одной стороне
+ * от прямой линии и какие - на другой. Реализовать ввод данных для объекта Line и
+ * случайное задание данных для объектов Point.
+ */
+
+class Point extends Canvas {
+	private static final long serialVersionUID = 1L;	
+	Color clr;
+	int x, y;
+	Dimension dim = new Dimension(20, 20);	
+	public Point (int appWidth, int appHeight) {
+		super();
+		setMaximumSize(dim);
+		setBackground(null);
+		setBounds(0, 0, dim.width, dim.height);
+		clr = Color.black;
+		x = new Random().nextInt(appWidth - dim.width) + dim.width / 2;
+		y = new Random().nextInt(appHeight - dim.height) + dim.height / 2;
+	}
+	public void paint (Graphics g) {
+		g.setColor(clr);
+		g.fillOval(0, 0, dim.width, dim.height);
+	}
+	public void setColor (Color clr) {
+		this.clr = clr;
+	}
+	public Dimension getMinimumSize () { return dim; }
+	public Dimension getPreferredSize () { return dim; }
+}
+
+class Line {
+	Color clr;
+	int x1, y1, x2, y2;
+	public Line (Color c, int x1, int y1, int x2, int y2) {
+		clr = c;
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+	}
+	public int compare (Point p) {
+		double tg = (double)(y2 - y1) / (x2 - x1);
+		int xt = (int)(x1 - (double)(y1 - p.y) / tg);
+		if ( p.x < xt )
+			return -1;
+		else if ( p.x > xt )
+			return 1;
+		
+		int yt = (int)(y1 - tg * (x1 - p.x));
+		if ( p.y < yt )
+			return 1;
+		else if ( p.y > yt )
+			return -1;
+		return 0;
+	}
+}
+
+public class task_20 extends Applet {
+	
+	private static final long serialVersionUID = 1L;
+	static final int CX = 600, CY = 500;
+	Canvas points[];
+	Line line;
+	
+	public Color getHtmlColor (String rgb, Color def) {
+		if ( rgb == null || rgb.charAt(0) != '#' )
+			return def;
+		try {
+			return new Color(Integer.parseInt(rgb.substring(1), 16));
+		} catch (NumberFormatException e) {
+			return def;
+		}
+	}
+	
+	public void init () {
+		setSize(CX, CY);
+		setLayout(null);
+		setBackground(Color.white);
+		Color clr = Color.BLACK;
+		int x1 = 0, y1 = 0, x2 = 0, y2 = 0, n = 0;
+		try {
+			clr = getHtmlColor(getParameter("lineColor"), Color.BLACK);
+			x1 = Integer.parseInt((getParameter("x1") == null)?"50":getParameter("x1"));
+			y1 = Integer.parseInt((getParameter("y1") == null)?"50":getParameter("y1"));
+			x2 = Integer.parseInt((getParameter("x2") == null)?"550":getParameter("x2"));
+			y2 = Integer.parseInt((getParameter("y2") == null)?"450":getParameter("y2"));
+			n = Integer.parseInt((getParameter("n") == null)?"10":getParameter("n"));
+		} catch (Exception e) {}
+		line = new Line(clr, x1, y1, x2, y2);
+		points = new Point[n];
+		for (Canvas p: points) {
+			p = new Point(this.getWidth(), this.getHeight());
+			int ans = ((Line)line).compare((Point)p);
+			Color cl;
+			switch (ans) {
+			case -1: cl = Color.red; break;
+			case 1: cl = Color.green; break;
+			default: cl = Color.yellow;
+			}
+			((Point)p).setColor(cl);
+			p.setLocation(((Point)p).x, ((Point)p).y);
+			add(p);
+		}
+		repaint();
+	}
+	public void paint (Graphics g) {
+		g.setColor(line.clr);
+		g.drawLine(line.x1, line.y1, line.x2, line.y2);
+	}
+
+}
+///////////////////////////////////////////////////////////////////////
+import java.applet.Applet;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+/* Вариант 21
+ * Изобразить в окне апплета гармонические колебания точки вдоль некоторого
+ * горизонтального отрезка. Если длина отрезка равна q, то расстояние от точки до левого
+ * конца в момент времени t можно считать равным q(1+cos(wt))/2,где w - некоторая константа.
+ * Указанные величины вводятся через параметры апплета.
+ */
+
+class MyCanv extends Canvas {
+	private static final long serialVersionUID = 1L;
+	int q, w, x, t;
+	Dimension dim;
+	private int func () {
+		return (int)(0.5 * (double)q * (1. + Math.cos(1.0 * w * t)));
+	}
+	
+	public MyCanv (int q, int w) {
+		super();
+		this.q = q;
+		this.w = w;
+		t = 0;
+		x = func();
+		dim = new Dimension(q, 10);
+		setBackground(Color.WHITE);
+		setMaximumSize(dim);
+		setBounds(0, 0, dim.width, dim.height);
+	}
+	public void paint (Graphics g) {
+		g.setColor(Color.RED);
+		g.drawLine(0, dim.height / 2, q, dim.height / 2);
+		g.setColor(Color.black);
+		g.fillOval(x - 5, 0, 10, dim.height);
+	}
+	public Dimension getMinimumSize () { return dim; }
+	public Dimension getPreferredSize () { return dim; }
+	
+	public void doMove () {
+		t += 10;
+		x = func();
+	}
+}
+
+public class task_21 extends Applet implements Runnable {
+
+	private static final long serialVersionUID = 1L;
+	
+	static final int CX = 600, CY = 500;
+	Canvas canv;
+	Thread t = null;
+	
+	public void init () {
+		setSize(CX, CY);
+		setLayout(null);
+		setBackground(Color.WHITE);
+		int q = 0, w = 0;
+		try {
+			q = Integer.parseInt((getParameter("q") == null)?"150":getParameter("q"));
+			w = Integer.parseInt((getParameter("w") == null)?"2":getParameter("w"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+		canv = new MyCanv(q, w);
+		canv.setLocation(this.getWidth() / 2 - ((MyCanv)canv).q / 2, this.getHeight() / 2);
+		add(canv);
+		if ( t == null )
+			t = new Thread(this);
+		t.start();
+	}
+	
+	void doMove () {
+		((MyCanv)canv).doMove();
+		canv.setLocation(this.getWidth() / 2 - ((MyCanv)canv).q / 2, this.getHeight() / 2);
+		canv.repaint();
+	}
+	
+	public void run () {
+		mySuspend();
+		while (true) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				break;
+			}
+			if ( !isSuspended() )
+				doMove();
+		}
+	}
+	
+	public void start () {
+		myResume();
+	}
+	public void stop () {
+		mySuspend();
+	}
+	public void destroy () {
+		if ( t != null ) {
+			t.interrupt();
+			t = null;
+		}
+	}
+	
+	volatile boolean f_suspend = false;
+	boolean isSuspended () { return f_suspend; }
+	void mySuspend () { f_suspend = true; }
+	void myResume () { f_suspend = false; }
+	
+}
+/////////////////////////////////////////////////////////////////////////////
+//нет 22 таски/////
+///////////////////////////////////////////////////////////////////////
+import java.applet.Applet;
+import java.awt.*;
+
+class Point_1
+{
+	int x;
+	int y;
+	public void setx(int xo)
+	{
+		x=xo;
+	}
+	public void sety(int yo)
+	{
+		y=yo;
+	}
+	public Point_1() {}
+	public Point_1(int xi,int yi)
+	{
+		x=xi;
+		y=yi;
+	}
+}
+
+public class task_23 extends Applet {
+
+	private static final long serialVersionUID = 1L;
+	
+	static final int CX = 400, CY = 400;
+    static String str = "Alexa";
+    static int pose1 = 10;
+    static int pose2 = 10;
+    static int pose3 = 10;
+    static int pose4 = 10;
+    static int next =0;
+    static String our="";
+    static int point=0;
+    static char cur1=str.charAt(point);
+    static char cur2=str.charAt(++point);
+    static char cur3=str.charAt(++point);
+    static char cur4=str.charAt(++point);    
+    public Color getHtmlColor( String strRGB, Color def )
+    {
+        // in form #RRGGBB
+        if ( strRGB != null && strRGB.charAt(0)== '#' )
+        {
+            try
+            {
+                return new Color(
+                    Integer.parseInt( strRGB.substring( 1 ), 16 ) );
+            }
+            catch ( NumberFormatException e ) 
+            {
+                return def;
+            }
+        }
+        return def;
+    }
+
+    public void init()
+    {
+        setSize( CX, CY );
+        setLayout( null );
+        Color col = getHtmlColor(getParameter( "AppBkColor" ), new Color( 90, 90, 160 ));
+        setBackground( col );
+        Color colx = getHtmlColor(getParameter( "DrawBkColor" ), new Color( 64, 64, 64 ));
+        col = getHtmlColor(	getParameter( "DrawColor" ), Color.WHITE );
+        
+    }
+    public void paint(Graphics g) 
+    {
+    	g.drawString(cur1+" ",pose1,pose1);
+    	g.drawString(cur2+" ",400-pose2,pose2);
+    	g.drawString(cur3+" ",400-pose3,400-pose3);
+    	g.drawString(cur4+" ",pose4,400-pose4);
+    	g.drawString(our,100,200);
+    	
+    }
+
+    public void start() {
+    	startThread();
+    }
+
+    public void stop() {
+    	stopThread();
+    }
+
+    public void destroy() {
+    	stopThread();
+    }
+
+    private AppletThread t = null;
+    private void createThread() {
+        if ( t == null ) {
+            t = new AppletThread( this );
+        }
+    }
+
+    private void startThread() {
+    	createThread();
+        t.start();
+    }
+
+    private void stopThread() {
+        if ( t != null ) {
+            t.interrupt();
+            t = null;
+        }
+    }
+}
+
+class AppletThread extends Thread {
+    task_23 pa = null;
+  	boolean stFlag  = false;
+    public AppletThread( task_23 pa ) {
+    	super();
+    	this.pa = pa;
+    }
+
+    public void run()
+    {
+    	while ( true ) {
+            try
+            {
+            	
+                Thread.sleep( 100 );
+                if(!stFlag)
+                doMove();
+            } catch ( InterruptedException e ) {
+                break;
+            }
+        }
+    }
+
+    public synchronized void doMove()
+    {    	
+    	if(pa.next==0)
+    	{
+    		pa.pose1+=10;
+    		pa.repaint();
+    		if(pa.pose1==200)
+    		{
+    			pa.pose1=10;
+    			pa.next+=1;
+    			pa.our+=pa.cur1;
+    			pa.point++;
+    			if(pa.point>=pa.str.length())
+    			{	
+    				pa.cur1=' ';
+    			}
+    			else
+    			{
+    				pa.cur1=pa.str.charAt(pa.point);
+    			}
+    			if ( pa.cur1 == ' ' && pa.cur2 == ' ' &&pa.cur3 == ' ' && pa.cur4 == ' ')
+    			{
+    				stFlag = true;
+    			}
+    			
+    		}    		
+    	}
+    	else if(pa.next==1)
+    	{
+    		pa.pose2+=10;
+    		pa.repaint();
+    		if(pa.pose2==200)
+    		{
+    			pa.pose2=10;
+    			pa.next+=1;
+    			pa.our+=pa.cur2;
+    			pa.point++;
+    			if(pa.point>=pa.str.length())
+    			{
+    				pa.cur2=' ';
+    			}
+    			else
+    			{
+    				pa.cur2=pa.str.charAt(pa.point);
+    			}
+    			if ( pa.cur1 == ' ' && pa.cur2 == ' ' &&pa.cur3 == ' ' && pa.cur4 == ' ')
+    			{
+    				stFlag = true;
+    			}
+    		}
+    	}
+    	else if(pa.next==2)
+    	{
+    		pa.pose3+=10;
+    		pa.repaint();
+    		if(pa.pose3==200)
+    		{
+    			pa.pose3=10;
+    			pa.next+=1;
+    			pa.our+=pa.cur3;
+    			pa.point++;
+    			if(pa.point>=pa.str.length())
+    			{
+    				pa.cur3=' ';
+    			}
+    			else
+    			{
+    				pa.cur3=pa.str.charAt(pa.point);
+   				}
+    			if ( pa.cur1 == ' ' && pa.cur2 == ' ' &&pa.cur3 == ' ' && pa.cur4 == ' ')
+    			{
+    				stFlag = true;
+    			}
+    		}
+    	}
+    	else
+    	{
+    		pa.pose4+=10;
+    		pa.repaint();
+    		if(pa.pose4==200)
+    		{
+    			pa.pose4=10;
+    			pa.next=0;
+    			pa.our+=pa.cur4;
+    			pa.point++;
+    			if(pa.point>=pa.str.length())
+    			{
+    				pa.cur4=' ';
+    			}
+    			else
+    			{
+    				pa.cur4=pa.str.charAt(pa.point);
+    			}
+    			if ( pa.cur1 == ' ' && pa.cur2 == ' ' &&pa.cur3 == ' ' && pa.cur4 == ' ')
+    			{
+    				stFlag = true;
+    			}
+    		}
+    	}   	
+    	
+    }
+}
+///////////////////////////////////////////////////////////////////////////
+//оставшиеся таски
+////////////////////////////////////////////////////////////////////////
+package exam;
+public class t_27 {
+class Arithm {
+static int max = 100;
+вложенном классе ?!
+int add (int a, int b) { return (a + b)%max; }
+}
+
+//static поле не во
+
+public static void main(String[] args) {
+class ArithmEx extends Arithm {
+ArithmEx (t_27 ob) { ob.super(); }
+int sub (int a, int b) {
+return (a - b)%max;
+}
+};
+ArithmEx p = new ArithmEx ( new t_27() );
+System.out.println(p.sub(4, 2));
+}
+}
+////////////////////////////////////
+package exam;
+public class t_21 {
+static class Arithm {
+int add (int a, int b) { return a + b; }
+}
+public static void main(String[] args) {
+class ArithmEx extends Arithm {
+ArithmEx (t_21 ob) { ob.super(); }
+static int sub (int a, int b) {
+//нельзя static методы во
+внутренних классах
+return a - b;
+}
+};
+ArithmEx p = new ArithmEx (this);
+//метод main statiс, а this - ссылка
+на данный объект ?!
+System.out.println(p.sub(4, 2));
+}
+}
+//////////////////////////
+package exam;
+public class t_18 {
+class Arithm {
+int add (int a, int b) { return a + b; }
+
+}
+public static void main (String[] args) {
+class ArithmEx extends Arithm {
+//ArithmEx () { new t_18().super(); }
+int sub (int a, int b) {
+return a - b;
+}
+};
+ArithmEx p = new ArithmEx ();
+System.out.println(p.sub(4, 2));
+}
+}
+////////////////////////////////////////
+package exam;
+import java.io.PrintStream;
+class Log {
+PrintStream out = System.err;
+protected void output (String what) {
+out.print(what);
+}
+void log (String... args) {
+for (String str: args)
+output(str);
+}
+}
+public class t_11 {
+public static void main(String/*[]*/ args) {
+Log p = new Log() { Log() { out = System.out; }}; //анонимный класс не
+имеет имени, мы не можем написать консруктор
+p.log("Log arguments: ", args);
+}
+}
+/////////////////////////////////////////////////
+
+package exam;
+public class t_15 {
+static void sub (int a, int b, Integer res) {
+res = a - b;
+// равносильно: res = new Integer(a-b);
+System.out.println(res);
+}
+
+public static void main(String[] args) {
+Integer res = 0;
+sub(4, 2, res);
+System.out.print(res);
+}
+}
+// выводит:
+// 2
+// 0
+//////////////////////////
+package exam;
+interface t_print9 { void print (String... args); }
+public class t_09 implements t_print9 {
+public static void main (String[] args) {
+new t_09().print(args);
+}
+void print (String... args) {
+// требуется public
+System.out.println("args");
+}
+}
+
+///////////////////////////////////////
+package exam;
+interface t_print8 { void print (String... args); }
+public class t_08 implements t_print8 {
+public static void main (String/*[]*/ args) {
+new t_08().print(args);
+}
+public void print (String... args) {
+for (String str: args)
+System.out.println(str);
+}
+}
+
+/////////////////////////////////
+package exam;
+public class t_03 {
+{ System.out.print("1"); }
+static { System.out.print("2"); }
+t_03 () { System.out.print("3"); }
+public static void main(String[] args) {
+System.out.print("4");
+}
+
+}
+// выводит:
+// 24
+
+////////////////////////////////////////////////
+package qwe;
+public class t_28 {
+static class Arithm { // убрать static
+int add (int a, int b) { return a+b; }
+}
+public static void main (String/*[]*/ args) {
+class ArithmEx extends Arithm {
+static int max = 100; // убрать static
+ArithmEx( t_28 ob ) { ob.super();}
+static int sub (int a, int b) { // убрать static
+return (a - b)%max;
+}
+};
+ArithmEx p = new ArithmEx (new t_28());
+System.out.println(p.sub(4, 2));
+}
+}
+///////////////////////////////////////////////////////
+
+package qwe;
+public class t_25 {
+class Arithm {
+int add (int a, int b) { return a+b; }
+}
+public static void main (String/*[]*/ args) {
+class ArithmEx extends Arithm {
+static int max = 100; // убрать static или дописать final
+ArithmEx( t_25 ob ) { ob.super();}
+int sub(int a, int b) {
+return (a-b)%max;
+}
+};
+ArithmEx p = new ArithmEx ( new t_25() );
+System.out.println(p.sub(4, 2));
+}
+}
+
+/////////////////////////////
+package qwe;
+public class t_24 {
+class Arithm {
+
+int add (int a, int b) { return a+b; }
+}
+public static void main (String/*[]*/ args) {
+static class ArithmEx extends Arithm { // убрать static
+ArithmEx( t_24 ob ) { ob.super();}
+static int sub (int a, int b) { // убрать static
+return a - b;
+}
+};
+ArithmEx p = new ArithmEx (new t_24());
+System.out.println(p.sub(4, 2));
+}
+}
+//////////////////////////////////
+package qwe;
+interface t_print { void print( String...what); }
+public class t_23 implements t_print {
+public static void main(String[] args) {
+new t_23().print(args);
+}
+static void print(String...what) { // вместо static нужно public
+for( String str : what )
+System.out.println(str);
+}
+}
+//////////////////////////////////////////
+package qwe;
+public class t_22 {
+static class Arithm {
+int add (int a, int b) { return a+b; }
+}
+public static void main (String/*[]*/ args) {
+class ArithmEx extends Arithm {
+ArithmEx( t_22 ob ) { ob.super();}
+static int sub (int a, int b) { // убрать static
+return a - b;
+}
+};
+ArithmEx p = new ArithmEx (this); // new t_22()
+System.out.println(p.sub(4, 2));
+}
+}
+///////////////////////////////////////////////////////////////////
+//еще какая-то таска/////////////////
+package pack;
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String [] args)
+	{
+		System.out.println("������� ������ �������� ������:");
+		Scanner in = new Scanner(System.in);
+		while(in.hasNextLine())
+		{
+			String s = in.nextLine();
+			String str = EditingStr(s);
+			System.out.println(str);
+		}
+		in.close();
+		System.exit(0);
+	}
+	
+	static String EditingStr(String s)
+	{
+		StringBuffer s_buffer = new StringBuffer(s.subSequence(0, s.length()));
+		int length = s_buffer.length();
+		int i = 0;
+		int counter_zeros = 0;
+		int left_zero = 0;
+		while (i != length - 1)
+		{
+			char symbol = s_buffer.charAt(i);
+			if (symbol == ' ')
+			{
+				if (counter_zeros == 0)
+					left_zero = i;
+				counter_zeros++;
+				i++;
+				continue;
+			}
+			if (counter_zeros == 1)
+				counter_zeros = 0;
+			if (counter_zeros >= 2)
+			{
+				s_buffer.replace(left_zero, i, " ");
+				length -= i - left_zero;
+				length++;
+				i -= counter_zeros + 1;
+				counter_zeros = 0;
+				continue;
+			}
+
+			if (symbol == '\\')
+			{
+				i++;
+				symbol = s_buffer.charAt(i);
+				if (symbol == 't')
+				{
+					s_buffer.replace(i - 1, i, "  ");
+					i++;
+					continue;
+				}
+				else
+				{
+					i++;
+					continue;
+				}
+			}
+			i++;
+		}
+		s = s_buffer.toString();
+		return s;
+	}
+
+}
+/////////////////////////////////////////////////////////////////////////
+package ЧисловойРяд;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+public class Row implements Comparable<Row>{
+    private String  rowStr;
+    private ArrayList<Double> row;
+    private int line;
+    private double M;
+    private double D;
+    private double S;
+    private double C;
+
+    public Row(String rowStr, ArrayList<Double> row, int line)
+    {
+        this.rowStr = rowStr.replaceAll("\\s", " ").trim();
+        this.row = row;
+        this.line = line;
+
+        createM();
+        createD();
+        createS();
+        createC();
+
+    }
+    public static ArrayList<Double> getRow(String line)
+    {
+        ArrayList<Double> row = new ArrayList<>();
+        StringTokenizer tokenizer = new StringTokenizer(line, " \n\r\t");
+        while(tokenizer.hasMoreElements())
+        {
+            String word = tokenizer.nextToken();
+            try {
+                double number = Double.parseDouble(word);
+                row.add(number);
+            }
+            catch(NumberFormatException e)
+            {
+                return null;
+            }
+        }
+        return row;
+    }
+    private void createM(){
+        double sum = 0.0;
+        for(Double n : row)
+        {
+            sum += n;
+        }
+        this.M = sum / row.size();
+    }
+    private void createD()
+    {
+        double sum = 0.0;
+        for(Double x : row)
+        {
+            sum += Math.pow(x - this.M, 2);
+        }
+        this.D = sum / (row.size()-1);
+    }
+    private void createS()
+    {
+        this.S = Math.sqrt(this.D);
+    }
+    private void createC()
+    {
+        this.C = (this.S / this.M);
+    }
+
+    public ArrayList<Double> getRow() {
+        return row;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public double getM() {
+        return M;
+    }
+
+    public double getD() {
+        return D;
+    }
+
+    public double getS() {
+        return S;
+    }
+
+    public double getC() {
+        return C;
+    }
+
+    public String getRowStr() {
+        return rowStr;
+    }
+
+    @Override
+    public int compareTo(Row o) {
+        return new Double(this.C).compareTo(o.C);
+    }
+    @Override
+    public String toString(){
+        return "Ряд: " + rowStr + "; Номер строки: " + line + "; M = " + M + "; D = " + D + " ; C = " + C;
+    }
+}
+-------------
+package ЧисловойРяд;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Test {
+    public static final String fileNameIn = "in.txt";
+    public static final String fileNameOut = "out.txt";
+
+    private static ArrayList<Row> list = new ArrayList<>();
+    public static void main(String[] args) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileNameIn))){
+            int count = 0;
+            while (reader.ready()) {
+                String line = reader.readLine();
+                getRaw(line, count);
+                count++;
+            }
+
+
+        } catch (IOException e) {
+
+        }
+        Collections.sort(list);
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(fileNameOut)))
+        {
+            for(Row row : list)
+            {
+                writer.write(row.toString() + "\n");
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public static void getRaw(String line, int count)
+    {
+        ArrayList<Double> numbers = Row.getRow(line);
+        if(numbers != null)
+        {
+            Row row = new Row(line, numbers, count);
+            list.add(row);
+        }
+    }
+}
+////////////////////////////////////////////////////////////////////
+//18 task
+package task_18;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class task_18{
+
+    public static void main(String[] args) {
+            ArrayList<String> text = new ArrayList<String>();
+            ArrayList<String> newText = new ArrayList<String>();
+            Scanner in = new Scanner(System.in);
+            System.out.println("Enter text or CTRL+Z to exit");
+            while (in.hasNextLine())
+            {
+                String str = in.nextLine();
+                text.add(str);
+            }
+            String add = "";
+            int i=0;
+            while(i!=text.size())
+            {
+                String line = text.get(i);
+                String[] mas = transformLine(add + " "+line);
+                line = mas[0];
+                newText.add(line);
+
+                add = mas[1];
+
+                while(add.length() > 80) {
+                    String[] tmp = transformLine(add);
+                    newText.add(tmp[0]);
+                    add = tmp[1];
+                }
+                i++;
+
+            }
+            if(!add.equals(""))
+            {
+                newText.add(add);
+            }
+            in.close();
+            System.out.println("\n Changed text:");
+            for (String s:newText)
+                System.out.println(s);
+        }
+
+        public static boolean isSeparator(String s){
+        String[] sep={",",".","!","?", ";",":",";"};
+        for (int i=0; i<sep.length; i++)
+            if (s.equals(sep[i]))
+                return true;
+            return false;
+        }
+    public static String[] transformLine(String line)
+    {
+        //line = line.trim();
+        line = deleteAllSpaces(line);
+
+        String[] mas = new String[2];
+
+        if(line.length() > 80)
+        {
+        	int index = 80;
+            while(line.charAt(index) != ' '){
+                index--;
+            }
+            mas[0] = line.substring(0,index);
+            mas[1] = line.substring(index+1, line.length());
+        }
+        else {
+            mas[0] = line;
+            mas[1] = "";
+        }
+        return mas;
+    }
+
+    public static String deleteAllSpaces(String line)
+    {
+        StringTokenizer str = new StringTokenizer(line);
+        String newStr=""; String buf=" ";
+        while(str.hasMoreTokens()){
+            String word = str.nextToken();
+            if (isSeparator(buf) || isSeparator(word) || endsWithSeps(buf) || startsWithSeps(word))
+                newStr+=word;
+            else 
+            	newStr+=" "+word;
+            buf=word;
+        }
+        newStr=newStr.trim();
+        return newStr;
+    }
+
+//    public static String[] makeTransference(String line)
+//    {
+//        int index = 80;
+//        while(line.charAt(index) != ' '){
+//            index--;
+//        }
+//        index++;
+//        String[] mas = new String[2];
+//        mas[0] = line.substring(0,index-1);
+//        mas[1] = line.substring(index, line.length());
+//        return mas;
+//    }
+    
+    public static boolean endsWithSeps(String word) {
+    	char[] sep={'.',',','!','?', ':',';'};
+        for (int i=0; i<sep.length; i++)
+            if (word.charAt(word.length()-1)==sep[i])
+                return true;
+            return false;
+    }
+    public static boolean startsWithSeps(String word) {
+    	char[] sep={'.',',','!','?', ':',';'};
+        for (int i=0; i<sep.length; i++)
+            if (word.charAt(0)==sep[i])
+                return true;
+            return false;
+    }
+}
+/////////////////////////////////////////////////////////////////
+//task 25 and 18
+package task_25;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/* Вариант 25
+* прочитать все данные с входного потока, разделить на слов,
+* выделить лексемы Java,представляющие собой дробные числа(float) со знаком.
+* Хранить эти значения с номерами входных строк. Вывести, предварительно отсортировав в порядке убывания значений.
+* 
+*/
+
+class MyFloat implements Comparable <MyFloat> {
+
+	String str;
+	int lineNumber;
+	float fl;
+
+	public MyFloat (String s, int l) {
+		str = s;	
+		lineNumber = l;
+		fl=Float.parseFloat(s);
+	}
+
+	public int compareTo (MyFloat mf) {
+		return (new Float(mf.fl)).compareTo(new Float(fl));
+	}
+
+	public static boolean isFloat (String str) {
+		if (!str.contains("f") && !str.contains("F"))
+			return false;
+		try {
+			Float.parseFloat(str);
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+
+	public String toString () {
+		return str + " in " + lineNumber + " line.";
+	}
+}
+
+public class task_18 {
+
+	static ArrayList<MyFloat> floats = new ArrayList<MyFloat>();
+	
+	static void processLine (String line, int lineNumber) {
+		StringTokenizer sttok = new StringTokenizer(line);
+		while (sttok.hasMoreTokens()) {
+			String word = sttok.nextToken();
+			if ( MyFloat.isFloat(word) ) {
+				floats.add(new MyFloat(word, lineNumber));
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		int lineNumber = 0;
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			processLine(line, lineNumber++);
+		}
+		in.close();
+		System.out.println("floats:" + ((floats.size() == 0)?"no floats...":""));
+		Collections.sort(floats);
+		for (MyFloat fl: floats)
+			System.out.println(fl);
+		System.out.println("the end.");
+	}
+}
+---------------------------------
+package task_25;
+import java.util.ArrayList;
+
+import java.util.Collections;
+
+import java.util.Scanner;
+
+import java.util.StringTokenizer;
+
+/* Вариант 25
+
+* прочитать все данные с входного потока, разделить на слов,
+
+* выделить лексемы Java,представляющие собой дробные числа(float) со знаком.
+
+* Хранить эти значения с номерами входных строк. Вывести, предварительно отсортировав в порядке убывания значений.
+
+*/
+
+class MyFloat implements Comparable <MyFloat> {
+
+	String str;
+	int lineNumber;
+
+	public MyFloat (String str, int lineNumber) {
+		this.str = str;	
+		this.lineNumber = lineNumber;
+	}
+
+	public int compareTo (MyFloat mf) {
+		double d1 = Double.parseDouble(str);
+		double d2 = Double.parseDouble(mf.str);
+		return (new Double(d2)).compareTo(new Double(d1));
+		//return (d1 > d2) ? -1 : (d1 == d2) ? 0 : 1;
+	}
+
+	public static boolean isFloat (String str) {
+		//if ( !("" + str.charAt(str.length() - 1)).matches("[fF]") )
+		if (!str.contains("f") && !str.contains("F"))
+			return false;
+		try {
+			Float.parseFloat(str);
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+
+	public String toString () {
+		return str + " in " + lineNumber + " line.";
+	}
+}
+
+public class task_18 {
+
+	static ArrayList<MyFloat> floats = new ArrayList<MyFloat>();
+	
+	static void processLine (String line, int lineNumber) {
+		StringTokenizer sttok = new StringTokenizer(line);
+		while (sttok.hasMoreTokens()) {
+			String word = sttok.nextToken();
+			if ( MyFloat.isFloat(word) ) {
+				floats.add(new MyFloat(word, lineNumber));
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		int lineNumber = 0;
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			processLine(line, lineNumber);
+			lineNumber++;
+		}
+		in.close();
+		System.out.println("floats:" + ((floats.size() == 0)?"no floats...":""));
+		Collections.sort(floats);
+		for (MyFloat fl: floats)
+			System.out.println(fl);
+		System.out.println("the end.");
+	}
+}
+///////////////////////////////////////////////////////////////////////////
+//еще какая-то таска
+package loman;
+
+import java.util.ArrayList;
+
+public class loman implements Comparable<loman>{
+    int line;
+    double length;
+    ArrayList<Double> xCoord;
+    ArrayList<Double> yCoord;
+
+    public loman(ArrayList<Double>x, ArrayList<Double> y, int l) {
+        line=l;
+        xCoord=new ArrayList<Double>();
+        yCoord=new ArrayList<Double>();
+        xCoord.addAll(x);
+        yCoord.addAll(y);
+        length=countLength(xCoord, yCoord);
+    }
+
+    private double countLength(ArrayList<Double> x, ArrayList<Double> y) {
+        // TODO Auto-generated method stub
+        double sum;
+        double sqr;
+        double l=0;
+        for (int i=0;i<x.size()-1; i++) {
+            sum=0;
+            sum += ((y.get(i) - y.get(i + 1)) * (y.get(i) - y.get(i + 1)) + (x.get(i) - x.get(i + 1)) * (x.get(i) - x.get(i + 1)));
+            sqr= Math.sqrt(sum);
+            l+=sqr;
+        }
+        return l;
+    }
+
+    @Override
+    public int compareTo(loman l) {
+        // TODO Auto-generated method stub
+        return (new Double(l.length)).compareTo(new Double(length));
+    }
+
+    public String toString() {
+        String str="";
+        str+="#"+line+" ";
+        for (int i=0; i<xCoord.size(); i++)
+            str+="("+xCoord.get(i)+":"+yCoord.get(i)+") ";
+        str+="length = "+length;
+        return str;
+    }
+}
+
+
+
+package loman;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class test {
+
+	public static ArrayList<loman> lomanList=new ArrayList<loman>();
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList<String> text=new ArrayList<String>();
+		Scanner in=new Scanner(System.in);
+		System.out.println("Enter coordinates or press Ctrl+Z to exit");
+		while(in.hasNextLine())
+			text.add(in.nextLine());
+		in.close();
+		System.out.println("entering stopped");
+		for (int i=0; i<text.size(); i++)
+			processLine(text.get(i), i);
+		Collections.sort(lomanList);
+		System.out.println("Soted list of loman");
+		if (lomanList.isEmpty())
+			System.out.println("No loman");
+		for (loman l:lomanList)
+			System.out.println(l);
+	}
+
+//	private static void processLine(String string, int i) {
+//		// TODO Auto-generated method stub
+//		ArrayList<Double>x=new ArrayList<Double>();
+//		ArrayList<Double>y=new ArrayList<Double>();
+//		string= string.trim();
+//		StringTokenizer tokens=new StringTokenizer(string, ",");
+//		boolean flag=true;
+//		int index=0;
+//		while (tokens.hasMoreTokens())
+//		{
+//			String coord=tokens.nextToken();
+//			if (coord.charAt(0)!='(' || coord.charAt(coord.length()-1)!=')') {
+//				flag=false;
+//				break;
+//			}
+//			index=coord.indexOf(":");
+//			if (index==-1)
+//			{
+//				flag=false;
+//				break;
+//			}
+//			try {
+//				String sX=coord.substring(1,index);
+//				double cX=Double.parseDouble(sX);
+//				String sY=coord.substring(index+1, coord.length()-1);
+//				double cY=Double.parseDouble(sY);
+//				x.add(cX);
+//				y.add(cY);
+//			}
+//			catch(Exception e){
+//				flag=false;
+//				break;
+//			}
+//		}
+//		if (flag==true)
+//			lomanList.add(new loman(x,y,i));
+//		}
+	
+	private static void processLine(String string, int i) {
+		// TODO Auto-generated method stub
+		ArrayList<Double>x=new ArrayList<Double>();
+		ArrayList<Double>y=new ArrayList<Double>();
+		string= string.trim();
+		boolean flag=true;
+		int index1=0, index2=0, index3=0;
+		while (string.length()!=0)
+		{
+			index1=string.indexOf('(');
+			if (index1==-1) {
+				flag=false;
+				break;
+			}
+			index2=string.indexOf(')');
+			if (index2==-1) {
+				flag=false;
+				break;
+			}
+			String coord=string.substring(index1+1, index2);
+			index3=coord.indexOf(':');
+			if (index3==-1) {
+				flag=false;
+				break;
+			}
+			try {
+				String sX=coord.substring(0,index3);
+				double cX=Double.parseDouble(sX);
+				String sY=coord.substring(index3+1);
+				double cY=Double.parseDouble(sY);
+				x.add(cX);
+				y.add(cY);
+			}
+			catch(Exception e){
+				flag=false;
+				break;
+			}
+			string=string.substring(index2+1);
+		}
+		if (flag==true)
+			lomanList.add(new loman(x,y,i));
+		}
+		
+	}
+//////////////////////////////////////
+//11 таска
+package palin;
+
+import java.util.*;
+
+/* 锣痂囗� 11
+ * 耦 耱囗溧痱眍泐 怩钿眍泐 镱蝾赅 镳铟栩囹� 耱痤觇 � 镳孱狃噻钼囹� 耠邃簋� 钺疣珙�:
+ * 耠钼� 耦耱�� 蝾朦觐 桤 狍赈, 怦� 铖蜞朦眍� 聍栩囹� 疣玟咫栩咫扈;
+ * 磬轵� 怦� 镟腓礓痤禧, 铗耦痱桊钼囹� � 桉躅漤铋 耱痤赍;
+ * 铖蜞朦睇� 耠钼� vc戾�螯� 礤 漕腈睇, 疣玟咫栩咫� 漕腈睇 铖蜞忄螯� 磬 戾耱圊 � 觐腓麇耱忸 镳钺咫钼 铖蜞忄螯� 镳彐龛�
+ */
+
+class Palindrom implements Comparable<Palindrom> {
+	String str;
+	int begining, ending;
+	
+	public Palindrom (String s, int beg) {
+		str = s;
+		begining = beg;
+		ending = begining + str.length() - 1;
+	}
+
+	public int compareTo (Palindrom p) {
+		return str.compareTo(p.str);
+	}
+	public static boolean isPalindrom (String str) {
+		String reverse = "";
+		for (int i = str.length() - 1; i >= 0; i--)
+			reverse += str.charAt(i);
+		reverse=reverse.toLowerCase();
+		return reverse.equals(str.toLowerCase());		
+	}
+}
+
+public class palin {
+
+	static ArrayList<String> text = new ArrayList<String>();
+	
+	static String getSeparators (String str) {
+		String sep = "";
+		for (int i = 0; i < str.length(); ++i) {
+			if ( !Character.isLetter(str.charAt(i)) )
+				sep += str.charAt(i);
+		}
+		return sep;
+	}
+	
+	static String processLine (String line) {
+		StringBuilder res = new StringBuilder(line);
+		
+		ArrayList<Palindrom> list = new ArrayList<Palindrom>();
+		ArrayList<Palindrom> sortlist = new ArrayList<Palindrom>();
+		
+		StringTokenizer sttok = new StringTokenizer(line, getSeparators(line));
+		
+		int endPos = 0;
+		while (sttok.hasMoreElements()) {
+			String word = sttok.nextToken();
+			endPos = line.indexOf(word, endPos);
+			if ( Palindrom.isPalindrom(word) ) {
+				Palindrom p = new Palindrom(word, endPos);
+				list.add(p);
+				sortlist.add(p);
+			}
+			endPos += word.length();
+		}
+		Collections.sort(sortlist);
+		for (int i = sortlist.size() - 1; i >= 0; --i) {
+			res.replace(list.get(i).begining, list.get(i).ending + 1, sortlist.get(i).str);
+		}
+		return res.toString();
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter text or Ctrl+Z:");
+		Scanner in = new Scanner(System.in);
+		while (in.hasNextLine()) {
+			String line = in.nextLine();
+			text.add(processLine(line));
+		}
+		in.close();
+		System.out.println("\nText:");
+		if ( text.size() == 0 )
+			System.err.println("....");
+		for (String line: text)
+			System.out.println(line);
+		System.out.println("The end.");
+		
+	}
+
+}
+////////////////////////////////////////////////////////////////////////////
+//еще таска
+package KR;
+
+import java.util.ArrayList;
+
+public class Sequence implements Comparable<Sequence> {
+
+	int line;
+	double M=0;
+	double D=0;
+	double S=0;
+	double C=0;
+	ArrayList<Double> arr;
+	ArrayList<String> arrStr;
+	public Sequence(ArrayList<Double> a,ArrayList<String> s , int l) {
+		arr = new ArrayList<Double>();
+		arrStr=new ArrayList<String>();
+		for (int i=0; i<a.size(); i++)
+			arr.add(a.get(i));
+		for (int i=0; i<a.size(); i++)
+			arrStr.add(s.get(i));
+		line=l;
+		if (arr.size()!=0) {
+			for (int i=0; i<arr.size(); i++)
+				M+=arr.get(i);
+			M/=arr.size();
+		}
+		if (arr.size()>1) {
+			for (int i=0; i<arr.size(); i++)
+				D+=((arr.get(i)-M)*(arr.get(i)-M));
+			D/=(arr.size()-1);
+		}
+		S=Math.sqrt(D);
+		if (M!=0)
+			C=(S/M)*100;
+	}
+	@Override
+	public int compareTo(Sequence o) {
+		// TODO Auto-generated method stub
+		return (new Double(C)).compareTo(new Double(o.C));
+	}
+	
+	public String toString() {
+		String str="#"+line+ " M="+ M+" D="+D+" C="+C+" Sequence: ";
+		for (int i=0; i<arrStr.size(); i++)
+			str+=arrStr.get(i)+" ";
+		return str;
+	}
+
+}
+
+package KR;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+
+
+public class test {
+	static ArrayList<Double> arrList=new ArrayList<Double>();
+	static ArrayList<String> strList=new ArrayList<String>();
+	static ArrayList<Sequence> seqList=new ArrayList<Sequence>();
+	public static void main(String[] args) {
+			Scanner in = new Scanner(System.in);
+			int ln = 0;
+			System.out.println("Input strings");
+			while(in.hasNextLine()) {
+				String s = in.nextLine();
+				if(s.equals("")) 
+					break;
+				arrList.clear();
+				strList.clear();
+				if (ProcLine(s)==true)
+					seqList.add(new Sequence(arrList,strList, ln));
+				ln++;
+			}
+			Collections.sort(seqList);
+			for (Sequence s:seqList)
+				System.out.println(s);
+			in.close();	
+		}
+	
+	
+	static boolean ProcLine(String str)
+	{
+		StringTokenizer st = new StringTokenizer(str,"\r\n ");
+		while(st.hasMoreTokens()) {
+			String token = st.nextToken();
+			int num = 0;
+			double dnum=0;
+			try {
+				if(token.charAt(0) == '0' &&  Character.toLowerCase(token.charAt(1))=='x') 
+					num = Integer.parseInt(token.substring(2), 16);
+				else throw new Exception();
+			}
+			catch (Exception e) {
+				try {
+					if(token.charAt(0) != '0') throw new Exception();
+					num = Integer.parseInt(token.substring(1), 8);
+				}
+				catch (Exception e1) {
+					try {
+						num = Integer.parseInt(token);
+					}
+					catch (Exception e2) {
+							try {
+								dnum = Double.parseDouble(token);
+							}
+							catch (Exception e3) {
+								//System.out.println("Wrong input string");
+								return false;
+							}	
+							arrList.add(dnum);
+							strList.add(token);
+							continue;
+							}
+					}	
+				}		
+		arrList.add((double)num);
+		strList.add(token);
+		}
+		return true;
+	}
+}
+////////////////////////////////////////////////////////////
+//пример кр
+package Prob;
+
+public class Word {
+	protected String word;
+	protected int line;
+	protected Word (String word, int line) {
+		assert(word!=null);
+		this.word = word;
+		this.line = line;
+	}
+	public String toString() {
+		return new String(word + "(" + line + ")");
+	}
+	static boolean isSigned (String word) {
+		return (word.charAt(0)=='-'||word.charAt(0)=='+');
+	}
+	static boolean isOctal(String word) {
+		final String octals = "01234567";
+		String w = isSigned(word)?word.substring(1):word;
+		if(w.charAt(0)!='0') {
+			return false;
+		}
+		for(int i = 1;i<w.length();i++) 
+			if(octals.indexOf(w.charAt(i))==-1) {
+				return false;
+			}
+		return true;
+	}
+	
+}
+class MyInt extends Word implements Comparable<MyInt>{
+	int val;
+	public MyInt(String word, int line, int v) {
+		super(word, line);
+		val = v;
+	}
+	public int compareTo(MyInt p) {
+		return(new Integer(p.val)).compareTo(new Integer(val));
+	}
+	static MyInt parseDec(String w, int ln) {
+		try {
+			int x = Integer.parseInt(w);
+			return new MyInt(w, ln, x);
+		}
+		catch(Exception e) {}
+		return null;
+	}
+	static MyInt parseHex(String w, int ln) {
+		String word = (w.charAt(0)=='0'&& Character.toLowerCase(w.charAt(1))=='x')?w.substring(2):w;
+		try {
+			int x = Integer.parseInt(word, 16);
+			return new MyInt(w,ln,x);
+		}
+		catch(Exception e) {} return null;
+	}
+	
+	public void print() {
+		System.out.print(word+"("+line+")"+ "   ");
+	}
+}
+class MyDbl extends Word implements Comparable<MyDbl>{
+	double val;
+	boolean exp;
+	public MyDbl(String word, int line, double v) {
+		super(word,line);
+		val = v;
+		exp = (word.indexOf('e')>0 || word.indexOf('E')>0);
+	}
+	public boolean isExp() {
+		return exp;
+	}
+	public int compareTo(MyDbl p) {
+		return (new Double(val)).compareTo(new Double(p.val));
+	}
+	static MyDbl parse(String w, int ln) {
+		try {
+			double x = Double.parseDouble(w);
+			MyDbl r =  new MyDbl(w, ln, x);
+			return r;
+		}
+		catch(Exception e) {}
+		return null;
+	}
+
+	public static boolean isFloat(String word) {
+		if ( word.indexOf("f")==-1 && word.indexOf("F")==-1)
+			return false;
+		return true;
+	}
+	
+	public void print() {
+		System.out.print(word+"("+line+")"+ "   ");
+	}
+	
+}
+class MyWord extends Word implements Comparable<MyWord>{
+	public MyWord(String word, int line) {
+		super(word, line);
+	}
+	public int compareTo(MyWord p) {
+		return p.word.compareTo(this.word);
+	}
+	
+	public void print() {
+		System.out.print(word+"("+line+")"+ "   ");
+	}
+}
+
+package Prob;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
+public class test {
+
+		static List <MyInt> di = new Vector<MyInt>();
+		static List <MyInt> hi = new Vector<MyInt>();
+		static List <MyDbl> df = new Vector<MyDbl>();
+		static List <MyDbl> de = new Vector<MyDbl>();
+		static List <MyWord> wd = new Vector<MyWord>();
+		
+		public static void main(String args[]) {
+			Scanner in = new Scanner(System.in);
+			int ln = 0;
+			System.out.println("Input strings");
+			while(in.hasNextLine()) {
+				String s = in.nextLine();
+				if(s.equals("")) break;
+				procLine(s,ln);
+				ln++;
+			}
+			di.sort(null);
+			hi.sort(null);
+			df.sort(null);
+			de.sort(null);
+			wd.sort(null);
+			in.close();
+			printRes();			
+		}
+		private static void printRes() {
+			// TODO Auto-generated method stub
+			System.out.println("целые числа в десятичном виде:");
+			for (int i=0;i<di.size();i++)
+				di.get(i).print();
+			System.out.println("\nцелые числа в шестнадцатиричном виде:");
+			for (int i=0;i<hi.size();i++)
+				hi.get(i).print();
+			System.out.println("\nдействительные числа с плавающей точкой:");
+			for (int i=0;i<df.size();i++)
+				df.get(i).print();
+			System.out.println("\nдействительные числа в экспоненциальной форме:");
+			for (int i=0;i<de.size();i++)
+				de.get(i).print();
+			System.out.println("\nтекст:");
+			for (int i=0;i<wd.size();i++)
+				wd.get(i).print();
+			System.out.println();
+			
+		}
+		static void procLine(String s, int n) {
+			StringTokenizer st = new StringTokenizer(s,"\r\n ");
+			while(st.hasMoreTokens()) {
+				String w = st.nextToken();
+				if( Word.isOctal(w)) {
+					wd.add(new MyWord(w,n));
+					continue;
+				}
+				if (MyInt.parseDec(w, n)!=null)
+				{
+					di.add(new MyInt(w,n,Integer.parseInt(w)));
+					continue;
+				}
+				if (MyInt.parseHex(w, n)!=null)
+				{
+					hi.add(new MyInt(w,n,Integer.parseInt(w.substring(2), 16)));
+					continue;
+				}
+				if (MyDbl.parse(w, n)!=null) {
+					if (w.indexOf("f")!=-1 || w.indexOf("F")!=-1) {
+						wd.add(new MyWord(w,n));
+						continue;
+					}
+					MyDbl md=new MyDbl(w,n, Double.parseDouble(w));
+					if (md.isExp()==true)
+						de.add(md);
+					else 
+						df.add(md);
+					continue;
+				}
+				wd.add(new MyWord(w,n));
+			}
+		}
+		
+}

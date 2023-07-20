@@ -1,0 +1,100 @@
+package triangle;
+
+
+import java.applet.*;
+import java.awt.*;
+
+public class RotateTriangle extends Applet implements Runnable
+{
+	private static final long serialVersionUID = 1L;
+	public Color getHtmlColor(String strRGB, Color def)
+	{
+        if (strRGB != null && strRGB.charAt(0)=='#')
+        {
+            try
+            {
+            	return new Color(Integer.parseInt(strRGB.substring(1),16));
+            }
+            catch (NumberFormatException e)
+            {
+                return def;
+            }
+        }
+        return def;
+    }
+	public Integer getcoord(String co,int val)
+	{
+		if(co!=null)
+		{
+			try
+			{
+				return Integer.parseInt(co);
+			}
+			catch(NumberFormatException e)
+			{
+				return val;
+			}
+		}
+		return val;
+	}
+	
+	static final int CX = 600, CY = 600;
+	Thread tr=null;
+	static int x1, x2, x3;
+	static int y1, y2, y3;
+	static double xCentre, yCentre;
+    static int masx[],masy[];
+    Color bgcol,trcol;
+    int angle=0;
+    
+    public void init()
+    {
+        setSize(CX, CY);
+        setLayout(null);
+        x1=getcoord(getParameter("x1"),229);
+    	y1=getcoord(getParameter("y1"),120);
+    	x2=getcoord(getParameter("x2"),107);
+    	y2=getcoord(getParameter("y2"),350);
+    	x3=getcoord(getParameter("x3"),345);
+    	y3=getcoord(getParameter("y3"),170);
+    	bgcol=getHtmlColor(getParameter("Backgroundclr"),Color.YELLOW);
+    	trcol=getHtmlColor(getParameter("TriangleColor"),Color.GREEN);
+    	xCentre=(x1+x2+x3)/3;
+    	yCentre=(y1+y2+y3)/3;
+    	masx=new int[]{x1,x2,x3};
+    	masy=new int[]{y1,y2,y3};
+    	setBackground(bgcol);
+    	tr = new Thread(this);
+    	tr.start();
+    	
+    }
+    public void paint(Graphics2D g)
+    {
+    	Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(trcol);
+        g2d.rotate(Math.toRadians(angle),xCentre,yCentre);
+        Polygon p = new Polygon(masx,masy,3);
+        g2d.fillPolygon(p);
+        rotateTr();
+    }
+    public void run()
+    {
+    	while (true)
+    	{
+    		repaint();
+            try
+            {
+                Thread.sleep(20);
+            } catch (InterruptedException e)
+            {
+                break;
+            }
+        }
+    }
+    public void rotateTr()
+    {
+    	angle++;
+    	if(angle>360)
+    		angle-=360;
+    }   
+}

@@ -1,0 +1,52 @@
+import java.util.*;
+
+class Main{
+    public static class Flooat implements Comparable<Flooat>{
+        int Line;
+        String Word;
+        Flooat(String L,int n){
+            Line=n;
+            Word=L;
+        }
+
+
+        public int compareTo (Flooat mf) {
+            double w1 = Double.parseDouble(this.Word);
+            double w2 = Double.parseDouble(mf.Word);
+            if (w1 > w2) {
+                return 1;
+            }
+            if (w2>w1){
+                return -1;
+            }
+
+            return 0;
+        }
+
+    }
+    static ArrayList<Flooat> floats = new ArrayList<Flooat>();
+    public static void processLine(String line, int num){
+        StringTokenizer st = new StringTokenizer(line);
+        while(st.hasMoreElements()){
+            String word = st.nextToken();
+            if(word.matches(("-?\\d+(\\.\\d+)?\\b"))){
+                Flooat a=new Flooat(word,num);
+                floats.add(a);
+
+            }
+        }
+    }
+    public static void main(String[] args) {
+        System.out.println("Enter text or Ctrl+Z:");
+        Scanner in = new Scanner(System.in);
+        int lineNumber = 0;
+        while (in.hasNextLine()) {
+            String line = in.nextLine();
+            processLine(line, lineNumber++);
+        }
+        Collections.sort(floats);
+        for(Flooat s:floats){
+            System.out.println(s.Word+":"+s.Line+1);
+        }
+    }
+}

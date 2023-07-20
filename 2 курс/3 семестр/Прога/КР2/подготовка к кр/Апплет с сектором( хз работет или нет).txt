@@ -1,0 +1,78 @@
+import java.applet.Applet;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+
+public class Sectcitcle extends Applet implements Runnable {
+
+    private static final long serialVersionUID = 1L;
+    static int w,h;
+    static int radius;
+    int angle=0;
+
+    private Thread timer = null;
+
+    public void init(){
+
+        w=Integer.parseInt(getParameter("wight"));
+        h=Integer.parseInt(getParameter("hight"));
+
+        setSize(w,h);
+        setBackground( new Color(Integer.parseInt((getParameter("bgc")).substring(1),16)));
+
+        if(w < h)
+            radius=(w-30)/2;
+        else
+            radius=(h-30)/2;
+
+        timer = new Thread(this);
+        timer.start();
+
+    }
+
+    public void paint(Graphics g){
+
+        Graphics2D g2 = (Graphics2D)g;
+
+        g2.setColor(new Color(Integer.parseInt((getParameter("crc")).substring(1),16)));
+        g2.fillOval(15, 15,h-30,h-30);
+
+        g2.rotate(Math.toRadians(angle),radius+15,radius+15);
+
+        g2.setColor(new Color(Integer.parseInt((getParameter("src")).substring(1),16)));
+        g2.fillArc(15, 15,h-30,h-30, 45,80);
+
+        rotateTr();
+
+    }
+
+
+
+    public void run()
+    {
+        while (true)
+        {
+            repaint();
+            try
+            {
+                Thread.sleep(20);
+            } catch (InterruptedException e)
+            {
+                break;
+            }
+        }
+    }
+
+
+    public void rotateTr()
+    {
+        angle++;
+        if(angle>360)
+            angle-=360;
+    }
+
+
+
+
+}

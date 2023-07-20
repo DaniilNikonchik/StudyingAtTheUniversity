@@ -1,0 +1,62 @@
+package zad_7;
+
+import java.applet.Applet;
+import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+
+public class Str extends Applet implements Runnable{
+	
+	private static final long serialVersionUID = 1L;
+	static String str;
+	static Thread t=null;
+	int k=0;
+	int step=2;
+	int x=-2;
+	
+	public void init()
+	{
+		setSize(300,300);
+		 str=getParameter("text");
+		 
+		 
+		 t = new Thread(this);
+		 t.start();		 
+	}
+	
+	public void paint(Graphics g){
+		
+	FontMetrics font=g.getFontMetrics(); 
+	int width=font.stringWidth(str);
+		
+	g.setColor(new Color(Integer.parseInt((getParameter("color_"+k)).substring(1),16)));
+	g.drawString(str, x+step, 30);
+	x+=step;
+	if( x+width >= 300 || x<= -2){
+		step=-step;
+		if(k==5)
+			k=-1;
+		k++;
+	}
+	
+	}
+
+	
+	public void run(){
+		while (true)
+    	{
+    		repaint();
+            try
+            {
+                Thread.sleep(20);
+            } catch (InterruptedException e)
+            {
+                break;
+            }
+        }
+	}
+	
+	
+
+}
+

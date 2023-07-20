@@ -1,0 +1,66 @@
+public class Test {
+ 
+    public static class SlovoComparator implements Comparator<Slovo> {
+        @Override
+        public int compare(Slovo slovo, Slovo t1) {
+            return slovo.getNum().compareTo(t1.getNum());
+        }
+    }
+ 
+    public static void main(String[] args) {
+        ArrayList<Slovo> mas = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int lineNumber = 1;
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+            StringTokenizer tokenizer = new StringTokenizer(line);
+            while (tokenizer.hasMoreElements()) {
+                String tmp = tokenizer.nextToken();
+                if (tmp.charAt(tmp.length() - 1) == 'l' || tmp.charAt(tmp.length() - 1) == 'L') {
+                    String value = tmp.substring(0, tmp.length() - 1);
+                    try {
+                        Long.parseLong(value);
+                        Slovo temp = new Slovo(value, lineNumber);
+                        mas.add(temp);
+                    }
+                    catch (NumberFormatException e) {}
+                }
+            }
+            ++lineNumber;
+        }
+        mas.sort(new SlovoComparator());
+        for (Slovo slovo : mas) {
+            System.out.println(slovo);
+        }
+    }
+}
+
+public class Word {
+    private String  word;
+    private int beginPos;
+    private int endPos;
+ 
+    public  int getBeginPos(){
+        return beginPos;
+    }
+ 
+    public String getWord(){
+        return word;
+    }
+ 
+    public int getEndPos() {
+        return endPos;
+    }
+ 
+    public Word(String word, int pos){
+        this.beginPos =pos;
+        this.word=word;
+        this.endPos = beginPos + word.length();
+    }
+ 
+    @Override
+    public String toString(){
+        return this.word;
+    }
+ 
+}

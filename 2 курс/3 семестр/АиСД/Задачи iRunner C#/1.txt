@@ -1,0 +1,280 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.CodeDom;
+using System.Collections.Specialized;
+using System.Threading;
+
+namespace _28
+{
+    class BST
+    {
+         List<Node> nodesWithEqualSubTrees = new List<Node>();
+
+        public class Node
+        {
+            public int key;
+            public int leftH = 0;
+            public int rightH = 0;
+            public Node leftSon = null;
+            public Node rightSon = null;
+            public Node parent = null;
+            
+
+            public Node(int key)
+            {
+                this.key = key;
+            }
+        }
+
+
+        public void MyTask(Node node)
+        {
+            if (node.leftSon != null)
+                MyTask(node.leftSon);
+            if (node.rightSon != null)
+                MyTask(node.rightSon);
+
+            //ACTION
+            
+            int leftSonLeftH;
+            int leftSonRightH;
+            int rightSonLeftH;
+            int rightSonRightH;
+            if (node.leftSon == null)
+            {
+                leftSonLeftH = -1;
+                leftSonRightH = -1;
+            }
+            else
+            {
+                leftSonLeftH = node.leftSon.leftH;
+                leftSonRightH = node.leftSon.rightH;
+            }
+
+            if (node.rightSon == null)
+            {
+                rightSonLeftH = -1;
+                rightSonRightH = -1;
+            }
+            else
+            {
+                rightSonLeftH = node.rightSon.leftH;
+                rightSonRightH = node.rightSon.rightH;
+            }
+            node.leftH = Math.Max(leftSonLeftH, leftSonRightH) + 1;
+            node.rightH = Math.Max(rightSonLeftH, rightSonRightH) + 1;
+
+            if (node.leftH == node.rightH)
+            {
+                //Добавим в вектор
+                nodesWithEqualSubTrees.Add(node);
+            }
+
+
+
+        }
+        public Node find(int key)
+        {
+            Node node = root;
+            while (node != null)
+            {
+                if (node.key == key)
+                {
+                    break;
+                }
+                
+                node = node.key > key ? node.leftSon : node.rightSon;
+
+            }
+            return node;
+        }
+        public void removeMeanFromList()
+        {
+            if (nodesWithEqualSubTrees.Count % 2 == 0)  
+                return;
+            else
+            {
+                nodesWithEqualSubTrees.Sort((Node a, Node b)=>a.key.CompareTo(b.key));
+                remove(nodesWithEqualSubTrees[nodesWithEqualSubTrees.Count / 2].key);
+            }
+        }
+        public void remove(int key)
+        {
+            Node node = find(key);
+            if(node == null)
+                return;
+            if (isLeaf(node))
+            {
+                if(isRoot(node))
+                {
+                    root = null;
+                    node = null;
+                }
+                else
+                {
+                    if(isLeft(node))
+                    {
+                        node.parent.leftSon = null;
+                        node = null;
+                    }
+                    else
+                    {
+                        node.parent.rightSon = null;
+                        node  = null;
+                    }
+                   
+                }
+            }
+            else if(hasBothSons(node))
+            {
+                //right remove
+                Node minLeft = node.rightSon;
+                while (minLeft.leftSon != null)
+                    minLeft = minLeft.leftSon;
+                int minLeftKey = minLeft.key;
+                remove(minLeft.key);
+                node.key = minLeftKey;
+                
+            }
+            else
+            {
+                if(isRoot(node))
+                {
+                    root = node.leftSon == null ? node.leftSon : node.rightSon;
+                    node = null;
+                }
+                else
+                {
+                    if(isLeft(node))
+                    {
+                        node.parent.leftSon = node.leftSon != null ? node.leftSon : node.rightSon;
+                    }
+                    else
+                    {
+                        node.parent.rightSon = node.leftSon != null ? node.leftSon : node.rightSon;
+                    }
+                    node = null;
+                }
+            }
+        }
+        private bool isLeft(Node node)
+        {
+            if (node.parent.leftSon != null && node.parent.leftSon == node)
+                return true;
+            //else if(node.parent.rightSon     != null && node.parent.rightSon == node)
+            //{
+            //    return false;
+            //}
+            return false;
+        }
+        private bool isLeaf(Node node)
+        {
+            return node.rightSon == null && node.leftSon == null;
+        }
+        private bool hasBothSons(Node node)
+        {
+            return node.rightSon != null && node.leftSon != null;
+        }
+        private bool isRoot (Node node)
+        {
+            return node == root;
+        }
+        public Node root = null;
+        private StreamWriter writer;
+        public BST()
+        {
+            root = null;
+        }
+        public void add(int key)
+        {
+            Node newNode = new Node(key);
+            Node parentNode = root;
+            if (root == null)
+            {
+                newNode.parent = null;
+                root = newNode;
+                return;
+            }
+            while (true)
+            {
+                if (key > parentNode.key)
+                {
+                    if (parentNode.rightSon != null)
+                        parentNode = parentNode.rightSon;
+                    else
+                    {
+                        parentNode.rightSon = newNode;
+                        newNode.parent = parentNode;
+                        break;
+                    }
+                }
+                else if (key < parentNode.key)
+                {
+                    if (parentNode.leftSon != null)
+                        parentNode = parentNode.leftSon;
+                    else
+                    {
+                        parentNode.leftSon = newNode;
+                        newNode.parent = parentNode;
+                        break;
+                    }
+
+                }
+                else
+                    break;
+
+            }
+        }
+
+        public void PrintLeftStraight()
+        {
+            writer = new StreamWriter("tst.out");
+            PrintLeftStraight(root);
+            Console.WriteLine();
+            writer.Close();
+        }
+
+        private void PrintLeftStraight(Node node)
+        {
+            if (node == null)
+                return;
+            PrintNodeInFile(node);
+            Console.Write(node.key + " ");
+            PrintLeftStraight(node.leftSon);
+            PrintLeftStraight(node.rightSon);
+        }
+
+
+        private void PrintNodeInFile(Node node)
+        {
+            writer.WriteLine(node.key);
+        }
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            BST tree = new BST();
+            StreamReader reader = new StreamReader("tst.in");
+            //int k = Int32.Parse(reader.ReadLine());
+            //reader.ReadLine();
+            while (!reader.EndOfStream)
+            {
+                tree.add(Int32.Parse(reader.ReadLine()));
+
+            }
+            //tree.PrintLeftStraight();
+            //tree.remove(20);
+            tree.MyTask(tree.root);
+            tree.removeMeanFromList();
+            tree.PrintLeftStraight();
+
+            reader.Close();
+        }
+    }
+}

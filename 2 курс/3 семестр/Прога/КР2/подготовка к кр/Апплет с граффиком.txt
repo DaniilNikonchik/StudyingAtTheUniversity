@@ -1,0 +1,114 @@
+package ReadParam;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Stroke;
+import java.awt.geom.Line2D;
+import java.applet.Applet;
+import java.util.ArrayList;
+
+
+public class ReadParam extends Applet {
+	
+	
+	private static final long serialVersionUID = 1L;
+	ArrayList<Float> mas= new ArrayList<Float>();
+
+public void init() {
+	
+
+
+
+	String param;
+
+	try {
+			
+		int i=0;
+		param = getParameter("param_"+i);
+		while( param != null){
+			if(Float.parseFloat(param)<=100 && Float.parseFloat(param)>0)
+				{
+				mas.add(Float.parseFloat(param)) ;
+				i++;	
+				param = getParameter("param_"+i);
+				}
+			else
+			{
+				System.err.println("Input values must be in the range");
+				break;
+				
+			}
+		}
+		
+
+	}
+	catch(NumberFormatException e) {
+		
+	}
+
+}
+
+public void paint(Graphics g) {
+	
+	Dimension d = this.getSize();
+	System.out.println(d. width + "," + d.height);
+
+	
+	
+	Graphics2D g2 = (Graphics2D) g;
+	
+	g2.setStroke(new BasicStroke(2.0f));
+	
+	g2.drawString("������� ��������� ������� (%)", 15, 15); 
+	g2.drawString("���� ������������", d. width-130, d.height-5);
+	
+	g2.draw(new Line2D.Float(45, 30, 45,d.height -30));
+	g2.draw(new Line2D.Float(45, d.height -30, d. width-15,d.height -30));
+	
+	float step=(d.height-60)/10;
+	
+	for(int i=0;i<11;i++){
+		g2.drawString((i*10)+ "%", 10, d.height -30-step*i);
+		g2.draw(new Line2D.Float(40, d.height -30-step*i, 50, d.height -30-step*i));
+	}
+	
+	g2.setStroke(new BasicStroke(3.0f)); 
+	
+	Color oldColor = g2.getColor();
+	Color newColor = new Color(0, 0, 255);
+	g2.setColor(newColor);
+
+	
+	
+	float mul=(d.height-60)/10;
+	int i=1;
+	int X = 45;
+	step=(d. width -60)/mas.size();
+	float Y_start=mas.get(0)/10;
+	g2.drawString(mas.get(0)+ " %", X+5, d.height -30 - (Y_start*mul));
+	g2.drawString("0" , 50, d.height -15);
+	g2.draw(new Line2D.Float(X, d.height -35, X, d.height -25));
+	
+	while( ! mas.isEmpty()){
+			
+		float Y_finish=mas.get(i)/10;
+		g2.draw(new Line2D.Float(X, d.height -30 - (Y_start * mul) , X+step,  d.height -30 - (Y_finish * mul)));
+		g2.drawString( mas.get(i)+ " %", X+step+5, d.height -30 - (Y_finish * mul));
+		
+		g2.drawString(i+"" , X+step+5, d.height -15);
+		g2.draw(new Line2D.Float(X+step, d.height -35, X+step, d.height -25));
+		Y_start=Y_finish;
+		X+=step;
+		i++;	
+	}
+		
+		
+	g2.setColor(oldColor);
+
+}
+
+}

@@ -1,0 +1,43 @@
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    LinkedList<String> text = new LinkedList<>();
+    LinkedList<String>new_text = new LinkedList<>();
+    while (sc.hasNextLine()) {
+        String line = sc.nextLine();
+        line = line.replaceAll("\\t", " ");
+        line = line.replaceAll("\\s+", " ");
+        line = line.trim();
+        line = line.replaceAll("\\s+(?=\\p{Punct})", "");
+        text.add(line);
+    }
+    String temp="";
+    for(String st:text){
+        st+=temp;
+        while (st.length()>=80){
+            if (st.length() == 80){
+                new_text.add(st.trim());
+                temp="";
+                st="";
+            }
+            else{
+                int index = 80;
+                while (st.charAt(index)!=' '){
+                    index--;
+                }
+                String tmp = st.substring(0,index-1);
+                st = st.substring(index);
+                new_text.add(tmp.trim());
+            }
+ 
+        }
+        temp = st;
+ 
+    }
+    if (temp!=""){
+        new_text.add(temp);
+    }
+    for (String tmp:new_text){
+        System.out.println(tmp);
+    }
+ 
+}

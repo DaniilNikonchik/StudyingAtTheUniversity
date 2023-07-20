@@ -1,0 +1,120 @@
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class string {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		// TODO Auto-generated method stub
+		
+//		Scanner in = new Scanner(new File("input.txt"));
+		
+		Scanner in = new Scanner(System.in);
+		
+		ArrayList<�ouple<Double>> EXP = new ArrayList<�ouple<Double>>();
+		ArrayList<�ouple<String>> WORD = new ArrayList<�ouple<String>>();
+		ArrayList<�ouple<Double>> DOBL = new ArrayList<�ouple<Double>>();
+		ArrayList<�ouple<Integer>> I_10 = new ArrayList<�ouple<Integer>>();
+		ArrayList<�ouple<Integer>> I_16 = new ArrayList<�ouple<Integer>>();
+		
+		int num_str=1;
+		
+		while(in.hasNext())
+		{
+			String str=in.nextLine();
+			if(str.equals("EXIT"))
+				break;
+			StringTokenizer st = new StringTokenizer(str, " \t\n\r");
+			while (st.hasMoreTokens()) {
+				
+				String a=st.nextToken();
+				try{
+					Integer.parseInt(a);
+					I_10.add(new �ouple<Integer>(Integer.parseInt(a),num_str));
+					continue;	
+				}
+				catch (Exception e)
+				{ 
+					try{
+					Integer.parseInt(a,16);
+					I_16.add(new �ouple<Integer>(Integer.parseInt(a,16),num_str));
+					continue;
+					}
+					catch(Exception ex){
+						try{
+							Double.parseDouble(a);
+							if(a.contains("E+")||a.contains("E-")||a.contains("e-")||a.contains("e-")||
+									a.contains("E")||a.contains("e")){
+								EXP.add(new �ouple<Double>(Double.parseDouble(a),num_str));
+								continue;
+							}
+							DOBL.add(new �ouple<Double>(Double.parseDouble(a),num_str));
+							continue;
+						}
+						catch(Exception exc){	
+						}
+					}
+				}
+		
+				WORD.add(new �ouple<String>(a,num_str));
+					
+			}
+			num_str++;
+		}
+		
+		in.close();
+		
+		System.out.println("Word ----------------------");
+		for(�ouple<String> state : WORD)
+			System.out.println(state);
+		System.out.println("exp ----------------------");
+		for(�ouple<Double> state : EXP)
+            System.out.println(state);
+		System.out.println("DOUBL----------------------");
+		for(�ouple<Double> state : DOBL)
+            System.out.println(state);
+		System.out.println("10 ----------------------");
+		for(�ouple<Integer> state : I_10)
+            System.out.println(state);
+    	System.out.println("16 ----------------------");
+		for(�ouple<Integer> state : I_16)
+            System.out.println(state);
+    	
+		Collections.sort(WORD, new Comparator<�ouple<String>>() {
+			  public int compare(�ouple<String> o1, �ouple<String> o2) {
+			    return o1.word.compareTo(o2.word);
+			  }
+			  });
+		
+		System.out.println("Word ----------------------");
+		for(�ouple<String> state : WORD)
+			System.out.println(state);
+		
+	}
+		
+
+}
+
+class �ouple<E>{
+    
+     E word;
+     int number_str;
+    
+    public  �ouple(E w,int ns){
+    	word=w;
+    	number_str=ns;
+    }
+    public E getWord(){return word;}
+    int getNumber(){return number_str;}
+    
+    
+    public String toString() {
+        return word+"  "+ number_str;	
+    }
+    
+}

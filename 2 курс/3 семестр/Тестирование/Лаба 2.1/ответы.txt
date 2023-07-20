@@ -1,0 +1,13 @@
+pr_otv_zadachi_1 = пластмасы; 
+pr_otv_zadachi_2 = газом;
+pr_otv_zadachi_3 = да;
+pr_otv_zadachi_4 = да;
+pr_otv_zadachi_5 = да;
+pr_otv_zadachi_7 = да;
+pr_otv_zadachi_8 = да;
+pr_otv_zadachi_9 = нет;
+pr_otv_zadachi_10 = нет;
+pr_otv_zadachi_11 = нет;
+pr_otv_zadachi_12 = да;
+pr_otv_zadachi_13 = да;
+pr_otv_zadachi_14 = 10см;
