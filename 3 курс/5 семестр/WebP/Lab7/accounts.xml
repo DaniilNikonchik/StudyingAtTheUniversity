@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<accounts>
+    <Account>
+        <accountNumber>100</accountNumber >
+        <amountMoney>500</amountMoney>
+        <blocked>false</blocked>
+    </Account>
+    <Account>
+        <accountNumber>200</accountNumber >
+        <amountMoney>1200</amountMoney>
+        <blocked>false</blocked>
+    </Account>
+    <Account>
+        <accountNumber>300</accountNumber >
+        <amountMoney>1500</amountMoney>
+        <blocked>true</blocked>
+    </Account>
+
+    <Account>
+        <accountNumber>500</accountNumber >
+        <amountMoney>200</amountMoney>
+        <blocked>false</blocked>
+    </Account>
+    <Account>
+        <accountNumber>600</accountNumber >
+        <amountMoney>600</amountMoney>
+        <blocked>false</blocked>
+    </Account>
+    <Account>
+        <accountNumber>700</accountNumber >
+        <amountMoney>2500</amountMoney>
+        <blocked>true</blocked>
+    </Account>
+</accounts>

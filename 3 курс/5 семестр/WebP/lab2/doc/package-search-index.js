@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.bsu.music"},{"l":"org.bsu.music.model"},{"l":"org.bsu.music.model.classic"},{"l":"org.bsu.music.model.disk"},{"l":"org.bsu.music.model.hipHop"},{"l":"org.bsu.music.model.rock"},{"l":"org.bsu.music.service"}];updateSearchResults();

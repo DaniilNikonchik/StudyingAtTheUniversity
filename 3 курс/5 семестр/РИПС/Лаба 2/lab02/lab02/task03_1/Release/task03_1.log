@@ -1,0 +1,10 @@
+﻿  Source.cpp
+D:\Studies\3 course\rips\lab02\lab02\task03_1\Source.cpp(16,2): warning C4273: QueryPerformanceFrequency: несовместимое связывание dll
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\profileapi.h(42,1): message : см. предыдущее определение "QueryPerformanceFrequency"
+D:\Studies\3 course\rips\lab02\lab02\task03_1\Source.cpp(63,1): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
+  Создание кода
+  0 of 13 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  task03_1.vcxproj -> D:\Studies\3 course\rips\lab02\lab02\Release\task03_1.exe

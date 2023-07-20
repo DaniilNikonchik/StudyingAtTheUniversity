@@ -1,0 +1,7 @@
+org.bsu.music
+org.bsu.music.model
+org.bsu.music.model.classic
+org.bsu.music.model.disk
+org.bsu.music.model.hipHop
+org.bsu.music.model.rock
+org.bsu.music.service

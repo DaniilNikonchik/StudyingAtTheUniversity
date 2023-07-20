@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Lab6_Calculator_4</string>
+    <string-array name="currencyNames">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>BYN</item>
+        <item>RUB</item>
+        <item>AUD</item>
+        <item>ARP</item>
+        <item>DZD</item>
+        <item>BRL</item>
+        <item>GEL</item>
+        <item>AED</item>
+        <item>IND</item>
+        <item>CAD</item>
+    </string-array>
+</resources>
